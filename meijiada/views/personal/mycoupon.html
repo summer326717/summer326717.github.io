@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>优惠券</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <span class="left back">
+                <img src="../../static/images/06.png">
+            </span>
+            <span>优惠券</span>
+        </div>
+        <div class="mycoupon">
+            <yd-tab>
+                <yd-tab-panel v-for='item in titleList' :label="item.name">
+                    <div class="couponlist">
+                        <div class="item">
+                            <p class="time">2017.1012-2015.23.03</p>
+                            <div class="bottom">
+                                <span class="num">￥10.0</span>
+                                <div class="right">
+                                    <p class="tit">新用户券</p>
+                                    <p class="des">·仅限新用户使用</p>
+                                </div>
+                                <button class="touse">去使用</button>
+                            </div>
+                            <span class="warn">剩一天</span>
+                        </div>
+                        <div class="item used">
+                            <p class="time">2017.1012-2015.23.03</p>
+                            <div class="bottom">
+                                <span class="num">￥10.0</span>
+                                <div class="right">
+                                    <p class="tit">新用户券</p>
+                                    <p class="des">·仅限新用户使用</p>
+                                </div>
+                                <button class="touse">去使用</button>
+                            </div>
+                            <span class="hasused"></span>
+                        </div>
+                    </div>
+                    <div class="nocoupon" v-if='dataList==""'>
+                        <img src="../../static/images/s04.png">
+                    </div>
+                    <p class="more">获取更多优惠券>></p>
+                </yd-tab-panel>
+            </yd-tab>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '.wrap',
+            data: {
+                titleList: [
+                    { name: '未使用' },
+                    { name: '使用记录' },
+                    { name: '已过期' }
+                ],
+                dataList: [
+                    { id: 0 }
+                ]
+            },
+            methods: {
+                goHistory: function () {
+                    location.go(-1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

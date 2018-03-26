@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>登陆</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header tr">
+            <span class="left hclose" @click="goHistory"></span>
+            <span class="right" @click="toRegister">去注册</span>
+        </div>
+        <div class="login">
+            <p class="bold_tit">登陆</p>
+            <p>欢迎来到美佳达</p>
+            <p>
+                <input class="ipt" v-model="username" type="text" placeholder="请输入手机号/邮箱">
+                <span class="close"></span>
+            </p>
+            <p class="ipt-code">
+                <input class="ipt" type="text" placeholder="请输入验证码">
+                <span class="close"></span>
+                <button class="s-btn">获取验证码</button>
+            </p>
+            <p class="mt80">
+                <button class="w-btn" @click="nowLogin">立即登录</button>
+            </p>
+            <p>
+                <button class="wi-btn" @click="pwdLogin">密码登陆</button>
+            </p>
+        </div>
+    </div>
+    <script src="../../static/js/login/codelogin.js"></script>
+</body>
+
+</html>

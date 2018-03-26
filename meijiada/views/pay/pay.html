@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>支付</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/swiper.min.css">
+    <script src="../../static/js/common/swiper.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <span class="left back">
+                <img src="../../static/images/06.png">
+            </span>
+            <span>支付</span>
+        </div>
+        <div class="pay bt20">
+            <div class="cardbanner">
+                <div id="certify">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><p>111111111111111111</p></div>
+                            <div class="swiper-slide"><p>2222222222222222</p></div>
+                            <div class="swiper-slide"><p>33333333333333</p></div>
+                            <div class="swiper-slide"><p>4444444444444</p></div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>                            
+            </div>
+            <div class="item">
+                <p><span>支付金额</span><span class="right">5000元</span></p>
+            </div>
+            <div class="item">
+                <p><span class="left">手机号</span><input value="15745454545" type="text" placeholder="请输入验证码"></p>
+                <p><span class="left">验证码</span><input type="text" placeholder="请输入验证码"><button class="code">发送验证码</button></p>
+            </div>
+            <p class="pbtn"><button class="w-btn">立即支付</button></p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '.wrap',
+            methods: {
+                goHistory: function () {
+                    location.go(-1);
+                }
+            }
+        })
+        certifySwiper = new Swiper('#certify .swiper-container', {
+            watchSlidesProgress: true,
+            slidesPerView: 'auto',
+            centeredSlides: true,
+            loop: true,
+            loopedSlides: 5,
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            on: {
+                progress: function(progress) {
+                    for (i = 0; i < this.slides.length; i++) {
+                        var slide = this.slides.eq(i);
+                        var slideProgress = this.slides[i].progress;
+                        modify = 1;
+                        if (Math.abs(slideProgress) > 1) {
+                            modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
+                        }
+                        translate = slideProgress * modify * 260 + 'px';
+                        scale = 1 - Math.abs(slideProgress) / 5;
+                        zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+                        slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+                        slide.css('zIndex', zIndex);
+                        slide.css('opacity', 1);
+                        if (Math.abs(slideProgress) > 3) {
+                            slide.css('opacity', 0);
+                        }
+                    }
+                },
+                setTransition: function(transition) {
+                    for (var i = 0; i < this.slides.length; i++) {
+                        var slide = this.slides.eq(i)
+                        slide.transition(transition);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

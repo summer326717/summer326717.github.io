@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>绑定银行卡</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <span class="left back">
+                <img src="../../static/images/06.png">
+            </span>
+            <span>绑定银行卡</span>
+        </div>
+        <div class="bindcard bt20">
+            <div class="item">
+                <p><span>真实姓名</span><input type="text" placeholder="李东"></p>
+                <p><span>身份证号</span><input type="text" placeholder="330601******1249"></p>
+            </div>
+            <div class="item">
+                <p><span>银行卡号</span><input type="text" placeholder="请输入您的银行卡号"><span class="close"></span></p>
+                <p class="bank">请选择开户银行</p>
+            </div>
+            <div class="item">
+                <p><span>手机号</span><input type="text" placeholder="15715566a"></p>
+                <p><span>验证码</span><input type="text" placeholder="请输入验证码"><button class="get_code">发送验证码</button></p>
+            </div>
+            <p>
+                <button class="w-btn mt42">完成</button>
+            </p>
+            <p class="tip">点击按钮-即表示您同意
+                <router-link to='/login' class="c_green">《委托扣款协议》</router-link>
+            </p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '.wrap',
+            methods: {
+                goHistory: function () {
+                    location.go(-1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

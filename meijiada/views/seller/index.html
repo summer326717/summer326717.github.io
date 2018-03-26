@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>美佳达智慧销售</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="seller">
+            <div class="header">
+                <span class="selectcity">杭州
+                    <img src="../../static/images/04.png">
+                </span>
+                <span>美佳达智慧销售</span>
+                <img @click='checkLogin' class="hsetting" src="../../static/images/05.png">
+            </div>
+            <div class="banner">
+                <img src="../../static/images/s14.png">
+            </div>
+            <ul>
+                <li>
+                    <a href="../seller/sellerbonus.html">
+                        <p>
+                            <img src="../../static/images/s01.png">
+                        </p>
+                        <p>我的奖金</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../seller/sellerclient.html">
+                        <p>
+                            <img src="../../static/images/s02.png">
+                        </p>
+                        <p>我的客户</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../personal/myhourse.html">
+                        <p>
+                            <img src="../../static/images/s03.png">
+                        </p>
+                        <p>我的房源</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../personal/mymessage.html">
+                        <p>
+                            <img src="../../static/images/s04.png">
+                        </p>
+                        <p>我的消息</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../seller/clientlist.html">
+                        <p>
+                            <img src="../../static/images/s05.png">
+                        </p>
+                        <p>我的组织</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../seller/clientlist.html">
+                        <p>
+                            <img src="../../static/images/s06.png">
+                        </p>
+                        <p>我的合约</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '.wrap',
+            methods: {
+                checkLogin: function () {
+                    location.href = '../personal/my.html';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

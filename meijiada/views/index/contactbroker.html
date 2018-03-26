@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>联系经纪人</title>
+    <link rel="stylesheet" href="../../static/css/ydui.rem.css">
+    <script src="../../static/js/common/ydui.flexible.js"></script>
+    <link rel="stylesheet" href="../../static/css/ydui.base.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/ydui.rem.js"></script>
+    <script src="../../static/js/common/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <span class="left back">
+                <img src="../../static/images/06.png">
+            </span>
+            <span>修改密码</span>
+        </div>
+        <div class="myinfo">
+            <p class="tit">信息填写</p>
+            <p class="item">
+                <span>姓名</span>
+                <span class="right">请填写
+                    <img class="i" src="../../static/images/s13.png">
+                </span>
+            </p>
+            <p class="item">
+                <span>手机号</span>
+                <span class="right">15788889898</span>
+            </p>
+            <p class="item">
+                <span>电子邮箱</span>
+                <span class="right">请填写
+                    <img class="i" src="../../static/images/s13.png">
+                </span>
+            </p>
+            <p class="tit">信息选择</p>
+            <div class="submittype">
+                <p>
+                    <span :class='{selected:infotype==1}' @click='changeType(1)'></span>马上联系我</p>
+                <p>
+                    <span :class='{selected:infotype==2}' @click='changeType(2)'></span>我想知道这个房子的具体情况</p>
+            </div>
+            <div class="con">
+                <textarea class="tarea" placeholder="自定义内容"></textarea>
+                <button class="w-btn mb40">提交</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '.wrap',
+            data: {
+                infotype: 0,//1.马上联系2.我想知道房子的具体情况
+            },
+            methods: {
+                goHistory: function () {
+                    location.go(-1);
+                },
+                changeType: function (infotype) {
+                    this.infotype = infotype;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
