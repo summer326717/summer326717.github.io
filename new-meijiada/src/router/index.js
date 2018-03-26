@@ -14,8 +14,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'SelectType',
+      component: SelectType
     },
     {
       path: '/SelectType',
