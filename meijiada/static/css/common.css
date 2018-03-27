@@ -101,7 +101,6 @@ textarea {
 .header .back img {
     width: 0.2rem;
     vertical-align: middle;
-    vertical-align: super;
 }
 
 .header .search_ipt {
@@ -113,6 +112,7 @@ textarea {
     font-size: 0.28rem;
     background: url('../images/09.png') #E6E6E6 no-repeat 0.1rem 50%;
     background-size: 0.4rem 0.43rem;
+    vertical-align: super;
 }
 
 .header .hclose {
