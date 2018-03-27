@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>订单</title>
+    <script src="../js/common/vue.js"></script>
+    <script src="../js/common/axios.min.js"></script>
+    <script src="../js/common/js.cookie.js"></script>
+    <script src="../js/common/md5.js"></script>
+    <script src="../js/common/aes.js"></script>
+    <script src="../js/common/mode-ecb.js"></script>
+    <link href="../css/index.css?rev=@@hash" rel="stylesheet" />
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <ul>
+                <li><img src="../images/logo.png" /></li>
+                <li><a href="send.html">我要寄件</a></li>
+                <li><a class="active" href="order.html">订单管理</a></li>
+                <li><a href="account.html">账户管理</a></li>
+                <!--<li><a href="invite.html">邀请好友</a></li>-->
+                <li class="li_out"><span>{{login_name}}</span><span class="sign_out" @click="sign_out">退出</span></li>
+            </ul>
+        </div>
+        <div class="order">
+            <div class="menu">
+                <p class="s_l_tit">订单管理</p>
+                <p class="o_status">
+                    <span :class="{active:order_status==1}" @click="tabclick(1)">订单未支付</span>
+                    <span :class="{active:order_status==4}" @click="tabclick(4)">批量未支付</span>
+                    <span :class="{active:order_status==2}" @click="tabclick(2)">单件失败</span>
+                    <span :class="{active:order_status==6}" @click="tabclick(6)">批量失败</span>
+                    <span :class="{active:order_status==5}" @click="tabclick(5)">批量订单</span>
+                    <span :class="{active:order_status==3}" @click="tabclick(3)">已完成订单</span>
+                </p>
+            </div>
+            <div class="order_pay" v-if="order_status==1||order_status==4">
+                <p class="tr">已选订单：<span>￥{{select_amount/100}}</span><button @click="just_pay">支付</button></p>
+            </div>
+            <div class="order_pay" v-if="order_status==3||order_status==5" v-cloak>
+                <div class="o_s_t pr">
+                    下单时间：<input type="text" readonly placeholder="-请选择-" :value="last_time" @click="demo" />
+                    结束时间：<input type="text" readonly placeholder="-请选择-" :value="last_time2" @click="demo2" />
+                    <div class="y_date" v-show="y_date_show" :class="{'y_data_s':input_id==1,'y_data_e':input_id==2}">
+                        <div class="y_tit"><i class="t_l" @click="before_select">&lt;</i><span @click="select_y">{{y_now_year}}</span><span @click="select_m">{{y_month[y_now_month]}}</span><i class="t_r" @click="after_select">&gt;</i></div>
+                        <div class="y_month">
+                            <ul>
+                                <li v-show="select_item==1" v-for="(item,index) in y_month" v-bind:class="{active:y_now_month==index}" @click="select_month(index)">{{item}}</li>
+                                <li v-show="select_item==2" v-for="(item,index) in y_year" v-bind:class="{active:y_now_year==item}" @click="select_year(item)">{{item}}</li>
+                            </ul>
+                        </div>
+                        <div class="y_day" v-show="select_item==3">
+                            <span v-for="item in y_week">{{item}}</span>
+                            <a href="javascript:void(0);" v-for="(item,index) in dateList" @click="select_day(item)" :class="{'span_gray':item.previousMonth||item.nextMonth,'unselected':check_selct(item),'active':check_time(item)&&y_now_day==item.value}">{{item.value}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="order_status==3">快递公司：<button :class="{active:express_id==0}" @click="express_id=0">全部</button><button :class="{active:express_id==item.express_id}" v-for="item in com_list" @click="express_id=item.express_id">{{item.express_name}}</button></div>
+                <p>快递单号：<input class="order_num" v-model="express_number" type="text" /><button @click="get_data" class="su_search">查询</button></p>
+            </div>
+            <table>
+                <tr>
+                    <th v-if="order_status==1||order_status==4"><input type="checkbox" v-model="all_check" @click="all_select">全选</th>
+                    <th>编号</th>
+                    <th v-if="order_status==1||order_status==2||order_status==3">订单编号</th>
+                    <th v-if="order_status==4||order_status==6||order_status==5">批量订单号</th>
+                    <th v-if="order_status==1||order_status==2||order_status==3">平台编号</th>
+                    <th v-if="order_status==1||order_status==2||order_status==3">收件人</th>
+                    <th>下单时间</th>
+                    <th v-if="order_status==1||order_status==2||order_status==3">快递公司</th>
+                    <th v-if="order_status==4">单价</th>
+                    <th v-if="order_status==4||order_status==6||order_status==5">数量</th>
+                    <th v-if="order_status==1||order_status==4">金额</th>
+                    <th v-if="order_status==3">快递单号</th>
+                    <th v-if="order_status==1||order_status==4||order_status==5">操作</th>
+                    <th v-if="order_status==2||order_status==6">备注</th>
+                </tr>
+                <tr v-for="(item,i) in order_list" v-cloak>
+                    <td v-if="order_status==1||order_status==4"><input type="checkbox" v-model="item.is_check" @click="single_select(item.is_check,item.eb_ord_id,item.total_amount,i)"></td>
+                    <td>{{i+1+(page_no-1)*10}}</td>
+                    <td>{{item.ord_number}}</td>
+                    <td v-if="order_status==1||order_status==2||order_status==3">{{item.platform_number}}</td>
+                    <td v-if="order_status==1||order_status==2||order_status==3">{{item.rev_name}}</td>
+                    <td>{{item.send_time}}</td>
+                    <td v-if="order_status==1||order_status==2||order_status==3">{{item.express_name}}</td>
+                    <td v-if="order_status==4">{{item.express_price/100}}</td>
+                    <td v-if="order_status==4||order_status==6||order_status==5">{{item.clt_size}}</td>
+                    <td v-if="order_status==1||order_status==4">{{item.total_amount/100}}</td>
+                    <td v-if="order_status==3">{{item.express_number}}</td>
+                    <td v-if="order_status==2||order_status==6">{{item.note}}</td>
+                    <td v-if="order_status==1||order_status==4"><button @click="r_delete(item.eb_ord_id)">删除</button></td>
+                    <td v-if="order_status==5"><button @click="r_explore(item.eb_ord_id)">导出</button></td>
+                </tr>
+            </table>
+            <div class="no_data" v-if="order_list==''" v-cloak>
+                <img src="../images/no_data.png" />
+            </div>
+            <div class="pagelist" v-cloak v-if="order_list!=''&&total_pages!=1">
+                <div v-if="page_no>1"><a v-on:click="page_no--,page_click()">上一页</a></div>
+                <div v-if="page_no==1"><a class="banclick">上一页</a></div>
+                <div v-for="index in indexs">
+                    <a v-bind:class="{ 'active': page_no == index}" v-on:click="btn_click(index)">{{ index }}</a>
+                </div>
+                <div v-if="page_no!=total_pages"><a v-on:click="page_no++,page_click()">下一页</a></div>
+                <div v-if="page_no == total_pages"><a class="banclick">下一页</a></div>
+                <div>
+                    <a>共<i>{{total_pages}}</i>页</a>
+                    <input v-model="page_txt" type="text" />
+                    <a @click="search_page" href="javascript:;">确定</a>
+                </div>
+            </div>
+            <div class="add_addr_dialog" v-if="is_delete" v-cloak>
+                <div class="is_delete">
+                    <p>确认删除？</p>
+                    <button class="s_sub_btn" @click="com_delete">确定</button><button class="s_cancel_btn" @click="is_delete=false">取消</button>
+                </div>
+            </div>
+            <div class="add_addr_dialog" v-if="is_pay_order" v-cloak>
+                <div class="dia_con">
+                    <p class="tit tc">支付<button class="close" @click="is_pay_order=false"></button></p>
+                    <div class="pay_way">
+                        <p>订单数量：{{order_num}}</p>
+                        <p>需付款：<span class="orange">￥{{select_amount/100}}</span></p>
+                        <p>支付方式：</p>
+                        <div id="cou_code"></div>
+                        <p>
+                            <button class="pay_btn" :class="{pay_btn_d:change_channel==3}" @click="change_channel=3">余额支付</button>
+                            <button class="pay_btn" :class="{pay_btn_d:change_channel==4}" @click="change_channel=4">抵扣券支付</button>
+                            <button class="pay_btn" :class="{pay_btn_d:change_channel==1}" @click="change_channel=1">支付宝</button>
+                        </p>
+                        <p v-if="change_channel==3">账户余额：{{user_balance/100}}</p>
+                        <p v-if="change_channel==4">抵扣券数量：{{surplus_frequency}}</p>
+                    </div>
+                    <p class="tc" style="padding-top:50px;" v-if="!complete_pay"><button class="s_sub_btn" @click="send_pay_order">支付</button><button class="s_cancel_btn" @click="is_pay_order=false">取消</button></p>
+                    <p class="tc" style="padding-top:50px;" v-if="complete_pay"><button class="s_sub_btn" @click="send_pay_order">完成支付</button><button class="s_cancel_btn" @click="is_pay_order=false">取消</button></p>
+                </div>
+            </div>
+            <div class="add_addr_dialog" v-if="complete_pay" v-cloak>
+                <div class="dia_con">
+                    <p class="tit tc">支付成功</p>
+                    <div class="pay_way tc">
+                        <p>您的快递单号为：{{com_express_number}}</p>
+                    </div>
+                    <p class="tc"><button class="s_sub_btn" @click="complete_pay=false">确定</button></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>客服QQ：2781686263  客服邮箱：ecms@innjoe.com<span>Copyright@2017 Innjoe 浙ICP备16035303号-1</span></p>
+        </div>
+    </div>
+    <script src="../js/base.js?rev=@@hash"></script>
+    <script src="../js/order.js?rev=@@hash"></script>
+</body>
+</html>

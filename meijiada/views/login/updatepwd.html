@@ -22,23 +22,23 @@
 <body>
     <div class="wrap">
         <div class="header">
-            <span class="left back">
+            <span class="left back" @click='goHistory'>
                 <img src="../../static/images/06.png">
             </span>
             <span>修改密码</span>
         </div>
         <div class="updatepwd bt20">
             <p>
-                <span>原密码</span><input type="password" placeholder="6~16位数字或字母">
+                <span>原密码</span><input v-model='oldpassword' type="password" placeholder="6~16位数字或字母">
             </p>
             <p>
-                <span>新密码</span><input type="password" placeholder="6~16位数字或字母">
+                <span>新密码</span><input v-model='newpassword' type="password" placeholder="6~16位数字或字母">
             </p>
             <p>
-                <span>确认密码</span><input type="password" placeholder="6~16位数字或字母">
+                <span>确认密码</span><input v-model='confirmpassword' type="password" placeholder="6~16位数字或字母">
             </p>
             <div>
-                <button class="w-btn mt80">确定</m>
+                <button class="w-btn mt80" @click='updatePwd'>确定</m>
             </div>
         </div>
     </div>
@@ -46,8 +46,42 @@
         new Vue({
             el: '.wrap',
             methods: {
+                data:{
+                    oldpassword:'',
+                    newpassword:'',
+                    confirmpassword:''
+                },
                 goHistory: function () {
                     location.go(-1);
+                },
+                updatePwd:function(){
+                    if (this.oldpassword.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入旧密码' });
+                        return;
+                    }
+                    if (this.newpassword.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入新密码' });
+                        return;
+                    }
+                    if (this.confirmpassword.trim() == '') {
+                        this.$dialog.toast({ mes: '请再次输入新密码' });
+                        return;
+                    }
+                    if (this.newpassword != this.confirmpassword) {
+                        this.$dialog.toast({ mes: '两次密码输入不相同' });
+                        return;
+                    }
+                    var json = {
+                        newpassword: this.newpassword
+                    }
+                    httpGet('/login', json, function (res) {
+                        if (res.code == 0) {
+                            _this.$dialog.toast({ mes: res.message });
+                            location.go(-1);
+                        } else {
+                            _this.$dialog.toast({ mes: res.message });
+                        }
+                    })
                 }
             }
         })

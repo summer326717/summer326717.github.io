@@ -3,17 +3,35 @@ new Vue({
     data: {
         username: "",
         password: "",
-        is_see_pwd: false
+        is_see_pwd: false,
+        isremember: false,
     },
     methods: {
         nowLogin: function () {
-            if (this.password) {
+            if (this.username.trim() == '') {
+                this.$dialog.toast({ mes: '请输入手机号或邮箱' });
                 return;
             }
-            let json = {
+            if (this.password.trim() == '') {
+                this.$dialog.toast({ mes: '请输入密码' });
+                return;
+            }
+            var json = {
                 username: this.username,
                 password: this.password
             };
+            var _this = this;
+            httpGet('/login', json, function (res) {
+                if (res.code == 0) {
+                    _this.$dialog.toast({ mes: '登录成功' });
+                    location.href = '../index/index.html';
+                } else {
+                    _this.$dialog.toast({ mes: res.message });
+                }
+            })
+        },
+        toRemember: function () {
+            this.isremember = !this.isremember;
         },
         goHistory: function () {
             location.go(-1);

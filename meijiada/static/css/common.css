@@ -9,7 +9,7 @@ input,
 button,
 textarea {
     border: none;
-    font-family: PingFang SC Medium, Arial, Helvetica, sans-serif;
+    font-family: PingFang SC Medium, Arial, Helvetica, sans-serif!important;
 }
 
 .ptb20 {
@@ -199,7 +199,7 @@ textarea {
 
 .login span.active {
     padding-left: 0.5rem;
-    background: url('../imahes/m13.png') no-repeat 0 50%;
+    background: url('../images/m13.png') no-repeat 0 50%;
     background-size: contain;
 }
 
@@ -1010,11 +1010,12 @@ textarea {
 }
 
 .couponlist .item .time {
+    font-size: 0.24rem;
     color: #ffffff;
     padding-left: 0.2rem;
     height: 0.6rem;
     line-height: 0.6rem;
-    background: url('../images/c01');
+    background: url('../images/c01.png');
     background-size: cover;
 }
 
@@ -1024,8 +1025,8 @@ textarea {
 
 .couponlist .item .num {
     font-size: 0.6rem;
-    height: 1.9rem;
-    line-height: 1.9rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
     width: 2rem;
     float: left;
 }
@@ -1034,16 +1035,17 @@ textarea {
     overflow: hidden;
     margin-top: 0.4rem;
     padding-left: 0.2rem;
+    line-height: 0.55rem;
     border-left: 1px solid #EAEAEA;
 }
 
 .couponlist .item .right .tit {
-    font-size: 0.6rem;
+    font-size: 0.42rem;
 }
 
 .couponlist .item .right .des {
     color: #999999;
-    font-size: 0.32rem;
+    font-size: 0.24rem;
 }
 
 .couponlist .item .touse {
@@ -1069,18 +1071,18 @@ textarea {
     height: 1rem;
     line-height: 1.5rem;
     text-align: center;
-    font-size: 0.3rem;
+    font-size: 0.24rem;
     transform: rotate(45deg);
 }
 
 .couponlist .used .time {
-    background: url('../images/c02');
+    background: url('../images/c02.png');
     background-size: cover;
 }
 
 .couponlist .used .hasused {
     display: inline-block;
-    background: url('../images/c03') no-repeat;
+    background: url('../images/c03.png') no-repeat;
     background-size: contain;
     position: absolute;
     right: 0;
@@ -1105,6 +1107,7 @@ textarea {
     color: #ff2a00;
     text-align: center;
     padding: 0.4rem 0;
+    font-size: 0.3rem;
 }
 
 

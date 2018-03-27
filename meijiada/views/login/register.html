@@ -27,22 +27,23 @@
         <div class="login">
             <p class="bold_tit">注册</p>
             <p>
-                <input class="ipt" type="text" placeholder="请输入手机号/邮箱">
+                <input class="ipt" type="text" v-mode='username' placeholder="请输入手机号/邮箱">
             </p>
             <p class="ipt-code">
-                <input class="ipt" type="text" placeholder="请输入验证码">
+                <input class="ipt" type="text" v-model='telcode' placeholder="请输入验证码">
                 <span class="close"></span>
-                <button class="s-btn">获取验证码</button>
+                <button v-if="isgetcode" class="s-btn" @click='getCode'>获取验证码</button>
+                <button v-if="!isgetcode" class="s-btn-gray">{{num}}</button>
             </p>
             <p>
-                <input class="ipt" type="text" placeholder="请设置6-20位登录密码">
+                <input class="ipt" type="text" v-model='password' placeholder="请设置6-20位登录密码">
                 <span class="close"></span>
             </p>
             <p>
-                <input class="ipt" type="text" placeholder="请输入真实姓名">
+                <input class="ipt" type="text" v-model='turename' placeholder="请输入真实姓名">
             </p>
             <p>
-                <button class="w-btn mt42">完成</button>
+                <button class="w-btn mt42" @click='toRegister'>完成</button>
             </p>
             <p class="tip">点击-完成即代表您同意
                 <router-link to='/login' class="c_orange">《注册服务协议》</router-link>
@@ -52,9 +53,81 @@
     <script>
         new Vue({
             el: '.wrap',
+            data:{
+                username:'',
+                telcode:'',
+                password:'',
+                turename:'',
+                isgetcode:true,
+                num:60,
+            },
             methods: {
                 goHistory: function () {
                     location.go(-1);
+                },
+                getGray: function () {
+                    if (this.num == 0) {
+                        this.isgetcode = true;
+                        this.num = 60;
+                    } else {
+                        this.num--;
+                        var _this = this;
+                        setTimeout(_this.getGray, 1000);
+                    }
+                },
+                getCode: function () {
+                    if (this.username.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入手机号或邮箱' });
+                        return;
+                    }
+                    this.$dialog.loading.open('发送中...');
+                    var json = {
+                        username: this.username
+                    };
+                    var _this = this;
+                    httpGet('/login', json, function (res) {
+                        if (res.code == 0) {
+                            _this.isgetcode = false;
+                            _this.getGray();
+                            _this.$dialog.loading.close();
+                            _this.$dialog.toast({ mes: res.message });
+                            location.href = '../index/index.html';
+                        } else {
+                            _this.$dialog.toast({ mes: res.message });
+                        }
+                    })
+                },
+                toRegister:function(){
+                    if (this.username.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入手机号或邮箱' });
+                        return;
+                    }
+                    if (this.telcode.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入验证码' });
+                        return;
+                    }
+                    if (this.password.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入密码' });
+                        return;
+                    }
+                    if (this.turename.trim() == '') {
+                        this.$dialog.toast({ mes: '请输入真实名称' });
+                        return;
+                    }
+                    var json = {
+                        username: this.username,
+                        telcode: this.telcode,
+                        password: this.password,
+                        turename: this.turename
+                    }
+                    httpGet('/login', json, function (res) {
+                        if (res.code == 0) {
+                            _this.$dialog.toast({ mes: res.message });
+                            location.go(-1);
+                        } else {
+                            _this.$dialog.toast({ mes: res.message });
+                        }
+                    })
                 }
             }
         })

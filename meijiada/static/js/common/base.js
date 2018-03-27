@@ -1,88 +1,44 @@
 ﻿//其他接口
-function axios_post(data, url, completion) {
-    axios.get('../../config.json')
-        .then(function (res) {
-            var con_url = res.data.con_url;
-            var time = Date.parse(new Date());
-            var hash = hex_md5(time + "hotol");
-            var token = Cookies.get('token');
-            if (token == undefined || token == '' || token == null) {
-                token = '';
-            }
-            time = Encrypt(res.data.key, time);
-            hash = Encrypt(res.data.key, hash);
-            console.log(data);
-            axios({
-                method: 'post',
-                url: con_url + url,
-                dataType: 'text',
-                data: Encrypt(res.data.key, JSON.stringify(data)),
-                headers: {
-                    "token": token,
-                    "version": "1",
-                    "client_type": "3",
-                    "Timestamp": time,
-                    "SignInfo": hash,
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json;charset=UTF-8"
-                }
-            }).then(function (resp) {
-                resp = JSON.parse(Decrypt(res.data.key, resp.data));
-                console.log(resp);
-                if (resp.mark == 0) {
-                    completion(resp);
-                } else if (resp.mark == 101 || resp.mark == 100) {
-                    location.href = '../login.html';
-                } else {
-                    completion(resp);
-                }
-            }).catch(function (error) {
-                alerter(error);
-            });
-        });
+function httpGet(data, url, completion) {
+    var con_url = res.data.con_url;
+    var time = Date.parse(new Date());
+    var hash = hex_md5(time + "hotol");
+    var token = Cookies.get('token');
+    if (token == undefined || token == '' || token == null) {
+        token = '';
+    }
+    time = Encrypt(res.data.key, time);
+    hash = Encrypt(res.data.key, hash);
+    console.log(data);
+    axios({
+        method: 'post',
+        url: con_url + url,
+        dataType: 'text',
+        data: Encrypt(res.data.key, JSON.stringify(data)),
+        headers: {
+            "token": token,
+            "version": "1",
+            "client_type": "3",
+            "Timestamp": time,
+            "SignInfo": hash,
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json;charset=UTF-8"
+        }
+    }).then(function (resp) {
+        resp = JSON.parse(Decrypt(res.data.key, resp.data));
+        console.log(resp);
+        if (resp.mark == 0) {
+            completion(resp);
+        } else if (resp.mark == 101 || resp.mark == 100) {
+            location.href = '../login.html';
+        } else {
+            completion(resp);
+        }
+    }).catch(function (error) {
+        alerter(error);
+    });
 }
-//登录接口
-function axios_post_login(data, url, completion) {
-    axios.get('../config.json')
-        .then(function (res) {
-            var con_url = res.data.con_url;
-            //console.log(res.data.con_url)
-            var time = Date.parse(new Date());
-            var hash = hex_md5(time + "hotol");
-            var token = Cookies.get('token');
-            if (token == undefined || token == '' || token == null) {
-                token = '';
-            }
-            time = Encrypt(res.data.key, time);
-            hash = Encrypt(res.data.key, hash);
-            console.log(data);
-            axios({
-                method: 'post',
-                url: con_url + url,
-                dataType: "text",
-                data: Encrypt(res.data.key, JSON.stringify(data)),
-                headers: {
-                    "token": token,
-                    "version": "1",
-                    "client_type": "3",
-                    "Timestamp": time,
-                    "SignInfo": hash,
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json;charset=UTF-8"
-                }
-            }).then(function (resp) {
-                resp = JSON.parse(Decrypt(res.data.key, resp.data));
-                console.log(resp);
-                if (resp.mark == 0) {
-                    completion(resp);
-                } else {
-                    alerter(resp.tip);
-                }
-            }).catch(function (error) {
-                alerter(error);
-            });
-        });
-}
+
 //加密
 function Encrypt(key, word) {
     var key = CryptoJS.enc.Utf8.parse(key);

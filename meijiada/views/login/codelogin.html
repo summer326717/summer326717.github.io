@@ -33,9 +33,10 @@
                 <span class="close"></span>
             </p>
             <p class="ipt-code">
-                <input class="ipt" type="text" placeholder="请输入验证码">
+                <input class="ipt" v-model='telcode' type="text" placeholder="请输入验证码">
                 <span class="close"></span>
-                <button class="s-btn">获取验证码</button>
+                <button v-if="isgetcode" class="s-btn" @click='getCode'>获取验证码</button>
+                <button v-if="!isgetcode" class="s-btn-gray">{{num}}</button>
             </p>
             <p class="mt80">
                 <button class="w-btn" @click="nowLogin">立即登录</button>

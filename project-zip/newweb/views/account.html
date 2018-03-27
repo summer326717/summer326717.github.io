@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>账号管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="../js/common/vue.js"></script>
+    <script src="../js/common/axios.min.js"></script>
+    <script src="../js/common/js.cookie.js"></script>
+    <script src="../js/common/md5.js"></script>
+    <script src="../js/common/aes.js"></script>
+    <script src="../js/common/mode-ecb.js"></script>
+    <link href="../css/index.css?rev=@@hash" rel="stylesheet" />
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <ul>
+                <li><img src="../images/logo.png" /></li>
+                <li><a href="send.html">我要寄件</a></li>
+                <li><a href="order.html">订单管理</a></li>
+                <li><a class="active" href="account.html">账户管理</a></li>
+                <!--<li><a href="invite.html">邀请好友</a></li>-->
+                <li class="li_out"><span v-cloak>{{login_name}}</span><span class="sign_out" @click="sign_out()">退出</span></li>
+            </ul>
+        </div>
+        <div class="account">
+            <p class="s_l_tit">账户管理</p>
+            <div class="top">
+                <div class="t_table">
+                    <div>
+                        <p>账户余额（元）</p>
+                        <p class="orange" v-cloak>{{user_balance/100}}</p>
+                    </div>
+                    <div>
+                        <button @click="is_recharge=true">充值</button>
+                    </div>
+                </div>
+                <div class="t_table yhj">
+                    <div>
+                        <p>抵扣券（张）</p><p class="orange" v-cloak>{{surplus_frequency}}</p>
+
+                        <button @click="buy_yhj">购买</button>
+                    </div>
+                    <!--<div>
+                        <button @click="is_buy=true">购买</button>
+                    </div>-->
+                </div>
+                <!--<span class="activity_icon">
+                    <img @click="is_activity=true" src="../images/img_25.png" />
+                    <a @click="is_activity=true" href="javascript:;">充值优惠？</a>
+                </span>-->
+            </div>
+            <div class="cat">
+                <p>分类：<span :class="{active:fund_type==0}" @click="tab_click(0)">全部</span><span :class="{active:fund_type==1}" @click="tab_click(1)">余额充值</span><span :class="{active:fund_type==2}" @click="tab_click(2)">抵扣券交易</span><span :class="{active:fund_type==3}" @click="tab_click(3)">余额支付</span><span :class="{active:fund_type==4}" @click="tab_click(4)">抵扣券支付</span><span :class="{active:fund_type==6}" @click="tab_click(6)">支付宝支付</span></p>
+                <p>状态：<span :class="{active:fund_state==2}" @click="status_click(2)">全部</span><span :class="{active:fund_state==0}" @click="status_click(0)">交易成功</span><span :class="{active:fund_state==1}" @click="status_click(1)">交易失败</span></p>
+               
+                <table>
+                    <tr>
+                        <th>编号</th>
+                        <th>创建时间</th>
+                        <th>支付金额</th>
+                        <th>分类</th>
+                        <th>账户余额</th>
+                        <th>抵扣券</th>
+                        <th>状态</th>
+                    </tr>
+                    <tr v-for="(item,i) in data_list" v-cloak>
+                        <td>{{i+1+(page_no-1)*10}}</td>
+                        <td>{{item.change_time}}</td>
+                        <td>￥{{item.pay_amount/100}}</td>
+                        <td>{{item.type}}</td>
+                        <td v-if="item.pay_type==1&&item.pay_balance!=0">+{{item.pay_balance/100}}</td>
+                        <td v-if="item.pay_type==2&&item.pay_balance!=0">-{{item.pay_balance/100}}</td>
+                        <td v-if="item.pay_balance==0">—</td>
+                        <td v-if="item.pay_type==3&&item.pay_deduction!=0">+{{item.pay_deduction}}</td>
+                        <td v-if="item.pay_type==4&&item.pay_deduction!=0">-{{item.pay_deduction}}</td>
+                        <td v-if="item.pay_deduction==0">—</td>
+                        <td v-if="item.pay_state==1">待支付</td>
+                        <td v-if="item.pay_state==0">支付成功</td>
+                    </tr>
+                </table>
+                <div class="no_data" v-if="data_list==''" v-cloak>
+                    <img src="../images/no_data.png" />
+                </div>
+                <div class="pagelist" v-if="data_list!=''&&total_pages!=1">
+                    <div v-if="page_no>1"><a v-on:click="page_no--,page_click()">上一页</a></div>
+                    <div v-if="page_no==1"><a class="banclick">上一页</a></div>
+                    <div v-for="index in indexs">
+                        <a v-bind:class="{ 'active': page_no == index}" v-on:click="btn_click(index)">{{ index }}</a>
+                    </div>
+                    <div v-if="page_no!=total_pages"><a v-on:click="page_no++,page_click()">下一页</a></div>
+                    <div v-if="page_no == total_pages"><a class="banclick">下一页</a></div>
+                    <div>
+                        <a>共<i>{{total_pages}}</i>页</a>
+                        <input v-model="page_txt" type="text" />
+                        <a @click="search_page()" href="javascript:;">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add_addr_dialog" v-if="is_recharge" v-cloak>
+            <div class="dia_con">
+                <p class="tit tc">充值<button class="close" @click="is_recharge=false"></button></p>
+                <div class="pay">
+                    <!--<p>充值：</p>
+                    <ul>
+                        <li v-for="item in recharge_list" :class="{active:amount==item.pay_amount}" @click="select_amount(item.pay_amount)">
+                            <p><button>￥{{item.pay_amount/100}}</button></p>
+                            <p class="tc">送{{item.give_amount/100}}</p>
+                        </li>
+                    </ul>-->
+                    <p>
+                        充值金额：<input class="ipt_num" v-model="rech_amount" @input="recharge_gift" type="text" />
+                        <!--<span class="orange">送￥{{r_gift_amount/100}}</span>-->
+                    </p>
+                    <div id="rec_code"></div>
+                    <!--<p>支付方式：</p>
+                    <p class="tc code" id="rec_code"></p>
+                    <p class="tc a_btn_t">使用手机支付宝扫码支付</p>-->
+                </div>
+                <p class="tc"><button class="s_sub_btn" @click="recharge_amount">支付宝支付</button><button class="s_cancel_btn" @click="is_recharge=false">取消</button></p>
+            </div>
+        </div>
+
+
+       <div class="add_addr_dialog" v-if="is_pay_order" v-cloak>
+                <div class="dia_con">
+                    <p class="tit tc">支付<button class="close" @click="is_pay_order=false"></button></p>
+                    <div class="pay_way">
+                        <p class="top_title">订单数量：<span class="">{{new_jiage}}</span></p>
+                        <p class="top_title">需付款：<span class="orange">￥{{caul_all}}</span></p>
+                        <p class="top_title">支付方式：</p>
+
+                        <div id="cou_code"></div>
+                        <p>
+                           
+                           
+                            <button class="pay_btn" :class="{pay_btn_d:change_channel==1}" @click="change_channel=1">支付宝</button>
+                        </p>
+                       
+                      
+                    </div>
+                    <p v-if="complete_pay" class="tc" style="padding-top:50px;"><button class="s_sub_btn" @click="is_pay_order=false">完成支付</button><button class="s_cancel_btn" @click="is_pay_order=false">取消</button></p>
+                    <p v-if="!complete_pay" class="tc" style="padding-top:50px;"><button class="s_sub_btn" @click="send_pay_order">支付</button><button class="s_cancel_btn" @click="is_pay_order=false">取消</button></p>
+                </div>
+            </div>
+
+
+
+        <div class="update_info_bg" v-if="getpay" @click="getpayfalse" v-cloak></div>
+        <div class="update_info dl_addbox" v-if="getpay" v-cloak>
+            
+           <p class="pay_title">购买抵用券</p>
+           <div class="pay_all">
+                <div class="pay_show" v-for="item in payaddr">
+                    <p class="show_title stamp stamp01" @click="getjuan(item)" v-bind:class="[{stamp01:item.classtype == 1},{stamp02:item.classtype == 2},{stamp03:item.classtype == 3},{stamp04:item.classtype == 4},{stamp05:item.classtype == 0}]">{{item.purchased_num}}次<i></i></p>
+                    <p class="show_take">送{{item.gift_num}}次</p>
+                </div>
+                
+           </div>
+
+            <p class="cont "><span class="pay_name">可购买数量（次）</span>
+                <span class="pay_jiage">{{surplus}}</span></p>
+
+            
+            <p class="cont"><span class="pay_name">购买数量：</span>            
+            <input type="text" id="dl_add3" class="jg_box" @Focus="getgift()" v-model="new_jiage" />
+            <span class="pay_jiagered">送{{get_gift}}次</span></p>
+            </p>
+
+             <p class="cont shouldpay"><span class="pay_name">需付款（元）</span>
+                <span class="pay_jiage">￥{{caul_all}}</span></p>
+            
+           
+
+            <p class="cont tijiao">
+                <button @click="dl_addnew">支付</button>
+            </p>
+        </div>
+        <!--<div class="add_addr_dialog" v-if="is_buy" v-cloak>
+            <div class="dia_con">
+                <div id="cou_code"></div>
+                <p class="tit tc">套餐购<button class="close" @click="is_buy=false"></button></p>
+                <div class="pay">
+                    <p>购买数量：</p>
+                    <div class="buy_num">
+                        <button @click="less_coupon()">-</button>
+                        <input type="text" v-model="coup_num" />
+                        <button @click="coup_num++">+</button>
+                        <span>需支付：{{unit_price * coup_num/100}}</span>
+                    </div>
+                    <div id="cou_code"></div>
+                    <p>支付方式：</p>
+                    <p class="tc code" id=""></p>
+                    <p class="tc a_btn_t">使用手机支付宝扫码支付</p>
+                </div>
+                <div class="pay">
+                    <p>套餐：</p>
+                    <ul>
+                        <li v-for="item in coupon_list" :class="{active:coupon==item.pay_amount}" @click="pay_id=item.pay_id;select_amount(item.pay_amount)">
+                            <p><button>￥{{item.pay_amount/100}}</button></p>
+                            <p class="tc">{{item.give_amount}}次</p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="tc"><button class="s_sub_btn" @click="buy_coupon">支付宝支付</button><button class="s_cancel_btn" @click="is_buy=false">取消</button></p>
+            </div>
+        </div>-->
+        <!--<div class="add_addr_dialog" v-if="is_activity" v-cloak>
+            <div class="a_activity">
+                <div class="con">
+                    <p>充值送：<i class="close" @click="is_activity=false"></i></p>
+                    <p><span v-for="item in recharge_list">充{{item.pay_amount/100}}送{{item.give_amount/100}},</span></p>
+                    <p>套餐购：</p>
+                    <p><span v-for="item in coupon_list">{{item.pay_amount/100}}元/{{item.give_amount}}次,</span></p>
+                </div>
+            </div>
+        </div>-->
+        <div class="footer">
+            <p>客服QQ：2781686263  客服邮箱：ecms@innjoe.com<span>Copyright@2017 Innjoe 浙ICP备16035303号-1</span></p>
+        </div>
+    </div>
+    <script src="../js/base.js?rev=@@hash"></script>
+    <script src="../js/account.js?rev=@@hash"></script>
+</body>
+</html>
