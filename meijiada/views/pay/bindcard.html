@@ -38,7 +38,7 @@
             </div>
             <div class="item">
                 <p><span>手机号</span><input type="text" v-model='phone' placeholder="请输入手机号"></p>
-                <p><span>验证码</span><input type="text" v-model='telcode' placeholder="请输入验证码"><button class="get_code">发送验证码</button></p>
+                <p><span>验证码</span><input type="text" v-model='telcode' placeholder="请输入验证码"><button class="get_code" @click='getCode'>发送验证码</button></p>
             </div>
             <p>
                 <button class="w-btn mt42" @click='bindBankCard'>完成</button>
