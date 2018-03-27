@@ -28,26 +28,38 @@
             <span>我的客户</span>
         </div>
         <div class="sellerclient bt20">
-            <p>
-                <a href="">吴小云</a>
-            </p>
-            <p>
-                <a href="">吴小云</a>
-            </p>
-            <p>
-                <a href="">吴小云</a>
-            </p>
-            <p>
-                <a href="">吴小云</a>
-            </p>
+            <yd-infinitescroll :callback="loadList" ref="infinitescrollDemo">
+                <yd-list theme="1" slot="list">
+                    <p v-for="item, key in list" :key="key">
+                        <a href="">吴小云</a>
+                    </p>
+                </yd-list>
+                <span slot="doneTip">啦啦啦，啦啦啦，没有数据啦~~</span>
+                <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
+            </yd-infinitescroll>
         </div>
     </div>
     <script>
         new Vue({
             el: '.wrap',
+            data:{
+                list:[1,2,3,4,5,6,7,8,9,1,2,3],
+                pagesize:10,
+                pageno:1,
+            },
             methods: {
                 goHistory: function () {
-                    location.go(-1);
+                    history.go(-1);
+                },
+                loadList() {
+                    /*const _list = response.body;
+                    this.list = [...this.list, ..._list];*/
+                    if (this.list.length < this.pagesize || this.pageno == 1) {
+                        this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
+                        return;
+                    }
+                    this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.finishLoad');
+                    this.pageno++;
                 }
             }
         })

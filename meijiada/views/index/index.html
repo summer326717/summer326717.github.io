@@ -71,44 +71,31 @@
                     <span class="right" @click='viewMore'>查看更多</span>
                 </p>
                 <div class="item_list">
-                    <a href="./hoursedetail.html">
-                        <div class="item">
-                            <div class="left">
-                                <img src="../../static/images/img_01.png" alt="">
-                            </div>
-                            <div class="right">
-                                <p class="ltit">nsjadasidnsajk</p>
-                                <p class="stit">dhuasdhsaidasdas</p>
-                                <p>
-                                    <span class="lable_blue">tree</span>
-                                    <span class="lablue_green">rerwre</span>
-                                </p>
-                                <p>
-                                    <span class="totalprice">100万</span>
-                                    <span>3232元/平</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="./hoursedetail.html">
-                        <div class="item">
-                            <div class="left">
-                                <img src="../../static/images/img_01.png" alt="">
-                            </div>
-                            <div class="right">
-                                <p class="ltit">nsjadasidnsajk</p>
-                                <p class="stit">dhuasdhsaidasdas</p>
-                                <p>
-                                    <span class="lable_blue">tree</span>
-                                    <span class="lablue_green">rerwre</span>
-                                </p>
-                                <p>
-                                    <span class="totalprice">100万</span>
-                                    <span>3232元/平</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                    <yd-infinitescroll :callback="loadList" ref="infinitescrollDemo">
+                        <yd-list theme="1" slot="list">
+                            <a href="./hoursedetail.html" v-for="item, key in list" :key="key">
+                                <div class="item">
+                                    <div class="left">
+                                        <img src="../../static/images/img_01.png" alt="">
+                                    </div>
+                                    <div class="right">
+                                        <p class="ltit">nsjadasidnsajk</p>
+                                        <p class="stit">dhuasdhsaidasdas</p>
+                                        <p>
+                                            <span class="lable_blue">tree</span>
+                                            <span class="lablue_green">rerwre</span>
+                                        </p>
+                                        <p>
+                                            <span class="totalprice">100万</span>
+                                            <span>3232元/平</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </yd-list>
+                        <span slot="doneTip">啦啦啦，啦啦啦，没有数据啦~~</span>
+                        <img slot="loadingTip" src="http://static.ydcss.com/uploads/ydui/loading/loading10.svg"/>
+                    </yd-infinitescroll>
                 </div>
             </div>
         </div>
@@ -116,12 +103,27 @@
     <script>
         new Vue({
             el: '.wrap',
+            data:{
+                list:[1,2,3,4,5,6,7,8,9],
+                pagesize:10,
+                pageno:1,
+            },
             methods: {
                 checkLogin: function () {
                     location.href = '../login/codelogin.html';
                 },
                 viewMore: function () {
                     location.href = './morelist.html';
+                },
+                loadList() {
+                    /*const _list = response.body;
+                    this.list = [...this.list, ..._list];*/
+                    if (this.list.length < this.pagesize || this.pageno == 1) {
+                        this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.loadedDone');
+                        return;
+                    }
+                    this.$refs.infinitescrollDemo.$emit('ydui.infinitescroll.finishLoad');
+                    this.pageno++;
                 }
             }
         })

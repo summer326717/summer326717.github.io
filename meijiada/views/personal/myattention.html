@@ -46,7 +46,9 @@
         new Vue({
             el: '.wrap',
             methods: {
-
+                goHistory: function () {
+                    history.go(-1);
+                },
             }
         })
     </script>

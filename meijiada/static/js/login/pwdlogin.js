@@ -34,7 +34,7 @@ new Vue({
             this.isremember = !this.isremember;
         },
         goHistory: function () {
-            location.go(-1);
+            history.go(-1);
         },
         toRegister: function () {
             location.href = './register.html'

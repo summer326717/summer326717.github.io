@@ -58,8 +58,8 @@
             el: '.wrap',
             methods: {
                 goHistory: function () {
-                    location.go(-1);
-                }
+                    history.go(-1);
+                },
             }
         })
         certifySwiper = new Swiper('#certify .swiper-container', {
@@ -80,8 +80,8 @@
                         if (Math.abs(slideProgress) > 1) {
                             modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
                         }
-                        translate = slideProgress * modify * 260 + 'px';
-                        scale = 1 - Math.abs(slideProgress) / 5;
+                        translate = slideProgress * modify * 20 + 'px';
+                        scale = 1 - Math.abs(slideProgress) / 4;
                         zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
                         slide.transform('translateX(' + translate + ') scale(' + scale + ')');
                         slide.css('zIndex', zIndex);

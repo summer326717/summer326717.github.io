@@ -39,7 +39,7 @@
                 </div>
             </div>
             <p>
-                <button class="b-btn">+ 添加银行卡</button>
+                <button class="b-btn" @click='addBankCard'>+ 添加银行卡</button>
             </p>
         </div>
     </div>
@@ -48,7 +48,10 @@
             el: '.wrap',
             methods: {
                 goHistory: function () {
-                    location.go(-1);
+                    history.go(-1);
+                },
+                addBankCard:function(){
+                    location.href = './bindcard.html';
                 }
             }
         })
