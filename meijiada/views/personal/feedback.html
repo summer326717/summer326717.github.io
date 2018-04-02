@@ -14,7 +14,7 @@
     <script src="../../static/js/common/ydui.flexible.js"></script>
     <link rel="stylesheet" href="../../static/css/ydui.base.css">
     <link rel="stylesheet" href="../../static/css/common.css">
-    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/vue.min.js"></script>
     <script src="../../static/js/common/ydui.rem.js"></script>
     <script src="../../static/js/common/axios.min.js"></script>
 </head>
@@ -29,30 +29,58 @@
         </div>
         <div class="updatepwd">
             <div>
-                <textarea class="advice" placeholder="亲爱的美佳达用户，如您在使用过程中有任何问题或建议，都可以在此反馈，不断的改进，只为让您用得更舒心~"></textarea>
+                <textarea class="advice" v-model='qustTxt' placeholder="亲爱的美佳达用户，如您在使用过程中有任何问题或建议，都可以在此反馈，不断的改进，只为让您用得更舒心~"></textarea>
             </div>
             <div class="img_des">
                 <div class="tit">请提供相关问题的截图或照片
                     <span>0/3</span>
                 </div>
                 <ul class="img_list">
-                    <li>
+                    <li @click='uploadImage'>
                         <img src="../../static/images/s17.png">
                     </li>
                 </ul>
                 <div>
-                    <button class="w-btn mt80">提交反馈</button>
+                    <button class="w-btn mt80" @click='submitQuestion'>提交反馈</button>
                 </div>
+            </div>
+            <div v-if='issubmitsuccess'>
+                <p>提交成功</p>
             </div>
         </div>
     </div>
     <script>
         new Vue({
             el: '.wrap',
+            data: {
+                qustTxt: '',
+                issubmitsuccess: false,
+                imglist: []
+            },
             methods: {
                 goHistory: function () {
                     history.go(-1);
                 },
+                uploadImage: function () {
+                    this.imglist.push({
+                        url: ''
+                    })
+                },
+                submitQuestion: function () {
+                    var json = {
+                        qustTxt: this.qustTxt,
+                        imglist: this.imglist
+                    }
+                    var _this = this;
+                    httpGet('/login', json, function (res) {
+                        if (res.code == 0) {
+                            _this.issubmitsuccess = true;
+                            _this.$dialog.toast({ mes: res.message });
+                        } else {
+                            _this.$dialog.toast({ mes: res.message });
+                        }
+                    })
+                }
             }
         })
     </script>

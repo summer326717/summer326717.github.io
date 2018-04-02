@@ -14,7 +14,7 @@
     <script src="../../static/js/common/ydui.flexible.js"></script>
     <link rel="stylesheet" href="../../static/css/ydui.base.css">
     <link rel="stylesheet" href="../../static/css/common.css">
-    <script src="../../static/js/common/vue.min.js"></script>    
+    <script src="../../static/js/common/vue.min.js"></script>
     <script src="../../static/js/common/ydui.rem.js"></script>
     <script src="../../static/js/common/axios.min.js"></script>
 </head>
@@ -39,7 +39,7 @@
                 <span>意见反馈</span>
             </p>
             <div>
-                <button class="w-btn mt80">退出登录</button>
+                <button class="w-btn mt80" @click='signOut'>退出登录</button>
             </div>
         </div>
     </div>
@@ -50,6 +50,20 @@
                 goHistory: function () {
                     history.go(-1);
                 },
+                signOut: function () {
+                    var json = {
+                        token: this.token,
+                    };
+                    var _this = this;
+                    httpGet('/login', json, function (res) {
+                        if (res.code == 0) {
+                            _this.$dialog.toast({ mes: res.message });
+                            location.href = '../login/selecttype.html';
+                        } else {
+                            _this.$dialog.toast({ mes: res.message });
+                        }
+                    })
+                }
             }
         })
     </script>
