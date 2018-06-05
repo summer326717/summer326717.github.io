@@ -1,0 +1,2 @@
+webpackJsonp([10],{tt5y:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var e=this.$createElement,t=this._self._c||e;return t("div",[t("h1",[this._v("账户明细")])])}]},r=n("vSla")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=10.28eac6580cc8a466b0ad.js.map
