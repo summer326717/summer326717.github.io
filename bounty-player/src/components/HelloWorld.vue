@@ -1,6 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <template>
+  <div>
+    {{$store.state.count}}
+    <button @click="$store.commit('addnum')">+</button>
+    <button>-</button>
+  </div>
+</template>
+
   </div>
 </template>
 

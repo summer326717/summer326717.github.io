@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1>用户登录</h1>
-    <p><input type="text" placeholder="请输入手机号" v-model="usertel"></p>
-    <p><input type="text" placeholder="请输入密码" v-model="userpwd"></p>
+    <h1>登录</h1>
+    <p><input type="text" placeholder="请输入用户名" v-model="usertel"><i @click="contactServicer">?</i></p>
+    <p><input type="password" placeholder="请输入密码" v-model="userpwd"><i @click="changeInput"></i></p>
+    <p><button @click="codeLogin">验证码登录</button></p>
     <p><button @click="userLogin">登录</button></p>
   </div>
 </template>
@@ -21,6 +22,15 @@ export default {
         console.log(response)
         this.$router.push({path: 'HomePage'})
       })
+    },
+    contactServicer () {
+      //
+    },
+    changeInput () {
+      //
+    },
+    codeLogin () {
+      //
     }
   }
 }
