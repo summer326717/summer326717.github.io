@@ -1,0 +1,2 @@
+webpackJsonp([5],{uVXF:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("h1",[this._v("关于我们")])},staticRenderFns:[]},r=n("vSla")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=5.d1f22758abd75c2f15b0.js.map

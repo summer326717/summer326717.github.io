@@ -1,0 +1,2 @@
+webpackJsonp([2],{DLtZ:function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("div",[e("div",[e("div",[this._v("头像"),e("span",[e("img",{attrs:{src:"",alt:""}})])]),this._v(" "),e("div",[this._v("密码")]),this._v(" "),e("div",[this._v("手机号"),e("span",[this._v("17010010101")])])])])}]},n=s("vSla")(null,i,!1,null,null,null);e.default=n.exports}});
+//# sourceMappingURL=2.8406c6d24c848b932718.js.map
