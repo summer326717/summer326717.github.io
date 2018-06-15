@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import {axiosPost, axiosGet} from './assets/utils/serverApi'
+import 'lib-flexible'
+import './assets/css/common.css'
 
 console.log(store)
 

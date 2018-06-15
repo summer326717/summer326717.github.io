@@ -11,12 +11,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "amfe-flexible": "^2.2.1",
     "axios": "^0.18.0",
     "cookies-js": "^1.2.3",
     "fastclick": "^1.0.6",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "lib-flexible": "^0.3.2",
+    "px2rem-loader": "^0.1.9",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-wechat-title": "^2.0.4",

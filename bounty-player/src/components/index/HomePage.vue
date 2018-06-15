@@ -1,44 +1,33 @@
 <template>
   <div>
-    <p><button>设置</button></p>
-    <p><img src="../../assets/logo.png"></p>
+    {{$store.state.count}}
+    <button @click="$store.commit('addnum')">+</button>
     <div>
-      <div>
-        <p>$10000.00</p>
-        <p>账户余额<span>明细</span></p>
-      </div>
-      <div>
-        <p>￥100.00</p>
-        <p>已赚取</p>
-      </div>
-      <div>
-        <p>15</p>
-        <p>今日金币</p>
-      </div>
-    </div>
-    <div><span class="">昨日收益：45金币=0.02元<i>?</i></span><span>金币转换率受每日运营收益影响（上下浮动）</span></div>
-    <div>
-      <div>
-        <p><img src="" alt=""></p>
-        <p>我要提现</p>
-      </div>
-      <div>
-        <p><img src="" alt=""></p>
-        <p>开启任务</p>
-      </div>
-      <div>
-        <p><img src="" alt=""></p>
-        <p>悬赏任务</p>
-      </div>
-      <div>
-        <p><img src="" alt=""></p>
-        <p>新手教学</p>
-      </div>
-    </div>
-    <div>
-      <div>广告招商</div>
-      <div>常见问题</div>
-      <div>关于我们</div>
+      <ul>
+        <li><router-link to='/TaskList'>悬赏任务</router-link></li>
+        <li><router-link to='/Teach'>新手教学</router-link></li>
+        <li><router-link to='/Advertising'>广告招商</router-link></li>
+        <li><router-link to='/Question'>常见问题</router-link></li>
+        <li><router-link to='/About'>关于我们</router-link></li>
+      </ul>
     </div>
   </div>
 </template>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
