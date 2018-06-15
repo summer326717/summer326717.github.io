@@ -5,7 +5,6 @@
       <img src="" alt="">
       <p>任务任务任务任务任务任务任务任务任务任务任务任务任务任务任务</p>
     </div>
-    <div class="demo"></div>
   </div>
 </template>
 
@@ -18,10 +17,11 @@ export default {
     }
   },
   created () {
+    this.getData()
   },
   methods: {
-    getGold () {
-      alert('10')
+    getData () {
+      console.log('1')
     }
   }
 }
@@ -34,10 +34,5 @@ export default {
 .wrap p {
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.demo{
-  width: 750px;
-  height: 300px;
-  background: red;
 }
 </style>

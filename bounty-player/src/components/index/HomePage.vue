@@ -11,6 +11,8 @@
         <li><router-link to='/About'>关于我们</router-link></li>
       </ul>
     </div>
+    <div class="demo"></div>
+    <div class="demo2"></div>
   </div>
 </template>
 
@@ -29,5 +31,10 @@ li {
 }
 a {
   color: #42b983;
+}
+.demo{
+  width: 750px;
+  height: 100px;
+  background: red;
 }
 </style>
