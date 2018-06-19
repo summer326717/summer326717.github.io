@@ -1,0 +1,2 @@
+webpackJsonp([4],{gxDL:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("h1",[this._v("系统管理")])},staticRenderFns:[]},r=n("vSla")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=4.b21d832b8eb136caeca0.js.map

@@ -19,10 +19,10 @@ export default {
         }
     },
     mounted() {
-        let ele = document.getElementsByClassName('y-dialog-content')[0];
-        let h = ele.clientHeight;
-        let winH = window.innerHeight;
-        ele.style.marginTop = (winH - h)/2 + 'px'
+        //let ele = document.getElementsByClassName('y-dialog-content')[0];
+        //let h = ele.clientHeight;
+        //let winH = window.innerHeight;
+        //ele.style.marginTop = (winH - h)/2 + 'px'
     }
 }
 </script>

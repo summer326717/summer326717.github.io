@@ -1,5 +1,21 @@
 <template>
   <div class="denglu">
+    <svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+    <defs>
+      <path id="gentle-wave" d="M-160 44c30 0
+      58-18 88-18s
+      58 18 88 18
+      58-18 88-18
+      58 18 88 18
+      v44h-352z">
+    </path>
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="50" y="0" fill="rgba(190,190,220,.5)"></use>
+      <use xlink:href="#gentle-wave" x="50" y="3" fill="rgba(190,190,220,.5)"></use>
+      <use xlink:href="#gentle-wave" x="50" y="6" fill="rgba(190,190,220,.5)"></use>
+    </g>
+    </svg>
     <div class="dlnr">
       <p><input type="text" v-model="username" placeholder="请输入用户名"/></p>
       <p><input type="password" v-model="password" placeholder="请输入密码"/></p>
@@ -20,7 +36,7 @@
       }
     },
     methods: {
-      dlLogin() {
+      dlLogin() {        
         if (this.username.trim() == '' || this.username.trim().length < 5) {
           alert('用户名不能为空且用户名至少6个字符');
           return;
@@ -36,12 +52,12 @@
         this.$axiosPost('/login',json).then((res) => {
           console.time("测试 fn 速度: ")
           try {
-            if (res.state === 0) {
-              this.$router.push({path: 'HomePage'})
-            } else {
-              alert(res.message);
-            }
-          } catch (error) {
+              if (res.state === 0) {
+                this.$router.push({path: 'HomePage'})
+              } else {
+                alert(res.message);
+              }
+            } catch (error) {
             alert(error.message)
           }
           console.timeEnd("测试 fn 速度: ") //1471.47900390625ms
@@ -67,7 +83,7 @@
     top: 50%;
     margin-top: -150px;
     margin-left: -200px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 50px;
   }
@@ -118,4 +134,36 @@
   .denglu .dlnr button:hover {
     background: #a9abcc;
   }
+
+  .editorial{
+    position: fixed;
+    bottom: 0;
+  }
+
+  .parallax>use {
+    animation: move-forever 12s linear infinite
+  }
+
+  .parallax>use:nth-child(1) {
+      animation-delay: -2s
+  }
+
+  .parallax>use:nth-child(2) {
+      animation-delay: -2s;
+      animation-duration: 5s
+  }
+
+  .parallax>use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 3s
+  }
+  @keyframes move-forever {
+    0% {
+        transform: translate(-90px,0)
+    }
+
+    100% {
+        transform: translate(85px,0)
+    }
+}
 </style>

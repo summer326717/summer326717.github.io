@@ -50,8 +50,11 @@ export default {
                 var geolocation = new BMap.Geolocation();
                 geolocation.getCurrentPosition(function(r){
                     if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                        //定义图标并设置其尺寸
                         var localIcon = new BMap.Icon("http://testwechat.hotol.cn/images/map_03.png", new BMap.Size(16, 17));
+                        //定义图像标注并将图标应用到标注上
                         var mk = new BMap.Marker(r.point, { icon: localIcon });
+                        //将标注添加到地图上
                         _this.mapView.addOverlay(mk);
                         _this.mapView.panTo(r.point);
                         //console.log(r);

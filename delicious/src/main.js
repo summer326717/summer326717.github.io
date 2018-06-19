@@ -7,6 +7,9 @@ import 'nprogress/nprogress.css'
 import {axiosPost, axiosGet} from './assets/utils/serverApi'
 require('./assets/utils/mockServer')
 
+//var fundebug = require("fundebug-javascript")
+//fundebug.apikey = "92b735ae3c80543c96664ca5e1c836de301111d2e338decef1ac6c2d7e231c5d"
+
 // 定义全局变量
 Vue.prototype.$axiosPost = axiosPost
 Vue.prototype.$axiosGet = axiosGet
@@ -27,9 +30,45 @@ router.afterEach(transition => {
     NProgress.done();
 });
 
+/*function formatComponentName(vm)
+{
+  if (vm.$root === vm) return 'root';
+
+  var name = vm._isVue ? (vm.$options && vm.$options.name) || (vm.$options && vm.$options._componentTag) : vm.name;
+  return (name ? 'component <' + name + '>' : 'anonymous component') + (vm._isVue && vm.$options && vm.$options.__file ? ' at ' + (vm.$options && vm.$options.__file) : '');
+
+}
+
+Vue.config.errorHandler = function(err, vm, info)
+{
+  var componentName = formatComponentName(vm);
+  var propsData = vm.$options && vm.$options.propsData;
+
+  fundebug.notifyError(err,
+  {
+      metaData:
+      {
+          componentName: componentName,
+          propsData: propsData,
+          info: info
+      }
+   });
+};*/
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     render: h => h(App)
 })
+
+window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
+    var info = "错误信息：" + errorMessage + "，" +
+      "出错文件：" + scriptURI + "，" +
+      "出错行号：" + lineNumber + "，" +
+      "出错列号：" + columnNumber + "，" +
+      "错误详情：" + errorObj + "，";
+    console.log(info);
+    alert(info + '如影响使用请联系客服。');
+    return true
+}
