@@ -1,15 +1,6 @@
 <template>
     <div class="index">
         <div class="flex-item">
-            <button class="y-info-button">info</button>
-            <button class="y-normal-button">normal</button>
-            <button class="y-warn-button">warn</button>
-        </div>
-        <div class="flex-item">
-            <button class="y-info-button" @click="clickMethod">加载</button>
-            <yloading v-if='isShowLoading'></yloading>
-        </div>
-        <div class="flex-item">
             <span>{{addressItem.address}}{{addressItem.title}}</span>
             <button @click="selectAddr">选择地址</button>
             <ydialog v-if="isShowMap">
@@ -18,6 +9,19 @@
                 中，根据 `name` 属性在子组件中重新组合。 -->
                 <ybaidumap @baidumap='getAddress'></ybaidumap>
             </ydialog>
+        </div>
+        <div class="flex-item">
+            <!--<yinput v-model="username" :rules='[{required: true},{emptyText: "请输入用户名"},{vType: "tel"}]'></yinput>-->
+            <yinput></yinput>
+        </div>
+        <div class="flex-item">
+            <button class="y-info-button">info</button>
+            <button class="y-normal-button">normal</button>
+            <button class="y-warn-button">warn</button>
+        </div>
+        <div class="flex-item">
+            <button class="y-info-button" @click="clickMethod">加载</button>
+            <yloading v-if='isShowLoading'></yloading>
         </div>
         <div class="flex-item">
             <ypagenation :cur='cur' :all='total' @getpage='getpage'></ypagenation>
@@ -34,6 +38,7 @@ import ydialog from '../common/Ydialog'
 import ybaidumap from '../common/Ybaidumap'
 import ypagenation from '../common/Ypagenation'
 import ytable from '../common/Ytable'
+import yinput from '../common/Yinput'
 export default {
     data() {
         return {
@@ -41,7 +46,8 @@ export default {
             isShowMap: false,
             addressItem: '',
             total: 10,
-            cur: 1
+            cur: 1,
+            username: ''
         }
     },
     components: {
@@ -49,7 +55,8 @@ export default {
         ydialog,
         ybaidumap,
         ypagenation,
-        ytable
+        ytable,
+        yinput
     },
     methods: {
         selectAddr(){

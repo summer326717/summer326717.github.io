@@ -51,12 +51,13 @@ export default {
                 geolocation.getCurrentPosition(function(r){
                     if(this.getStatus() == BMAP_STATUS_SUCCESS){
                         //定义图标并设置其尺寸
+                        _this.mapView.centerAndZoom(r.point, 16);
                         var localIcon = new BMap.Icon("http://testwechat.hotol.cn/images/map_03.png", new BMap.Size(16, 17));
                         //定义图像标注并将图标应用到标注上
                         var mk = new BMap.Marker(r.point, { icon: localIcon });
                         //将标注添加到地图上
                         _this.mapView.addOverlay(mk);
-                        _this.mapView.panTo(r.point);
+                        _this.mapView.panTo(r.point);                        
                         //console.log(r);
                         _this.presentPoint = new BMap.Point(r.point.lng, r.point.lat);
                         //根据浏览器定位获取经纬度，根据经纬度获取周围建筑物信息
@@ -79,7 +80,6 @@ export default {
                 _this.presentCity = rs.addressComponents.city;
                 _this.presentDistrict = rs.addressComponents.district;
                 _this.mapView.enableScrollWheelZoom();
-                _this.mapView.centerAndZoom(point, 16);
                 _this.displayPOI(point);
             });
         },

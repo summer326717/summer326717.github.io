@@ -30,31 +30,6 @@ router.afterEach(transition => {
     NProgress.done();
 });
 
-/*function formatComponentName(vm)
-{
-  if (vm.$root === vm) return 'root';
-
-  var name = vm._isVue ? (vm.$options && vm.$options.name) || (vm.$options && vm.$options._componentTag) : vm.name;
-  return (name ? 'component <' + name + '>' : 'anonymous component') + (vm._isVue && vm.$options && vm.$options.__file ? ' at ' + (vm.$options && vm.$options.__file) : '');
-
-}
-
-Vue.config.errorHandler = function(err, vm, info)
-{
-  var componentName = formatComponentName(vm);
-  var propsData = vm.$options && vm.$options.propsData;
-
-  fundebug.notifyError(err,
-  {
-      metaData:
-      {
-          componentName: componentName,
-          propsData: propsData,
-          info: info
-      }
-   });
-};*/
-
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -62,7 +37,7 @@ new Vue({
     render: h => h(App)
 })
 
-window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
+/*window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
     var info = "错误信息：" + errorMessage + "，" +
       "出错文件：" + scriptURI + "，" +
       "出错行号：" + lineNumber + "，" +
@@ -71,4 +46,4 @@ window.onerror = function (errorMessage, scriptURI, lineNumber, columnNumber, er
     console.log(info);
     alert(info + '如影响使用请联系客服。');
     return true
-}
+}*/

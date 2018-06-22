@@ -3,8 +3,8 @@
         <div class="right-container">
             <leftmenu></leftmenu>
             <div class="top-menu">
-                <span class="login-name">张阿三</span>
-                <button class="y-info-button">退出</button>
+                <span class="login-name">{{username}}</span>
+                <button @click="signOut" class="y-info-button">退出</button>
             </div>
             <div class="bottom-container">
                 <router-view></router-view>
@@ -19,14 +19,16 @@
         name: "Home",
         data(){
             return {
-                
+                username: localStorage.getItem('username')
             }
         },
         components: {
             leftmenu
         },
         methods: {
-            
+            signOut() {
+                this.$router.push({path: '/'})
+            }
         }
     }
 </script>

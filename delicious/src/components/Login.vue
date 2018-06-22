@@ -50,17 +50,12 @@
           password: this.password
         }
         this.$axiosPost('/login',json).then((res) => {
-          console.time("测试 fn 速度: ")
-          try {
-              if (res.state === 0) {
-                this.$router.push({path: 'HomePage'})
-              } else {
-                alert(res.message);
-              }
-            } catch (error) {
-            alert(error.message)
+          if (res.state === 0) {
+            localStorage.setItem('username', res.data.name)
+            this.$router.push({path: 'HomePage'})
+          } else {
+            alert(res.message);
           }
-          console.timeEnd("测试 fn 速度: ") //1471.47900390625ms
         })
       }
     }

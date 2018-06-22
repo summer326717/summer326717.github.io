@@ -5,9 +5,9 @@
             <div class="y-dialog-body">
                 <slot></slot>
             </div>
-            <div class="y-dialog-bottom">
+            <!--<div class="y-dialog-bottom">
                 <button class="y-normal-button">取消</button><button class="y-info-button">确认</button>
-            </div>
+            </div>-->
         </div>
     </div>
 </template>
