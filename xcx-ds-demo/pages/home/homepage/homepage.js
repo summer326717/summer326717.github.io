@@ -7,7 +7,8 @@ Page({
    */
   data: {
     bannerList: mock.bannerList,
-    categoryList: mock.categoryList
+    categoryList: mock.categoryList,
+    recommendList: mock.recommendList
   },
 
   /**
