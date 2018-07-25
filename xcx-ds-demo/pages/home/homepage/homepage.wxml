@@ -1,0 +1,11 @@
+<view>
+    <view>
+        <swiper indicator-dots="true" autoplay="false" interval="3000" duration="1000" circular="true">
+            <block wx:for="{{bannerList}}" wx:key="{{index}}">
+                <swiper-item>
+                    <image mode='scaleToFill' src="{{item.bannerUrl}}" class="slide-image" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+</view>
