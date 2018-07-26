@@ -3,3 +3,15 @@ view {
   color: #454546;
   font-size: 30rpx;
 } 
+
+.pink {
+  color: #FF5970;
+}
+
+.gray {
+  color: #999999;
+}
+
+.fr {
+  float: right;
+}

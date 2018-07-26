@@ -81,8 +81,46 @@ const recommendList = [
   }
 ]
 
+const bannerList2 = [
+  {
+    bannerUrl: 'http://10.205.130.130/images/banner-01.png'
+  },
+  {
+    bannerUrl: 'http://10.205.130.130/images/banner-02.png'
+  },
+  {
+    bannerUrl: 'http://10.205.130.130/images/banner-03.png'
+  },
+  {
+    bannerUrl: 'http://10.205.130.130/images/banner-03.png'
+  }
+]
+
+const categoryList2 = [
+  {
+    cName: '本本',
+    cUrl: 'pages/my/my/my',
+    cImg: 'http://10.205.130.130/images/y-c-01.png'
+  },
+  {
+    cName: '笔类',
+    cUrl: 'pages/my/my/my',
+    cImg: 'http://10.205.130.130/images/y-c-02.png'
+  },
+  {
+    cName: '便签',
+    cUrl: 'pages/my/my/my',
+    cImg: 'http://10.205.130.130/images/y-c-03.png'
+  },
+  {
+    cName: '文件袋',
+    cUrl: 'pages/my/my/my',
+    cImg: 'http://10.205.130.130/images/y-c-04.png'
+  }
+]
+
 export default {
-  bannerList: bannerList,
-  categoryList: categoryList,
+  bannerList: bannerList2,
+  categoryList: categoryList2,
   recommendList: recommendList
 }

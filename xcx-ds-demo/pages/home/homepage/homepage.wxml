@@ -3,7 +3,7 @@
         <swiper indicator-dots="true" autoplay="false" interval="30000" duration="1000" circular="true">
             <block wx:for="{{bannerList}}" wx:key="{{index}}">
                 <swiper-item>
-                    <image mode='scaleToFill' src="{{item.bannerUrl}}" class="slide-image" />
+                    <image mode='widthFix' src="{{item.bannerUrl}}" class="slide-image" />
                 </swiper-item>
             </block>
         </swiper>
@@ -11,16 +11,21 @@
     <view class="index-category">
         <block wx:for="{{categoryList}}" wx:key="{{index}}">
             <navigator url='{{item.cUrl}}'>
-                <view><image src="{{item.cImg}}" /></view>
+                <view><image mode='aspectFit' src="{{item.cImg}}" /></view>
                 <view>{{item.cName}}</view>
             </navigator>
         </block>
     </view>
     <view class="index-recommend">
-        <block wx:for="{{categoryList}}" wx:key="{{index}}">
+        <block wx:for="{{recommendList}}" wx:key="{{index}}">
             <navigator url='{{item.cUrl}}'>
-                <view><image src="{{item.cImg}}" /></view>
-                <view>{{item.cName}}</view>
+                <view class="item">
+                    <view><image mode='widthFix' src="http://10.205.130.130/images/good.jpg" /></view>
+                    <view class="content">
+                        <view class="name">{{item.rName}}</view>
+                        <view><text class='pink'>￥{{item.sellPrice}}</text><text class="gray fr">已售{{item.sellNum}}</text></view>
+                    </view>
+                </view>
             </navigator>
         </block>
     </view>
