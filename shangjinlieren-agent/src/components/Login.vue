@@ -43,7 +43,8 @@ export default {
         account: this.account,
         password: this.password
       }
-      this.$axiosPost('/adminLogin', json).then((res) => {
+      this.$router.push({path: '/MyCustomer'})
+      /* this.$axiosPost('/adminLogin', json).then((res) => {
         if (res.code === 0) {
           this.$router.push({path: '/MyCustomer'})
           if (this.checked) {
@@ -56,7 +57,7 @@ export default {
         } else {
           alert(res.message)
         }
-      })
+      }) */
     }
   }
 }
