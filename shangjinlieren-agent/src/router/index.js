@@ -31,6 +31,11 @@ export default new Router({
           component: resolve => require(['../components/AccountManage/MyAccount'], resolve)
         },
         {
+          path: '/toCash',
+          name: 'toCash',
+          component: resolve => require(['../components/AccountManage/toCash'], resolve)
+        },
+        {
           path: '/CustomerDetail',
           name: 'CustomerDetail',
           component: resolve => require(['../components/CustomerManage/CustomerDetail'], resolve)

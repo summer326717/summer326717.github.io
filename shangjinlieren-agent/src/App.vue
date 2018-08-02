@@ -96,6 +96,9 @@ input,button {
 .right {
     float: right;
 }
+.redfont {
+    color: #DD5044;
+}
 .female {
     width: 16px;
     height: 16px;
@@ -324,12 +327,15 @@ input,button {
     display: inline-block;
     width: 154px;
     height: 104px;
-    line-height: 50px;
     background: #FFD900;
     font-size: 20px;
     font-weight: bold;
     margin: 0 50px;
     padding: 25px 0;
     border: 1px solid #CCCCCC;
+    vertical-align: middle;
+}
+.ul li p {
+    line-height: 40px;
 }
 </style>

@@ -6,7 +6,7 @@
         <div class="m-limit">
             <div class="m-title">
                 <span>筛选条件</span>
-                <button class="btn-normal" @click="addAgent()">添加</button>
+                <button class="btn-normal" @click="addCustomer()">添加</button>
                 <button class="btn-normal" @click="getData()">查询</button>
             </div>
             <div class="ptb20">
@@ -56,13 +56,14 @@
                     </tr>
                     <tr v-for="(item,i) in resultList" :key="i">
                         <td>{{item.agentId}}</td>
-                        <td>{{item.name}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{item.nickName}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
+                        <td>{{item.mobile}}</td>
+                        <td>{{(item.balance/100).toFixed(2)}}</td>
+                        <td>{{(item.totalEarnMoney/100).toFixed(2)}}</td>
+                        <td>{{$changeTime(item.lastLoginTime)}}</td>
+                        <td>
+                            <span v-if='item.state==0'>启用</span>
+                            <span v-if='item.state==1'>停用</span>
                         <td>
                             <router-link class="edit-btn" :to='{path: "/CustomerDetail", query: { type: 3, userBaseId : item.userBaseId }}'>修改</router-link>
                         </td>
@@ -109,13 +110,11 @@ export default {
       let json = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        agentId: this.agentId,
         mobile: this.mobile,
-        name: this.name,
-        allData: 'N',
+        nickName: this.name,
         sortType: this.sortType
       }
-      this.$axiosPost('/back/demo', json).then((res) => {
+      this.$axiosPost('/back/queryAgentCustomerList', json).then((res) => {
         if (res.code === 0) {
           this.resultList = res.data.resultList
           this.totalPages = res.data.pageTotal
@@ -125,7 +124,7 @@ export default {
         }
       })
     },
-    addAgent () {
+    addCustomer () {
       this.$router.push({'path': '/CustomerDetail', query: { type: 1 }})
     },
     getPage (e) {

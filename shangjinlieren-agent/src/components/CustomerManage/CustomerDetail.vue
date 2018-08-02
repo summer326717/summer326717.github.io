@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { getAgentList } from '../../utils/common'
 let utils = require('../../utils/common')
 export default {
   data () {
@@ -48,7 +47,6 @@ export default {
       name: '',
       mobile: '',
       sex: '1',
-      idNumber: '',
       type: 1, // 1.添加2.查看3.修改
       userDetail: '',
       agentId: ''
@@ -56,9 +54,10 @@ export default {
   },
   created () {
     this.type = this.$route.query.type
-    this.agentId = this.$route.query.agentId
+    this.agentId = localStorage.getItem('agentId')
+    this.userBaseId = this.$route.query.userBaseId
     if (this.type === 2 || this.type === 3) {
-      this.ViewUserInfo(this.agentId)
+      this.ViewUserInfo(this.userBaseId)
     }
   },
   methods: {
@@ -94,14 +93,6 @@ export default {
         this.$message('请输入正确手机号')
         return false
       }
-      if (!utils.checkNull(this.idNumber)) {
-        this.$message('身份证号不能为空')
-        return false
-      }
-      if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(this.idNumber)) {
-        this.$message('请输入正确的身份证号码')
-        return false
-      }
       return true
     },
     addAgent () {
@@ -109,35 +100,21 @@ export default {
         return
       }
       let json = {
+        agentId: this.agentId,
         account: this.account,
-        name: this.name,
+        nickName: this.name,
         mobile: this.mobile,
-        sex: this.sex, // 0保密1男2女，默认保密
-        idNumber: this.idNumber
+        sex: this.sex // 0保密1男2女，默认保密
       }
-      this.$axiosPost('/back/saveAgentInfo', json).then((res) => {
+      this.$axiosPost('/back/saveUserInfoByAgent', json).then((res) => {
         if (res.code === 0) {
-          this.queryList()
-        } else {
-          this.$message.error(res.message)
-        }
-      })
-    },
-    queryList () {
-      getAgentList().then((res) => {
-        if (res.data) {
-          let dataList = []
-          res.data.resultList.map((v, i) => {
-            dataList.push({value: v.name, name: v.agentId})
-          })
-          sessionStorage.setItem('agentList', JSON.stringify(dataList))
           this.$message({
             message: res.message,
             type: 'success'
           })
           this.$router.back(-1)
         } else {
-          this.$message(res.message)
+          this.$message.error(res.message)
         }
       })
     },
@@ -149,18 +126,18 @@ export default {
         this.EditUserInfo()
       }
     },
-    ViewUserInfo (agentId) {
+    ViewUserInfo (userId) {
       let json = {
-        agentId: agentId
+        userId: userId
       }
-      this.$axiosPost('/back/queryAgentInfoDetail', json).then((res) => {
+      this.$axiosPost('/back/queryUserInfoDetail', json).then((res) => {
         if (res.code === 0) {
           this.userDetail = res.data
           this.account = res.data.account
           this.sex = res.data.sex.toString()
           this.mobile = res.data.mobile
           this.idNumber = res.data.idNumber
-          this.name = res.data.name
+          this.name = res.data.nickName
         } else {
           this.$message(res.message)
         }
@@ -172,36 +149,22 @@ export default {
       }
       let json = {
         agentId: this.agentId,
+        userBaseId: this.userBaseId,
         account: this.account,
-        name: this.name,
+        nickName: this.name,
         mobile: this.mobile,
-        sex: this.sex, // 0保密1男2女，默认保密
-        idNumber: this.idNumber
+        sex: this.sex // 0保密1男2女，默认保密
       }
-      this.$axiosPost('/back/updateAgentInfo', json).then((res) => {
+      this.$axiosPost('/back/updateUserInfoByAgent', json).then((res) => {
         if (res.code === 0) {
-          this.queryList()
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+          this.$router.back(-1)
         } else {
           this.$message.error(res.message)
         }
-      })
-    },
-    uploadImg () {
-      document.getElementById('tea_cate_img').click()
-    },
-    uploadMethod () {
-      let files = document.getElementById('tea_cate_img').files
-      var fd = new FormData()
-      fd.append('file', files[0])
-      let config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      this.$axios.post('/fileUploadSave', fd, config).then(res => {
-        console.log(res)
-      }).catch(res => {
-        console.log(res)
       })
     }
   }

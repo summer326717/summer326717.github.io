@@ -19,7 +19,7 @@
                 <span slot="title">我的代理人</span>
               </el-menu-item>
               <el-menu-item index="/MyAccount">
-                <i class="el-icon-document"></i>
+                <i class="el-icon-menu"></i>
                 <span slot="title">我的账户</span>
               </el-menu-item>
             </el-menu>

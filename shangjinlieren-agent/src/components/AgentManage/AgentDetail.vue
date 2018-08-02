@@ -31,16 +31,17 @@
                 </div>
                 <div class="item">
                     <span class="left-span">*身份证号</span>
-                    <input class="ipt-normal" type="text" placeholder="请输入手机号码" v-model="mobile">
+                    <input class="ipt-normal" type="text" placeholder="请输入身份证号" v-model="idNumber">
                 </div>
                 <div class="item">
                     <span class="left-span">*分润（%）</span>
-                    <input class="ipt-normal" type="text" placeholder="请输入手机号码" v-model="mobile">
+                    <input class="ipt-normal" type="text" placeholder="请输入分润" v-model="sharePoint">
+                    <span>上限为5%</span>
                 </div>
                 <div class="item">
                     <span class="left-span">*开设代理权限</span>
-                    <el-radio v-model="sex" label="1">不开通</el-radio>
-                    <el-radio v-model="sex" label="2">开通</el-radio>
+                    <el-radio v-model="agentState" label="1">不开通</el-radio>
+                    <el-radio v-model="agentState" label="2">开通</el-radio>
                 </div>
                 <div class="item">
                     <span class="left-span">&nbsp;</span>
@@ -52,7 +53,6 @@
 </template>
 
 <script>
-import { getAgentList } from '../../utils/common'
 let utils = require('../../utils/common')
 export default {
   data () {
@@ -64,7 +64,9 @@ export default {
       idNumber: '',
       type: 1, // 1.添加2.查看3.修改
       userDetail: '',
-      agentId: ''
+      agentId: '',
+      sharePoint: '',
+      agentState: '1'
     }
   },
   created () {
@@ -126,31 +128,19 @@ export default {
         name: this.name,
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
-        idNumber: this.idNumber
+        idNumber: this.idNumber,
+        sharePoint: this.sharePoint,
+        agentState: this.agentState
       }
-      this.$axiosPost('/back/saveAgentInfo', json).then((res) => {
+      this.$axiosPost('/back/saveLowerAgentInfo', json).then((res) => {
         if (res.code === 0) {
-          this.queryList()
-        } else {
-          this.$message.error(res.message)
-        }
-      })
-    },
-    queryList () {
-      getAgentList().then((res) => {
-        if (res.data) {
-          let dataList = []
-          res.data.resultList.map((v, i) => {
-            dataList.push({value: v.name, name: v.agentId})
-          })
-          sessionStorage.setItem('agentList', JSON.stringify(dataList))
           this.$message({
             message: res.message,
             type: 'success'
           })
           this.$router.back(-1)
         } else {
-          this.$message(res.message)
+          this.$message.error(res.message)
         }
       })
     },
@@ -174,6 +164,8 @@ export default {
           this.mobile = res.data.mobile
           this.idNumber = res.data.idNumber
           this.name = res.data.name
+          this.sharePoint = res.data.sharePoint
+          this.agentState = res.data.agentState.toString()
         } else {
           this.$message(res.message)
         }
@@ -184,37 +176,25 @@ export default {
         return
       }
       let json = {
-        agentId: this.agentId,
         account: this.account,
+        agentId: this.agentId,
         name: this.name,
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
-        idNumber: this.idNumber
+        idNumber: this.idNumber,
+        sharePoint: this.sharePoint,
+        agentState: this.agentState
       }
-      this.$axiosPost('/back/updateAgentInfo', json).then((res) => {
+      this.$axiosPost('/back/updateAgentInfoByAgent', json).then((res) => {
         if (res.code === 0) {
-          this.queryList()
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+          this.$router.back(-1)
         } else {
           this.$message.error(res.message)
         }
-      })
-    },
-    uploadImg () {
-      document.getElementById('tea_cate_img').click()
-    },
-    uploadMethod () {
-      let files = document.getElementById('tea_cate_img').files
-      var fd = new FormData()
-      fd.append('file', files[0])
-      let config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      this.$axios.post('/fileUploadSave', fd, config).then(res => {
-        console.log(res)
-      }).catch(res => {
-        console.log(res)
       })
     }
   }

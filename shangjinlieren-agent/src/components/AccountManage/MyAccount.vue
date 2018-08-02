@@ -6,20 +6,21 @@
         <div class="ul">
             <ul>
                 <li>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
                     <p>账户余额</p>
+                    <p>￥{{(0/100).toFixed(2)}}</p>
+                    <div><el-button type="warning" size="medium" plain @click="toCash">提现</el-button></div>
                 </li>
                 <li>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
                     <p>总收益</p>
+                    <p>￥{{(0/100).toFixed(2)}}</p>
                 </li>
                 <li>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
                     <p>客户收益</p>
+                    <p>￥{{(0/100).toFixed(2)}}</p>
                 </li>
                 <li>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
                     <p>代理收益</p>
+                    <p>￥{{(0/100).toFixed(2)}}</p>
                 </li>
             </ul>
         </div>
@@ -31,23 +32,17 @@
             <div class="ptb20">
                 <span>分类：</span>
                 <span>
-                    <el-autocomplete
-                        popper-class="my-autocomplete"
-                        v-model="agentName"
-                        :fetch-suggestions="querySearch"
-                        placeholder=""
-                        @select="changeAgent">
-                    <i
-                        class="el-icon-edit el-input__icon"
-                        slot="suffix">
-                    </i>
-                    <template slot-scope="{item}">
-                        <span class="addr">{{item.name}}&nbsp;{{item.value}}</span>
-                    </template>
-                    </el-autocomplete>
+                    <el-select v-model="profitType" placeholder="请选择">
+                        <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option>
+                    </el-select>
                 </span>
                 <span>创建日期：</span>
-                <el-date-picker format='yyyy-MM-dd' v-model="effectiveDate" type="date" placeholder="选择日期"></el-date-picker>
+                <el-date-picker format='yyyy-MM-dd' v-model="arrTime" type="date" placeholder="选择日期"></el-date-picker>
             </div>
         </div>
         <div class="m-table">
@@ -112,15 +107,29 @@ export default {
   data () {
     return {
       agentId: '',
-      mobile: '',
-      name: '',
       pageNo: 1,
       pageSize: 10,
       sortType: 2, // 排序方式
       totalPages: 1,
       resultList: [],
-      effectiveDate: '',
-      agentName: ''
+      arrTime: '',
+      endTime: '',
+      startTime: '',
+      profitType: '', // 0是从客户收益，1是从代理人收益，2是提现
+      options: [
+        {
+          value: '0',
+          label: '客户收益'
+        },
+        {
+          value: '1',
+          label: '代理收益'
+        },
+        {
+          value: '2',
+          label: '提现'
+        }
+      ]
     }
   },
   components: {
@@ -130,21 +139,6 @@ export default {
     this.getData()
   },
   methods: {
-    createFilter (queryString) {
-      return (restaurant) => {
-        return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
-      }
-    },
-    querySearch (queryString, cb) {
-      var restaurants = this.agentList
-      var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants
-      // 调用 callback 返回建议列表的数据
-      cb(results)
-    },
-    changeAgent (e) {
-      this.agentId = e.name
-      // this.getData()
-    },
     getData () {
       if (this.mobile) {
         if (!/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(this.mobile)) {
@@ -155,13 +149,12 @@ export default {
       let json = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        agentId: this.agentId,
-        mobile: this.mobile,
-        name: this.name,
-        allData: 'N',
+        endTime: this.endTime,
+        startTime: this.startTime,
+        profitType: this.profitType, // 0是从客户收益，1是从代理人收益，2是提现
         sortType: this.sortType
       }
-      this.$axiosPost('/back/demo', json).then((res) => {
+      this.$axiosPost('/back/queryAgentAccountInfo', json).then((res) => {
         if (res.code === 0) {
           this.resultList = res.data.resultList
           this.totalPages = res.data.pageTotal
@@ -170,9 +163,6 @@ export default {
           this.totalPages = 1
         }
       })
-    },
-    addAgent () {
-      this.$router.push({'path': '/AgentDetail', query: { type: 1 }})
     },
     getPage (e) {
       this.pageNo = e
@@ -191,10 +181,12 @@ export default {
       this.pageNo = 1
       this.pageSize = 10
       this.sortType = 0
-      this.mobile = ''
-      this.name = ''
-      this.mobile = ''
+      this.profitType = ''
+      this.arrTime = ''
       this.getData()
+    },
+    toCash () {
+      this.$router.push({'path': '/toCash'})
     }
   }
 }

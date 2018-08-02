@@ -25,8 +25,8 @@ export default {
   data () {
     return {
       checked: false,
-      account: 'cupid',
-      password: '123456'
+      account: '',
+      password: ''
     }
   },
   methods: {
@@ -43,12 +43,12 @@ export default {
         account: this.account,
         password: this.password
       }
-      this.$router.push({path: '/MyCustomer'})
-      /* this.$axiosPost('/adminLogin', json).then((res) => {
+      this.$axiosPost('/backAgentLogin', json).then((res) => {
         if (res.code === 0) {
           this.$router.push({path: '/MyCustomer'})
           if (this.checked) {
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('agentId', res.data.userInfo.agentId)
             localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
           } else {
             localStorage.setItem('token', res.data.token)
@@ -57,7 +57,7 @@ export default {
         } else {
           alert(res.message)
         }
-      }) */
+      })
     }
   }
 }

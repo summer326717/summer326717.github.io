@@ -56,10 +56,10 @@
                     <tr v-for="(item,i) in resultList" :key="i">
                         <td>{{item.agentId}}</td>
                         <td>{{item.name}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{item.mobile}}</td>
+                        <td>{{item.sharePoint}}</td>
+                        <td>{{(item.agentProfit/100).toFixed(2)}}</td>
+                        <td>{{item.customerNum}}</td>
                         <td>
                             <router-link class="edit-btn" :to='{path: "/AgentDetail", query: { type: 3, agentId: item.agentId}}'>修改</router-link>
                         </td>
@@ -106,13 +106,11 @@ export default {
       let json = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        agentId: this.agentId,
         mobile: this.mobile,
-        name: this.name,
-        allData: 'N',
+        nickName: this.name,
         sortType: this.sortType
       }
-      this.$axiosPost('/back/demo', json).then((res) => {
+      this.$axiosPost('/back/queryAgentLowerLevelList', json).then((res) => {
         if (res.code === 0) {
           this.resultList = res.data.resultList
           this.totalPages = res.data.pageTotal
