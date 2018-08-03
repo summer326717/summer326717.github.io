@@ -55,7 +55,7 @@
                         <th>操作</th>
                     </tr>
                     <tr v-for="(item,i) in resultList" :key="i">
-                        <td>{{item.agentId}}</td>
+                        <td>{{item.userBaseId}}</td>
                         <td>{{item.nickName}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
                         <td>{{item.mobile}}</td>
                         <td>{{(item.balance/100).toFixed(2)}}</td>

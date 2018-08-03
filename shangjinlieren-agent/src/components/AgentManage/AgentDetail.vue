@@ -40,8 +40,8 @@
                 </div>
                 <div class="item">
                     <span class="left-span">*开设代理权限</span>
-                    <el-radio v-model="agentState" label="1">不开通</el-radio>
-                    <el-radio v-model="agentState" label="2">开通</el-radio>
+                    <el-radio v-model="agentState" label="0">不开通</el-radio>
+                    <el-radio v-model="agentState" label="1">开通</el-radio>
                 </div>
                 <div class="item">
                     <span class="left-span">&nbsp;</span>
@@ -129,7 +129,7 @@ export default {
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
         idNumber: this.idNumber,
-        sharePoint: this.sharePoint,
+        sharePoint: parseFloat(this.sharePoint),
         agentState: this.agentState
       }
       this.$axiosPost('/back/saveLowerAgentInfo', json).then((res) => {
@@ -182,7 +182,7 @@ export default {
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
         idNumber: this.idNumber,
-        sharePoint: this.sharePoint,
+        sharePoint: parseFloat(this.sharePoint),
         agentState: this.agentState
       }
       this.$axiosPost('/back/updateAgentInfoByAgent', json).then((res) => {

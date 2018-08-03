@@ -42,13 +42,14 @@
 </template>
 
 <script>
+let utils = require('../../utils/common')
 export default {
   data () {
     return {
       currentMoney: 0,
       upRangeMoney: 0,
       toCashMoney: 0,
-      iptMoney: 0,
+      iptMoney: '',
       zhifubao: '',
       czhifubao: ''
     }
@@ -58,8 +59,24 @@ export default {
       this.$router.back(-1)
     },
     toCash () {
-      if (!(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(this.zhifubao)) && /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(this.zhifubao)) {
+      if (!utils.checkNull(this.iptMoney)) {
+        this.$message('提现金额不能为空')
+        return
+      }
+      if (!(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(this.iptMoney))) {
+        this.$message('提现金额必须为正数，且小数点后，最多2位小数')
+        return
+      }
+      if (!utils.checkNull(this.zhifubao)) {
+        this.$message('支付宝号不能为空')
+        return
+      }
+      if (!(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(this.zhifubao)) && !(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/.test(this.zhifubao))) {
         this.$message('请输入正确支付宝号')
+        return
+      }
+      if (!utils.checkNull(this.czhifubao)) {
+        this.$message('请再次输入支付宝号')
         return
       }
       if (this.zhifubao !== this.czhifubao) {
@@ -73,11 +90,13 @@ export default {
       }
       this.$axiosPost('/back/agentWithdrawApply', json).then((res) => {
         if (res.code === 0) {
-          this.resultList = res.data.resultList
-          this.totalPages = res.data.pageTotal
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+          this.$router.back(-1)
         } else {
-          this.resultList = []
-          this.totalPages = 1
+          this.$message.error(res.message)
         }
       })
     }

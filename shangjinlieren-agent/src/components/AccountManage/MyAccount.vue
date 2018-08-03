@@ -7,20 +7,20 @@
             <ul>
                 <li>
                     <p>账户余额</p>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
+                    <p>￥{{(accountBalance/100).toFixed(2)}}</p>
                     <div><el-button type="warning" size="medium" plain @click="toCash">提现</el-button></div>
                 </li>
                 <li>
                     <p>总收益</p>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
+                    <p>￥{{(totalProfit/100).toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>客户收益</p>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
+                    <p>￥{{(customerProfit/100).toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>代理收益</p>
-                    <p>￥{{(0/100).toFixed(2)}}</p>
+                    <p>￥{{(agentProfit/100).toFixed(2)}}</p>
                 </li>
             </ul>
         </div>
@@ -82,14 +82,16 @@
                         <th>备注</th>
                     </tr>
                     <tr v-for="(item,i) in resultList" :key="i">
-                        <td>{{item.agentId}}</td>
-                        <td>{{item.name}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{item.flowingWaterId}}</td>
+                        <td>{{item.profitType}}</td>
+                        <td>
+                            <span v-if='item.profitFrom==0'>客户收益</span>
+                            <span v-if='item.profitFrom==1'>代理人受益</span>
+                            <span v-if='item.profitFrom==2'>提现</span>
+                        </td>
+                        <td>{{(item.mny/100).toFixed(2)}}</td>
+                        <td>{{$changeTime(item.createTime)}}</td>
+                        <td>{{item.remark}}</td>
                     </tr>
                 </table>
                 <div class="no-data" v-if='resultList.length==0'>
@@ -116,6 +118,10 @@ export default {
       endTime: '',
       startTime: '',
       profitType: '', // 0是从客户收益，1是从代理人收益，2是提现
+      accountBalance: 0,
+      totalProfit: 0,
+      customerProfit: 0,
+      agentProfit: 0,
       options: [
         {
           value: '0',
@@ -156,8 +162,14 @@ export default {
       }
       this.$axiosPost('/back/queryAgentAccountInfo', json).then((res) => {
         if (res.code === 0) {
-          this.resultList = res.data.resultList
-          this.totalPages = res.data.pageTotal
+          this.accountBalance = res.data.accountInfo.accountBalance
+          this.totalProfit = res.data.accountInfo.totalProfit
+          this.customerProfit = res.data.accountInfo.customerProfit
+          this.agentProfit = res.data.accountInfo.agentProfit
+          if (res.data.resultList) {
+            this.resultList = res.data.resultList
+            this.totalPages = res.data.pageTotal
+          }
         } else {
           this.resultList = []
           this.totalPages = 1
