@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import Cookies from 'cookies-js'
 export default {
   name: 'Login',
   data () {
@@ -32,11 +33,11 @@ export default {
   methods: {
     LoginMethod () {
       if (this.account === '' || this.account === null || this.account === undefined) {
-        alert('手机号码不能为空')
+        this.$message('手机号码不能为空')
         return
       }
       if (this.password === '' || this.account === null || this.account === undefined) {
-        alert('密码不能为空')
+        this.$message('密码不能为空')
         return
       }
       let json = {
@@ -45,17 +46,14 @@ export default {
       }
       this.$axiosPost('/backAgentLogin', json).then((res) => {
         if (res.code === 0) {
+          Cookies.set('token', res.data.token, { expires: 86400 }) // 七天
+          Cookies.set('agentId', res.data.userInfo.agentId, { expires: 86400 }) // 七天
+          Cookies.set('account', res.data.userInfo.account, { expires: 86400 }) // 七天
+          Cookies.set('mobile', res.data.userInfo.mobile, { expires: 86400 }) // 七天
+          Cookies.set('nickName', res.data.userInfo.name, { expires: 86400 }) // 七天
           this.$router.push({path: '/MyCustomer'})
-          if (this.checked) {
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('agentId', res.data.userInfo.agentId)
-            localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
-          } else {
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
-          }
         } else {
-          alert(res.message)
+          this.$message.error(res.message)
         }
       })
     }

@@ -3,7 +3,7 @@
         <div class="left-menu">
             <p class="menu-title">赏金猎人</p>
             <el-menu router
-              default-active="2"
+              :default-active="$route.path"
               class="el-menu-vertical-demo"
               @open="handleOpen"
               @close="handleClose"
@@ -23,7 +23,11 @@
                 <span slot="title">我的账户</span>
               </el-menu-item>
             </el-menu>
-            <p class="sign-out" @click="signOut"><img src="../../assets/img-13.png"></p>
+            <div class="sign-out">
+              <p @click="dialogVisible = true"><img src="../../assets/header.png"></p>
+              <p @click="dialogVisible = true">{{nickName}}</p>
+              <p @click="signOut"><img src="../../assets/img-13.png"></p>
+            </div>
         </div>
         <div class="right-content">
             <transition name="fade-transform" mode="out-in">
@@ -31,10 +35,36 @@
             </transition>
             <footer>&copy; 2018 杭州音聚网络科技有限公司 版权所有</footer>
         </div>
+        <el-dialog
+          title="提示"
+          :visible.sync="dialogVisible"
+          width="30%">
+          <div>
+            <div>
+              <span>手机号码：</span>
+              <span>{{replaceString(mobileNo)}}</span>
+              <el-button @click="getCode">获取验证码</el-button>
+            </div>
+            <div>
+              <span>验证码：</span>
+              <el-input v-model="telcode" placeholder="请输入验证码"></el-input>
+            </div>
+            <div>
+              <span>新密码：</span>
+              <el-input v-model="newpwd" placeholder="请输入新密码"></el-input>
+            </div>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="changePwd">确 定</el-button>
+          </span>
+        </el-dialog>
     </div>
 </template>
 
 <script>
+import Cookies from 'cookies-js'
+let utils = require('../../utils/common')
 export default {
   name: '',
   data () {
@@ -80,13 +110,22 @@ export default {
             }
           ]
         } */
-      ]
+      ],
+      dialogVisible: false,
+      telcode: '',
+      newpwd: '',
+      nickName: '',
+      mobileNo: ''
     }
+  },
+  created () {
+    this.nickName = Cookies.get('nickName')
+    this.mobileNo = Cookies.get('mobile')
   },
   methods: {
     signOut () {
-      localStorage.removeItem('token')
-      sessionStorage.removeItem('token')
+      Cookies.set('token', '')
+      Cookies.set('agentId', '')
       this.$router.push({path: '/'})
     },
     handleOpen (key, keyPath) {
@@ -94,12 +133,59 @@ export default {
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
-    }
-  },
-  computed: {
-    // 当前路由名称
-    onRoutes () {
-      return this.$route.path.replace('/', '')
+    },
+    replaceString (str) {
+      let str1 = str.substr(3, 4)
+      let str2 = str.replace(str1, "****")
+      return str2
+    },
+    changePwd () {
+      if (!utils.checkNull(this.telcode)) {
+        this.$message('手机验证码不能为空')
+        return
+      }
+      if (this.telcode.length !== 4 || this.telcode.length !== 6) {
+        this.$message('请输入正确验证码')
+        return
+      }
+      if (!utils.checkNull(this.newpwd)) {
+        this.$message('新密码不能为空')
+        return
+      }
+      if (!/^[a-zA-Z0-9_-]{4,16}$/.test(this.newpwd)) {
+        this.$message('密码必须为大于4个字符，小于16个字符的数字和字母的组合')
+        return
+      }
+      let json = {
+        code: this.telcode,
+        newPwd: this.newpwd
+      }
+      this.$axiosPost('/app/userPassWordInfo', json).then((res) => {
+        if (res.code === 0) {
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+        } else {
+          this.$message.error(res.message)
+        }
+      })
+    },
+    getCode () {
+      let json = {
+        mobileNo: this.mobileNo
+      }
+      this.$axiosPost('/sms/sendSmsVerificationCode', json).then((res) => {
+        if (res.code === 0) {
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+          this.dialogVisible = false
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     }
   }
 }
@@ -155,6 +241,11 @@ export default {
   padding: 10px 0;
   text-align: center;
   border-top: 1px solid #484848;
+}
+.container .left-menu .sign-out p {
+  color: #ffffff;
+  height: 46px;
+  cursor: pointer;
 }
 .container .right-content {
     padding-left: 180px;

@@ -57,7 +57,7 @@
                         <td>{{item.agentId}}</td>
                         <td>{{item.name}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
                         <td>{{item.mobile}}</td>
-                        <td>{{item.sharePoint}}</td>
+                        <td>{{item.sharePoint * 100}}</td>
                         <td>{{(item.agentProfit/100).toFixed(2)}}</td>
                         <td>{{item.customerNum}}</td>
                         <td>

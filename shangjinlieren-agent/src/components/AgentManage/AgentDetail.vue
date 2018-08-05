@@ -35,8 +35,8 @@
                 </div>
                 <div class="item">
                     <span class="left-span">*分润（%）</span>
-                    <input class="ipt-normal" type="text" placeholder="请输入分润" v-model="sharePoint">
-                    <span>上限为5%</span>
+                    <input class="ipt-normal" type="number" placeholder="请输入分润" v-model="sharePoint">
+                    <span>上限为{{limitSharePoint}}%</span>
                 </div>
                 <div class="item">
                     <span class="left-span">*开设代理权限</span>
@@ -66,7 +66,8 @@ export default {
       userDetail: '',
       agentId: '',
       sharePoint: '',
-      agentState: '1'
+      agentState: '0',
+      limitSharePoint: 0
     }
   },
   created () {
@@ -75,6 +76,7 @@ export default {
     if (this.type === 2 || this.type === 3) {
       this.ViewUserInfo(this.agentId)
     }
+    this.limitSharePoint = 5 - JSON.parse(localStorage.getItem('userInfo')).sharePoint * 100
   },
   methods: {
     back () {
@@ -86,7 +88,7 @@ export default {
         return false
       }
       if (!/^[a-zA-Z0-9_-]{4,16}$/.test(this.account)) {
-        this.$message('账号必须为大于4个字符，小于16个字符的数字和字母')
+        this.$message('账号必须为大于4个字符，小于16个字符的数字和字母的组合')
         return
       }
       if (!utils.checkNull(this.name)) {
@@ -117,20 +119,34 @@ export default {
         this.$message('请输入正确的身份证号码')
         return false
       }
+      if (!utils.checkNull(this.sharePoint)) {
+        this.$message('请输入分润')
+        return false
+      }
+      this.sharePoint = parseFloat(this.sharePoint)
+      if ((this.sharePoint > this.limitSharePoint) || (this.sharePoint < 0)) {
+        this.$message('请输入分润范围0 - ' + this.limitSharePoint + '之间')
+        return false
+      }
+      if (!(/^\d*\.{0,1}\d{0,1}$/.test(this.sharePoint))) {
+        this.$message('分润(%)小数位最多只能为一位小数')
+        return
+      }
       return true
     },
     addAgent () {
       if (!this.checkAgent()) {
         return
       }
+      let sharePoint = utils.divNum(this.sharePoint, 100)
       let json = {
         account: this.account,
         name: this.name,
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
         idNumber: this.idNumber,
-        sharePoint: parseFloat(this.sharePoint),
-        agentState: this.agentState
+        sharePoint: sharePoint,
+        agentState: parseInt(this.agentState)
       }
       this.$axiosPost('/back/saveLowerAgentInfo', json).then((res) => {
         if (res.code === 0) {
@@ -164,7 +180,7 @@ export default {
           this.mobile = res.data.mobile
           this.idNumber = res.data.idNumber
           this.name = res.data.name
-          this.sharePoint = res.data.sharePoint
+          this.sharePoint = utils.mulNum(res.data.sharePoint, 100)
           this.agentState = res.data.agentState.toString()
         } else {
           this.$message(res.message)
@@ -175,6 +191,7 @@ export default {
       if (!this.checkAgent()) {
         return
       }
+      let sharePoint = utils.divNum(this.sharePoint, 100)
       let json = {
         account: this.account,
         agentId: this.agentId,
@@ -182,7 +199,7 @@ export default {
         mobile: this.mobile,
         sex: this.sex, // 0保密1男2女，默认保密
         idNumber: this.idNumber,
-        sharePoint: parseFloat(this.sharePoint),
+        sharePoint: sharePoint,
         agentState: this.agentState
       }
       this.$axiosPost('/back/updateAgentInfoByAgent', json).then((res) => {

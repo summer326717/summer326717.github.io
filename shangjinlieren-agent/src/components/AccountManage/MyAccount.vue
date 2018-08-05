@@ -7,20 +7,20 @@
             <ul>
                 <li>
                     <p>账户余额</p>
-                    <p>￥{{(accountBalance/100).toFixed(2)}}</p>
+                    <p>￥{{(accountBalance).toFixed(2)}}</p>
                     <div><el-button type="warning" size="medium" plain @click="toCash">提现</el-button></div>
                 </li>
                 <li>
                     <p>总收益</p>
-                    <p>￥{{(totalProfit/100).toFixed(2)}}</p>
+                    <p>￥{{(totalProfit).toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>客户收益</p>
-                    <p>￥{{(customerProfit/100).toFixed(2)}}</p>
+                    <p>￥{{(customerProfit).toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>代理收益</p>
-                    <p>￥{{(agentProfit/100).toFixed(2)}}</p>
+                    <p>￥{{(agentProfit).toFixed(2)}}</p>
                 </li>
             </ul>
         </div>
@@ -42,7 +42,13 @@
                     </el-select>
                 </span>
                 <span>创建日期：</span>
-                <el-date-picker format='yyyy-MM-dd' v-model="arrTime" type="date" placeholder="选择日期"></el-date-picker>
+                <el-date-picker
+                    v-model="arrTime"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+                </el-date-picker>
             </div>
         </div>
         <div class="m-table">
@@ -83,12 +89,12 @@
                     </tr>
                     <tr v-for="(item,i) in resultList" :key="i">
                         <td>{{item.flowingWaterId}}</td>
-                        <td>{{item.profitType}}</td>
                         <td>
-                            <span v-if='item.profitFrom==0'>客户收益</span>
-                            <span v-if='item.profitFrom==1'>代理人受益</span>
-                            <span v-if='item.profitFrom==2'>提现</span>
+                            <span v-if='item.profitType==0'>客户收益</span>
+                            <span v-if='item.profitType==1'>代理人受益</span>
+                            <span v-if='item.profitType==2'>提现</span>
                         </td>
+                        <td>{{item.profitFrom}}</td>
                         <td>{{(item.mny/100).toFixed(2)}}</td>
                         <td>{{$changeTime(item.createTime)}}</td>
                         <td>{{item.remark}}</td>
@@ -155,9 +161,9 @@ export default {
       let json = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        endTime: this.endTime,
-        startTime: this.startTime,
-        profitType: this.profitType, // 0是从客户收益，1是从代理人收益，2是提现
+        endTime: this.arrTime[1],
+        startTime: this.arrTime[0],
+        profitType: parseInt(this.profitType), // 0是从客户收益，1是从代理人收益，2是提现
         sortType: this.sortType
       }
       this.$axiosPost('/back/queryAgentAccountInfo', json).then((res) => {
@@ -168,6 +174,9 @@ export default {
           this.agentProfit = res.data.accountInfo.agentProfit
           if (res.data.resultList) {
             this.resultList = res.data.resultList
+            this.totalPages = res.data.pageTotal
+          } else {
+            this.resultList = []
             this.totalPages = res.data.pageTotal
           }
         } else {
@@ -198,7 +207,7 @@ export default {
       this.getData()
     },
     toCash () {
-      this.$router.push({'path': '/toCash'})
+      this.$router.push({'path': '/toCash', 'query': {accountBalance: this.accountBalance}})
     }
   }
 }

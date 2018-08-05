@@ -47,12 +47,15 @@ export default {
   data () {
     return {
       currentMoney: 0,
-      upRangeMoney: 0,
-      toCashMoney: 0,
+      upRangeMoney: 50000,
+      toCashMoney: 50000,
       iptMoney: '',
       zhifubao: '',
       czhifubao: ''
     }
+  },
+  created () {
+    this.currentMoney = this.$route.query.accountBalance
   },
   methods: {
     back () {
