@@ -136,7 +136,7 @@ export default {
     },
     replaceString (str) {
       let str1 = str.substr(3, 4)
-      let str2 = str.replace(str1, "****")
+      let str2 = str.replace(str1, '****')
       return str2
     },
     changePwd () {

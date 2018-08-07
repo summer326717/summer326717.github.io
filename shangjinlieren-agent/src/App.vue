@@ -172,6 +172,9 @@ input,button {
     margin: 32px 52px 20px 52px;
     background: #F1F1F1;
 }
+.manage-content .m-limit .el-range-input {
+    background: #F7F7F7;
+}
 .manage-content .m-limit .btn-normal {
     float: right;
     margin-top: 10px;

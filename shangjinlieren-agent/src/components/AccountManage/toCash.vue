@@ -12,7 +12,7 @@
             <div class="detail-content">
                 <div class="item">
                     <span class="left-span">当前金额</span>
-                    <span>￥{{(currentMoney/100).toFixed(2)}}（今日上限为{{(upRangeMoney/100).toFixed(2)}}元，今日剩余上限{{(toCashMoney/100).toFixed(2)}}元）</span>
+                    <span>￥{{(currentMoney).toFixed(2)}}（今日上限为{{(upRangeMoney/100).toFixed(2)}}元，今日剩余上限{{(toCashMoney/100).toFixed(2)}}元）</span>
                 </div>
                 <div class="item">
                     <span class="left-span">*提现金额</span>
@@ -30,7 +30,7 @@
                     <p>提现说明</p>
                     <p>1.提现时请务必<span class="redfont">填写正确的支付宝账户</span>，如因个人原因，支付宝账号填写错误，造成的损失将由个人承担</p>
                     <p>2.提现申请将在<span class="redfont">24小时</span>内到账；如遇高峰期或节假日，可能延迟到账，请耐心等待。</p>
-                    <p>3.一天只能提现一次，每次提现将会收取2%的手续费，最低2元起</p>
+                    <p>3.每次提现将会收取2%的手续费，最低2元起</p>
                 </div>
                 <div class="item">
                     <span class="left-span">&nbsp;</span>
@@ -89,7 +89,7 @@ export default {
       let json = {
         alipay: this.zhifubao,
         sureAlipay: this.czhifubao,
-        withdrawNum: parseFloat(this.iptMoney) * 100
+        withdrawNum: parseFloat(this.iptMoney)
       }
       this.$axiosPost('/back/agentWithdrawApply', json).then((res) => {
         if (res.code === 0) {

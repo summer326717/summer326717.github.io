@@ -5,10 +5,10 @@
       <div class="login-box">
         <div class="login-title">欢迎登陆</div>
         <div>
-          <input class="ipt" type="text" v-model="account" placeholder="请输入手机号码">
+          <input class="ipt username" type="text" v-model="account" placeholder="请输入手机号码">
         </div>
         <div>
-          <input class="ipt" type="password" v-model="password" placeholder="请输入登录密码">
+          <input class="ipt password" type="password" v-model="password" placeholder="请输入登录密码">
         </div>
         <div class="check-btn">
           <el-checkbox v-model="checked">记住密码</el-checkbox><router-link class="f-right" to='/ForgetPwd'>忘记密码</router-link>
@@ -97,6 +97,18 @@ export default {
   padding-left: 38px;
   margin: 15px 0;
   border: 1px solid #CCCCCC
+}
+.page-login .login-bg .login-box .username {
+  background: url('../assets/login-01.png') no-repeat 8px 50%;
+}
+.page-login .login-bg .login-box .password {
+  background: url('../assets/login-02.png') no-repeat 8px 50%;
+}
+.page-login .login-bg .login-box .username:focus {
+  background: url('../assets/login-03.png') no-repeat 8px 50%;
+}
+.page-login .login-bg .login-box .password:focus {
+  background: url('../assets/login-04.png') no-repeat 8px 50%;
 }
 .page-login .login-bg .login-box input:focus {
   outline: none;
