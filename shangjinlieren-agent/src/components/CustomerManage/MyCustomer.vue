@@ -58,8 +58,8 @@
                         <td>{{item.userBaseId}}</td>
                         <td>{{item.nickName}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
                         <td>{{item.mobile}}</td>
-                        <td>{{(item.balance/100).toFixed(2)}}</td>
-                        <td>{{(item.totalEarnMoney/100).toFixed(2)}}</td>
+                        <td>{{(calc.div(item.balance, 100)).toFixed(2)}}</td>
+                        <td>{{(calc.div(item.totalEarnMoney, 100)).toFixed(2)}}</td>
                         <td>{{$changeTime(item.lastLoginTime)}}</td>
                         <td>
                             <span v-if='item.state==0'>启用</span>

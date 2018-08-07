@@ -60,10 +60,6 @@ axios.interceptors.response.use(
     if (response.status === 500) {
       this.$message.error('接口超时，请稍后再试')
     }
-    if (response.data.code === 100) {
-      Cookies.set('token', '')
-      this.$router.push({path: 'Login'})
-    }
     return response
   },
   error => {
@@ -110,6 +106,7 @@ export function axiosPost (url, data) {
         this.$message.error(response.data.message)
       }
       if (response.data.code === 100) {
+        Cookies.set('token', '')
         this.$router.push({path: 'Login'})
       }
       if (response.data.code === 501) {

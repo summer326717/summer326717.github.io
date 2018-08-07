@@ -57,8 +57,8 @@
                         <td>{{item.agentId}}</td>
                         <td>{{item.name}}<i v-if='item.sex==2' class="female"></i><i v-if='item.sex==1' class="male"></i></td>
                         <td>{{item.mobile}}</td>
-                        <td>{{item.sharePoint * 100}}</td>
-                        <td>{{(item.agentProfit/100).toFixed(2)}}</td>
+                        <td>{{calc.mul(item.sharePoint, 100)}}</td>
+                        <td>{{(calc.div(item.agentProfit, 100)).toFixed(2)}}</td>
                         <td>{{item.customerNum}}</td>
                         <td>
                             <router-link class="edit-btn" :to='{path: "/AgentDetail", query: { type: 3, agentId: item.agentId}}'>修改</router-link>

@@ -7,20 +7,20 @@
             <ul>
                 <li>
                     <p>账户余额</p>
-                    <p>￥{{(accountBalance).toFixed(2)}}</p>
+                    <p>￥{{accountBalance.toFixed(2)}}</p>
                     <div><el-button type="warning" size="medium" plain @click="toCash">提现</el-button></div>
                 </li>
                 <li>
                     <p>总收益</p>
-                    <p>￥{{(totalProfit).toFixed(2)}}</p>
+                    <p>￥{{totalProfit.toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>客户收益</p>
-                    <p>￥{{(customerProfit).toFixed(2)}}</p>
+                    <p>￥{{customerProfit.toFixed(2)}}</p>
                 </li>
                 <li>
                     <p>代理收益</p>
-                    <p>￥{{(agentProfit).toFixed(2)}}</p>
+                    <p>￥{{agentProfit.toFixed(2)}}</p>
                 </li>
             </ul>
         </div>
@@ -95,7 +95,7 @@
                             <span v-if='item.profitType==2'>提现</span>
                         </td>
                         <td>{{item.profitFrom}}</td>
-                        <td>{{(item.mny/100).toFixed(2)}}</td>
+                        <td>{{calc.div(item.mny, 100).toFixed(2)}}</td>
                         <td>{{$changeTime(item.createTime)}}</td>
                         <td>{{item.remark}}</td>
                     </tr>

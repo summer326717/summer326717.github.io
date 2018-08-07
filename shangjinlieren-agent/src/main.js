@@ -11,11 +11,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import Cookies from 'cookies-js'
+import calc from 'calculatorjs'
 
 Vue.prototype.$axiosGet = axiosGet
 Vue.prototype.$axiosPost = axiosPost
 Vue.prototype.$axios = axios
 Vue.prototype.$changeTime = changeTime
+Vue.prototype.calc = calc
 Vue.config.productionTip = false
 
 NProgress.configure({ showSpinner: true })

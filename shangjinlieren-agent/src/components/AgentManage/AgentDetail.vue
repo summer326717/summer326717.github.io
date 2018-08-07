@@ -76,7 +76,7 @@ export default {
     if (this.type === 2 || this.type === 3) {
       this.ViewUserInfo(this.agentId)
     }
-    this.limitSharePoint = 5 - JSON.parse(localStorage.getItem('userInfo')).sharePoint * 100
+    this.limitSharePoint = 5 - this.calc.mul(JSON.parse(localStorage.getItem('userInfo')).sharePoint, 100)
   },
   methods: {
     back () {
@@ -138,7 +138,7 @@ export default {
       if (!this.checkAgent()) {
         return
       }
-      let sharePoint = utils.divNum(this.sharePoint, 100)
+      let sharePoint = this.calc.div(this.sharePoint, 100)
       let json = {
         account: this.account,
         name: this.name,
@@ -180,7 +180,7 @@ export default {
           this.mobile = res.data.mobile
           this.idNumber = res.data.idNumber
           this.name = res.data.name
-          this.sharePoint = utils.mulNum(res.data.sharePoint, 100)
+          this.sharePoint = this.calc.mul(res.data.sharePoint, 100)
           this.agentState = res.data.agentState.toString()
         } else {
           this.$message(res.message)
@@ -191,7 +191,7 @@ export default {
       if (!this.checkAgent()) {
         return
       }
-      let sharePoint = utils.divNum(this.sharePoint, 100)
+      let sharePoint = this.calc.div(this.sharePoint, 100)
       let json = {
         account: this.account,
         agentId: this.agentId,

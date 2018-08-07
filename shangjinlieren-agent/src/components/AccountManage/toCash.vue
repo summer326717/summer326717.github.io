@@ -12,7 +12,7 @@
             <div class="detail-content">
                 <div class="item">
                     <span class="left-span">当前金额</span>
-                    <span>￥{{(currentMoney).toFixed(2)}}（今日上限为{{(upRangeMoney/100).toFixed(2)}}元，今日剩余上限{{(toCashMoney/100).toFixed(2)}}元）</span>
+                    <span>￥{{currentMoney}}（今日上限为{{calc.div(upRangeMoney, 100).toFixed(2)}}元，今日剩余上限{{calc.div(toCashMoney, 100).toFixed(2)}}元）</span>
                 </div>
                 <div class="item">
                     <span class="left-span">*提现金额</span>
