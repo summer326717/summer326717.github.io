@@ -36,7 +36,7 @@
             <footer>&copy; 2018 杭州音聚网络科技有限公司 版权所有</footer>
         </div>
         <el-dialog
-          title="提示"
+          title="修改密码"
           :visible.sync="dialogVisible"
           width="500px">
           <div class="updatepwd">

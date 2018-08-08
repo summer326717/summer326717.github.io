@@ -51,6 +51,7 @@ export default {
           Cookies.set('account', res.data.userInfo.account, { expires: 86400 }) // 七天
           Cookies.set('mobile', res.data.userInfo.mobile, { expires: 86400 }) // 七天
           Cookies.set('nickName', res.data.userInfo.name, { expires: 86400 }) // 七天
+          Cookies.set('sharePoint', res.data.userInfo.sharePoint, { expires: 86400 }) // 七天
           this.$router.push({path: '/MyCustomer'})
         } else {
           this.$message.error(res.message)

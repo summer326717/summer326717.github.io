@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import Cookies from 'cookies-js'
 let utils = require('../../utils/common')
 export default {
   data () {
@@ -76,7 +77,8 @@ export default {
     if (this.type === 2 || this.type === 3) {
       this.ViewUserInfo(this.agentId)
     }
-    this.limitSharePoint = 5 - this.calc.mul(JSON.parse(localStorage.getItem('userInfo')).sharePoint, 100)
+    let sharePoint = Cookies.get('sharePoint')
+    this.limitSharePoint = 5 - this.calc.mul(sharePoint, 100)
   },
   methods: {
     back () {
@@ -143,7 +145,7 @@ export default {
         account: this.account,
         name: this.name,
         mobile: this.mobile,
-        sex: this.sex, // 0保密1男2女，默认保密
+        sex: parseInt(this.sex), // 0保密1男2女，默认保密
         idNumber: this.idNumber,
         sharePoint: sharePoint,
         agentState: parseInt(this.agentState)
@@ -197,10 +199,10 @@ export default {
         agentId: this.agentId,
         name: this.name,
         mobile: this.mobile,
-        sex: this.sex, // 0保密1男2女，默认保密
+        sex: parseInt(this.sex), // 0保密1男2女，默认保密
         idNumber: this.idNumber,
         sharePoint: sharePoint,
-        agentState: this.agentState
+        agentState: parseInt(this.agentState)
       }
       this.$axiosPost('/back/updateAgentInfoByAgent', json).then((res) => {
         if (res.code === 0) {

@@ -16,7 +16,7 @@
                 </div>
                 <div class="item">
                     <span class="left-span">*提现金额</span>
-                    <input class="ipt-normal" type="number" v-model="iptMoney" placeholder="请输入提现金额">
+                    <input class="ipt-normal" type="number" v-model="iptMoney" placeholder="请输入提现金额(提现金额不小于50)">
                 </div>
                 <div class="item">
                     <span class="left-span">*支付宝账户</span>
@@ -81,7 +81,7 @@ export default {
         this.$message('提现金额必须为正数，且小数点后，最多2位小数')
         return
       }
-      if (parseFloat(this.iptMoney) >= 50) {
+      if (parseFloat(this.iptMoney) < 50) {
         this.$message('提现金额必须大于等于50')
         return
       }
@@ -99,6 +99,14 @@ export default {
       }
       if (this.zhifubao !== this.czhifubao) {
         this.$message('两次输入的支付宝账号不一致')
+        return
+      }
+      if (this.calc.mul(this.iptMoney, 100) > this.currentMoney) {
+        this.$message('您的余额不足')
+        return
+      }
+      if (this.calc.mul(this.iptMoney, 100) > this.toCashMoney) {
+        this.$message('输入金额已达到今日上限')
         return
       }
       let json = {
