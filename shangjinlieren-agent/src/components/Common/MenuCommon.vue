@@ -38,25 +38,25 @@
         <el-dialog
           title="提示"
           :visible.sync="dialogVisible"
-          width="30%">
-          <div>
+          width="500px">
+          <div class="updatepwd">
             <div>
-              <span>手机号码：</span>
+              <span class="t-left">手机号码：</span>
               <span>{{replaceString(mobileNo)}}</span>
-              <el-button @click="getCode">获取验证码</el-button>
+              <span class="right"><el-button type="warning" size="medium" @click="getCode">获取验证码</el-button></span>
             </div>
             <div>
-              <span>验证码：</span>
-              <el-input v-model="telcode" placeholder="请输入验证码"></el-input>
+              <span class="t-left">验证码：</span>
+              <span class="t-right"><el-input v-model="telcode" placeholder="请输入验证码"></el-input></span>
             </div>
             <div>
-              <span>新密码：</span>
-              <el-input v-model="newpwd" placeholder="请输入新密码"></el-input>
+              <span class="t-left">新密码：</span>
+              <span class="t-right"><el-input v-model="newpwd" placeholder="请输入新密码"></el-input></span>
             </div>
           </div>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="changePwd">确 定</el-button>
+            <el-button size="medium" @click="dialogVisible=false">取 消</el-button>
+            <el-button size="medium" type="warning" @click="changePwd">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -144,7 +144,7 @@ export default {
         this.$message('手机验证码不能为空')
         return
       }
-      if (this.telcode.length !== 4 || this.telcode.length !== 6) {
+      if (this.telcode.length < 4) {
         this.$message('请输入正确验证码')
         return
       }
@@ -158,14 +158,16 @@ export default {
       }
       let json = {
         code: this.telcode,
-        newPwd: this.newpwd
+        mobileNo: this.mobileNo,
+        newPassword: this.newpwd
       }
-      this.$axiosPost('/app/userPassWordInfo', json).then((res) => {
+      this.$axiosPost('/backAgentUpdatePassword', json).then((res) => {
         if (res.code === 0) {
           this.$message({
             message: res.message,
             type: 'success'
           })
+          this.dialogVisible = false
         } else {
           this.$message.error(res.message)
         }
@@ -181,7 +183,6 @@ export default {
             message: res.message,
             type: 'success'
           })
-          this.dialogVisible = false
         } else {
           this.$message.error(res.message)
         }
@@ -254,5 +255,17 @@ export default {
     font-size: 14px;
     padding: 15px 0;
     text-align: center;
+}
+.updatepwd .t-left {
+  width: 30%;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  text-align: right;
+  display: inline-block;
+}
+.updatepwd .t-right {
+  width: 69%;
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>

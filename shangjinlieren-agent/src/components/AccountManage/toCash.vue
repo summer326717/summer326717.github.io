@@ -12,7 +12,7 @@
             <div class="detail-content">
                 <div class="item">
                     <span class="left-span">当前金额</span>
-                    <span>￥{{currentMoney}}（今日上限为{{calc.div(upRangeMoney, 100).toFixed(2)}}元，今日剩余上限{{calc.div(toCashMoney, 100).toFixed(2)}}元）</span>
+                    <span>￥{{currentMoney}}（今日上限为{{calc.div(upRangeMoney, 1).toFixed(2)}}元，今日剩余上限{{calc.div(toCashMoney, 1).toFixed(2)}}元）</span>
                 </div>
                 <div class="item">
                     <span class="left-span">*提现金额</span>
@@ -47,8 +47,8 @@ export default {
   data () {
     return {
       currentMoney: 0,
-      upRangeMoney: 50000,
-      toCashMoney: 50000,
+      upRangeMoney: 0,
+      toCashMoney: 0,
       iptMoney: '',
       zhifubao: '',
       czhifubao: ''
@@ -56,10 +56,21 @@ export default {
   },
   created () {
     this.currentMoney = this.$route.query.accountBalance
+    this.getData()
   },
   methods: {
     back () {
       this.$router.back(-1)
+    },
+    getData () {
+      this.$axiosPost('/back/agentWithdrawLimitBalance', '').then((res) => {
+        if (res.code === 0) {
+          this.upRangeMoney = res.data.dayUpperLimitMny
+          this.toCashMoney = this.calc.sub(res.data.dayUpperLimitMny, res.data.dayHasWithdrawMny)
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     },
     toCash () {
       if (!utils.checkNull(this.iptMoney)) {
@@ -68,6 +79,10 @@ export default {
       }
       if (!(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/.test(this.iptMoney))) {
         this.$message('提现金额必须为正数，且小数点后，最多2位小数')
+        return
+      }
+      if (parseFloat(this.iptMoney) >= 50) {
+        this.$message('提现金额必须大于等于50')
         return
       }
       if (!utils.checkNull(this.zhifubao)) {
