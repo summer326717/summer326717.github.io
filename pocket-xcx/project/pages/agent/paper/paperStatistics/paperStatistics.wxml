@@ -1,0 +1,25 @@
+<view class="wrap">
+    <view class="top">
+        <picker mode="date" value="{{selectMonth}}" start="2010-01" end="{{currentMonth}}" bindchange="pickerMonth" fields='month'>
+            <view class="picker">
+              当前选择: {{selectMonth}}
+            </view>
+        </picker>
+        <picker class="select" bindchange="pickerEquipment" value="{{index}}" range="{{array}}">
+            <view class="picker">
+              全部设备{{EquipmentList[index]}}
+            </view>
+        </picker>
+    </view>
+    <view class="content">
+        <view class="top-total">
+            <view><text>本月累计</text><text>{{monthTotal}}</text></view>
+        </view>
+        <view class="m-list">
+            <view class="m-item">
+                <text>07-31</text>
+                <text>130包</text>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,37 @@
+<view class="wrap">
+    <view class="top">
+        <view class="head-icon">
+            <image src='{{avatarUrl}}' />
+        </view>
+        <view class="left-menu">运营管理</view>
+    </view>
+    <view class="content">
+        <view class="con-top">
+            <view class="item">
+                <view>0</view>
+                <view>总收益</view>
+            </view>
+            <view class="item">
+                <view>0</view>
+                <view>本月收益</view>
+            </view>
+            <view class="item">
+                <view>0</view>
+                <view>今日收益</view>
+            </view>
+        </view>
+        <view class="con-bottom">
+            <view class="item" wx:for="{{menuList}}">
+                <view class="">{{item.menuName}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <navigator class="item">
+            <view class="item-txt">首页</view>
+        </navigator>
+        <navigator class="item">
+            <view class="item-txt">我的</view>
+        </navigator>
+    </view>
+</view>
