@@ -29,7 +29,12 @@ export function getAgentList () {
 
 export function changeTime (t) {
   let time = new Date(t)
-  return time.getFullYear() + '-' + checkT(time.getMonth() + 1) + '-' + checkT(time.getDate()) + ' ' + checkT(time.getHours()) + ':' + checkT(time.getMinutes()) + ':' + checkT(time.getSeconds())
+  let date = time.getFullYear() + '-' + checkT(time.getMonth() + 1) + '-' + checkT(time.getDate()) + ' ' + checkT(time.getHours()) + ':' + checkT(time.getMinutes()) + ':' + checkT(time.getSeconds())
+  if (date === '1970-01-01 08:00:00') {
+    return '—'
+  } else {
+    return date
+  }
 }
 
 export function checkT (e) {

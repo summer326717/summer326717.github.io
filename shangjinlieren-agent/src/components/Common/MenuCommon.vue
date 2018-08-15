@@ -135,9 +135,12 @@ export default {
       console.log(key, keyPath)
     },
     replaceString (str) {
-      let str1 = str.substr(3, 4)
-      let str2 = str.replace(str1, '****')
-      return str2
+      if (str) {
+        let str1 = str.substr(3, 4)
+        let str2 = str.replace(str1, '****')
+        return str2
+      }
+      return ''
     },
     changePwd () {
       if (!utils.checkNull(this.telcode)) {

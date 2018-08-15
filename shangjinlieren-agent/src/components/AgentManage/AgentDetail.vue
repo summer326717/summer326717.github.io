@@ -78,7 +78,7 @@ export default {
       this.ViewUserInfo(this.agentId)
     }
     let sharePoint = Cookies.get('sharePoint')
-    this.limitSharePoint = 5 - this.calc.mul(sharePoint, 100)
+    this.limitSharePoint = this.calc.mul(sharePoint, 100)
   },
   methods: {
     back () {
