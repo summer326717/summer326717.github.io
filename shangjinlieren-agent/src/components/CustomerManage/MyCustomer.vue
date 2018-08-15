@@ -26,7 +26,7 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item command="1">正序</el-dropdown-item>
-                            <el-dropdown-item command="2">倒叙</el-dropdown-item>
+                            <el-dropdown-item command="2">倒序</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
