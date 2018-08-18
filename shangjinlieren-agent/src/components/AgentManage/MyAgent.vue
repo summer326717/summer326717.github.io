@@ -6,7 +6,7 @@
         <div class="m-limit">
             <div class="m-title">
                 <span>筛选条件</span>
-                <button class="btn-normal" @click="addAgent()">添加</button>
+                <button v-if="agentState==1" class="btn-normal" @click="addAgent()">添加</button>
                 <button class="btn-normal" @click="getData()">查询</button>
             </div>
             <div class="ptb20">
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import Cookies from 'cookies-js'
 import pagenation from '../Common/Pagenation'
 export default {
   data () {
@@ -86,13 +87,15 @@ export default {
       pageSize: 10,
       sortType: 2, // 排序方式
       totalPages: 1,
-      resultList: []
+      resultList: [],
+      agentState: 0
     }
   },
   components: {
     pagenation
   },
   created () {
+    this.agentState = Cookies.get('agentState')
     this.getData()
   },
   methods: {

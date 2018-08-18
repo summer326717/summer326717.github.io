@@ -14,7 +14,8 @@
             <div class="detail-content" v-if='type==1||type==3'>
                 <div class="item">
                     <span class="left-span">*账户</span>
-                    <input class="ipt-normal" type="text" v-model="account" placeholder="请输入账户">
+                    <input v-if='type==1' class="ipt-normal" type="text" v-model="account" placeholder="请输入账户">
+                    <input v-if='type==3' class="ipt-normal" type="text" v-model="account" placeholder="请输入账户" disabled>
                 </div>
                 <div class="item">
                     <span class="left-span">*姓名</span>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import Cookies from 'cookies-js'
 let utils = require('../../utils/common')
 export default {
   data () {
@@ -54,7 +56,7 @@ export default {
   },
   created () {
     this.type = this.$route.query.type
-    this.agentId = localStorage.getItem('agentId')
+    this.agentId = Cookies.get('agentId')
     this.userBaseId = this.$route.query.userBaseId
     if (this.type === 2 || this.type === 3) {
       this.ViewUserInfo(this.userBaseId)

@@ -14,7 +14,8 @@
             <div class="detail-content" v-if='type==1||type==3'>
                 <div class="item">
                     <span class="left-span">*账户</span>
-                    <input class="ipt-normal" type="text" v-model="account" placeholder="请输入账户">
+                    <input v-if='type==1' class="ipt-normal" type="text" v-model="account" placeholder="请输入账户">
+                    <input v-if='type==3' class="ipt-normal" type="text" v-model="account" placeholder="请输入账户" disabled>
                 </div>
                 <div class="item">
                     <span class="left-span">*姓名</span>
