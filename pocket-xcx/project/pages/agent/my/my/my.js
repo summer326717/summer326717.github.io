@@ -1,14 +1,11 @@
-// pages/agent/ad/adManage/adManage.js
+// pages/agent/my/my/my.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    stateList: ['全部', '通过', '待审核'],
-    typeList: ['全部' ,'视频', '图片'],
-    stateIndex: 0,
-    typeIndex: 0,
+  
   },
 
   /**
@@ -65,21 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  /**
-   * 选择状态
-   */
-  pickerState: function (e) {
-    this.setData({
-      stateIndex: e.detail.value
-    })
-  },
-  /**
-   * 选择类型
-   */
-  pickerType: function (e) {
-    this.setData({
-      typeIndex: e.detail.value
-    })
   }
 })

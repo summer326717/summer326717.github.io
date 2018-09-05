@@ -1,2 +1,24 @@
-<!--pages/agent/ad/adManage/adManage.wxml-->
-<text>pages/agent/ad/adManage/adManage.wxml</text>
+<view class="wrap">
+  <view class="top_menu">
+    <view class="s-menu">
+      <picker class="select" bindchange="pickerState" value="{{stateIndex}}" range="{{stateList}}">
+        <view class="picker">{{stateList[stateIndex]}}</view>
+      </picker>
+    </view>
+    <view class="s-menu">
+      <picker class="select" bindchange="pickerType" value="{{typeIndex}}" range="{{typeList}}">
+        <view class="picker">{{typeList[typeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="add">
+      <image src="http://localhost/imgs/add.png" />
+    </view>
+  </view>
+  <view class="content">
+    <view class="list-item">
+      <view class="item">爱奇艺广告</view>
+      <view class="item">鸡蛋饼</view>
+      <view class="item">包子铺</view>
+    </view>
+  </view>
+</view>

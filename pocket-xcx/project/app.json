@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/agent/homePage/homePage",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/agent/homePage/homePage",
     "pages/agent/paper/paperStatistics/paperStatistics",
     "pages/agent/paper/paperDetail/paperDetail",
     "pages/agent/equipment/equipmentManage/equipmentManage",
@@ -25,12 +25,13 @@
     "pages/agent/my/messageDetail/messageDetail",
     "pages/agent/my/myAccount/myAccount",
     "pages/agent/my/toCash/toCash",
-    "pages/operator/operator/operator"
+    "pages/operator/operator/operator",
+    "pages/agent/my/my/my"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#F3A000",
     "navigationBarTitleText": "口袋管家",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   }
 }

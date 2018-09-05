@@ -7,28 +7,44 @@ Page({
   data: {
     menuList: [
       {
-        menuName: '出纸统计'
+        menuName: '出纸统计',
+        menuImg: 'http://localhost/imgs/index_01.png',
+        menuUrl: '/pages/agent/paper/paperStatistics/paperStatistics'
       },
       {
-        menuName: '设备管理'
+        menuName: '设备管理',
+        menuImg: 'http://localhost/imgs/index_02.png',
+        menuUrl: '/pages/agent/equipment/equipmentManage/equipmentManage'
       },
       {
-        menuName: '缺纸设备'
+        menuName: '缺纸设备',
+        menuImg: 'http://localhost/imgs/index_03.png',
+        menuUrl: '/pages/agent/equipment/lackPaper/lackPaper'
       },
       {
-        menuName: '故障设备'
+        menuName: '故障设备',
+        menuImg: 'http://localhost/imgs/index_04.png',
+        menuUrl: '/pages/agent/equipment/faultyEquipment/faultyEquipment'
       },
       {
-        menuName: '广告平台'
+        menuName: '广告平台',
+        menuImg: 'http://localhost/imgs/index_05.png',
+        menuUrl: ''
       },
       {
-        menuName: '广告管理'
+        menuName: '广告管理',
+        menuImg: 'http://localhost/imgs/index_06.png',
+        menuUrl: '/pages/agent/ad/adManage/adManage'
       },
       {
-        menuName: '运营人员'
+        menuName: '运营人员',
+        menuImg: 'http://localhost/imgs/index_07.png',
+        menuUrl: '/pages/agent/staff/staffManage/staffManage'
       },
       {
-        menuName: '细分管理'
+        menuName: '吸粉管理',
+        menuImg: 'http://localhost/imgs/index_08.png',
+        menuUrl: ''
       }
     ],
     avatarUrl: '', // 头像

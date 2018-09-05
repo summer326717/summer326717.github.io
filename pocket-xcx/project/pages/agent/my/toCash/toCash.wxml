@@ -1,2 +1,21 @@
-<!--pages/agent/my/toCash/toCash.wxml-->
-<text>pages/agent/my/toCash/toCash.wxml</text>
+<view class="">
+  <view class="">账户余额：</view>
+  <view class="">提现金额：<input type="text"/></view>
+  <view class="">
+    <text class="">支付宝账户</text>
+    <text class="">收款码</text>
+  </view>
+  <view class="">支付宝账户：<input placeholder="支付宝账户是手机号码或邮箱地址" /></view>
+  <view class="">确认账户：<input placeholder="支付宝账户是手机号码或邮箱地址" /></view>
+  <view class="">
+    <text class="">上传图片：</text>
+    <text class="">上传支付宝收款码</text>
+    <button>上传</button>
+  </view>
+  <view class="">
+    <view class="">提现说明：</view>
+    <view class="">1.提现是请务必<text class="">填写正确的支付宝账户</text>，如因个人原因，支付宝账号填写错误，造成的损失将由个人承担；</view>
+    <view class>2.提现中将<text class="">24小时</text>内到账，如遇高峰期或节假日，可能延迟到账，请耐心等待。</view>
+    <view class=""><button class="normal-btn">保存</button></view>
+  </view>
+</view>

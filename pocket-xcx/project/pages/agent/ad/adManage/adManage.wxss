@@ -1,1 +1,45 @@
-/* pages/agent/ad/adManage/adManage.wxss */
+.wrap {}
+
+.wrap .top_menu {
+  color: #4B4848;
+  height: 79rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.09);
+}
+
+.wrap .top_menu .s-menu,
+.wrap .top_menu .add {
+  flex: 1;
+  padding-left: 20rpx;
+}
+
+.wrap .top_menu .add {
+  flex: 2;
+  text-align: right;
+  padding-right: 20rpx;
+}
+
+.wrap .top_menu .add image {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.wrap .content {}
+
+.wrap .content .list-item {
+  background: #FBFBFB;
+}
+
+.wrap .content .list-item .item {
+  display: flex;
+  align-items: center;
+  padding-left: 77rpx;
+  font-size: 30rpx;
+  color: rgba(75, 72, 72, 1);
+  height: 138rpx;
+  margin-top: 20rpx;
+  background: rgba(255, 255, 255, 1);
+  border-bottom: 1px solid #E9E9E9;
+}

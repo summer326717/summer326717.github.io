@@ -1,1 +1,12 @@
-/* pages/agent/paper/paperStatistics/paperStatistics.wxss */
+.wrap .content .top-total {
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #B1B1B1;
+  padding-left: 20rpx;
+}
+.wrap .content .m-list .m-item{
+  height: 138rpx;
+  line-height: 138rpx;
+  border-top: 20rpx solid #FBFBFB;
+  border-bottom: 1px solid #E9E9E9;
+}
