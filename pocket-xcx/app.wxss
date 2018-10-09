@@ -1,0 +1,320 @@
+@import "./lib/font/style.wxss";
+.wrap {
+  font-size: 28rpx
+}
+
+.normal-btn {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: rgba(255, 254, 254, 1);
+  line-height: 70rpx;
+  width: 220rpx;
+  height: 70rpx;
+  background: rgba(243, 160, 0, 1);
+  border-radius: 35rpx;
+  box-shadow: 0px 2px 10rpx 0px rgba(243, 160, 0, 0.65);
+}
+
+/*选择头部*/
+
+.wrap .top {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  box-shadow: 0 3px 5px #afa5a5;
+}
+
+.wrap .top picker {
+  flex: 1;
+  text-align: center;
+}
+
+/*列表*/
+
+.wrap .l-list {
+  padding: 20rpx 0;
+  background: #FBFBFB;
+}
+
+.wrap .l-list .m-item {
+  font-size: 30rpx;
+  color: #4B4848;
+  padding: 28rpx 21rpx;
+  line-height: 60rpx;
+  background: #ffffff;
+  position: relative;
+  border-bottom: 1px solid #E5E5E5
+}
+
+.wrap .l-list .m-item .s-info {
+  color: #7B7979;
+  font-size: 26rpx;
+}
+
+.wrap .l-list .m-item .right {
+  position: absolute;
+  top: 0;
+  right: 10%;
+  margin-top: 60rpx;
+  margin-right: 20rpx;
+}
+
+.wrap .l-list .m-item .more {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  margin-top: 70rpx;
+}
+
+/*本月累计*/
+
+.wrap .content .top-total {
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #B1B1B1;
+  padding-left: 20rpx;
+}
+
+/**设备详情*/
+
+.eq-index {
+  background: #FBFBFB;
+}
+
+.eq-index .eq-index-menu {
+  height: 90rpx;
+  display: flex;
+  font-size: 24rpx;
+  background: #ffffff;
+  padding: 30rpx 0 15rpx 0;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.eq-index .eq-index-menu .item {
+  flex: 1;
+  text-align: center;
+  justify-items: center;
+}
+
+.eq-index .content {
+  color: #4B4848;
+  font-size: 26rpx;
+  line-height: 85rpx;
+  padding: 0 20rpx;
+  background: #ffffff;
+  margin-top: 20rpx;
+  border-top: 1px solid #DCDCDC
+}
+
+.eq-index .content .left {
+  font-size: 28rpx;
+  width: 180rpx;
+  display: inline-block;
+}
+
+/**授权页面*/
+
+.userinfo,
+.usermotto {
+  color: #585858;
+  width: 80%;
+  margin: 0 auto;
+  padding: 50rpx 0;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.userinfo .info,
+.usermotto .info {
+  padding-bottom: 50rpx;
+}
+
+.userinfo .orange,
+.usermotto .orange {
+  color: #F3A41B
+}
+
+.no-data {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 0 auto;
+  padding-top: 100rpx;
+  background: url('http://tactivity.boonmo.com/imgs/nodata.png') no-repeat 0 100%;
+  background-size: 300rpx 300rpx;
+}
+
+.bottombg {
+  background: url('http://tactivity.boonmo.com/imgs/bottom.png') no-repeat 75% 0;
+  background-size: 32rpx 32rpx;
+}
+
+.lixian {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.navigator-hover {
+  opacity: 0;
+}
+
+.green {
+  color: #35A234;
+}
+
+.red {
+  color: #E72E35;
+}
+
+.item_tit {
+  font-size: 28rpx;
+  text-align: center;
+  padding-bottom: 80rpx;
+}
+
+.buy_num {
+  display: inline-block;
+  text-align: center;
+  padding: 20rpx 0;
+  vertical-align: middle;
+}
+
+.buy_num button {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #ffffff;
+  font-size: 30rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+  text-align: center;
+}
+
+.buy_num input {
+  width: 200rpx;
+  display: inline-block;
+  border: 1px solid #dedede
+}
+
+.addpicbg {
+  text-align: right;
+}
+
+.previewImg image,
+.previewImg canvas {
+  width: 128rpx;
+  height: 80rpx;
+}
+
+.marginTop {
+  margin-top: 80rpx;
+}
+
+.uploadimg {
+  font-size: 30rpx;
+}
+
+.uploadimg .up-item {
+  display: flex;
+  height: 120rpx;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.uploadimg .up-item .upload {
+  color: #999999;
+}
+
+.uploadimg .up-item .gray {
+  font-size: 24rpx;
+  color: #A2A1A1;
+  padding-left: 15rpx;
+}
+
+.uploadimg .up-item text {
+  width: 200rpx;
+}
+
+.uploadimg .up-item .up-right {
+  flex: 1;
+}
+
+.admanage {
+  padding-bottom: 76rpx;
+}
+
+.admanage .mobile {
+  flex: 1;
+}
+
+.admanage text {
+  margin-right: 20rpx;
+}
+
+.admanage .mright {
+  flex: 1;
+  text-align: right;
+}
+
+.wrap .content .admanage .item {
+  padding-left: 20rpx !important;
+}
+
+.selecead {
+  padding-bottom: 96rpx;
+}
+
+.selecead .noactive {
+  color: #999999
+}
+
+.selecead .active {
+  color: #F37315
+}
+
+.selecead .bottom-btn {
+  position: fixed;
+  width: 92%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 96rpx;
+  align-items: center;
+  background: #EEEEEE;
+  padding: 0 4%;
+}
+
+.selecead .bottom-btn .info {
+  flex: 1;
+  padding-right: 20rpx;
+  text-align: right;
+}
+
+.selecead .l-list .m-item {
+  margin-bottom: 20rpx;
+}
+
+.selecead .save-btn {
+  color: #ffffff;
+  text-align: center;
+  width: 150rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #F3A000;
+  border-radius: 32rpx;
+}
+
+.more {
+  width: 35rpx;
+  height: 35rpx;
+  margin: 0 auto;
+  background: url('http://tactivity.boonmo.com/imgs/more.png') no-repeat 0 100%;
+  background-size: 35rpx 35rpx;
+  margin-top: 20rpx;
+}
+
+.mb50 {
+  margin-bottom: 50rpx;
+}

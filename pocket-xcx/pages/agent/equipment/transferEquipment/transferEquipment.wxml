@@ -1,0 +1,7 @@
+<view>
+    <view class="jiebang">
+        <text class="">转让账号：</text>
+        <input placeholder="请输入转让账号" bindinput="bindKeyInput" />
+    </view>
+    <button class="normal-btn" bindtap='zrzhMethod'>保存</button>
+</view>

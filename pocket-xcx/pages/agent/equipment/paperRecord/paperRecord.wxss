@@ -1,0 +1,30 @@
+.precord {
+  background: #FBFBFB;
+}
+
+.precord image {
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+}
+
+.precord .p-item {
+  display: flex;
+  padding: 20rpx;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  margin-bottom: 20rpx;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.precord .p-item .s-inf {
+  padding-left: 20rpx;
+}
+
+.precord .p-item .right {
+  color: #7B7979;
+  font-size: 26rpx;
+  flex: 1;
+  text-align: right;
+}

@@ -1,0 +1,11 @@
+.userinfo button,
+.usermotto button {
+  font-size: 28rpx;
+  color: #ffffff;
+  width: 220rpx;
+  height: 70rpx;
+  height: 70rpx;
+  background: rgba(243, 160, 0, 1);
+  border-radius: 35rpx;
+  box-shadow: 0px 2px 10px 0px rgba(243, 160, 0, 0.65);
+}

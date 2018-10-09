@@ -1,0 +1,13 @@
+<view class="uploadimg">
+    <view class="up-item">
+        <text class="">姓名：</text>
+        <input class="up-right" type="text" placeholder="请输入姓名" bindinput="bindOperatorName" value="{{operatorName}}" />
+    </view>
+    <view class="up-item">
+        <text class="">手机号码：</text>
+        <input class="up-right" type="text" placeholder="请输入手机号" bindinput="bindMobileNo" value="{{mobileNo}}" />
+    </view>
+    <view class="marginTop">
+        <button class="normal-btn" bindtap='operatorInfoEditOrSave' class="normal-btn">提交</button>
+    </view>
+</view>

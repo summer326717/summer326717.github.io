@@ -1,0 +1,12 @@
+.jiebang {
+  font-size: 30rpx;
+  padding: 30rpx;
+}
+
+.jiebang input {
+  margin: 0 auto;
+  background: #ffffff;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 80rpx;
+  margin-top: 50rpx;
+}

@@ -1,0 +1,12 @@
+<view class="wrap precord">
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="p-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+            <view>
+                <image src="{{item.headImg}}" />
+            </view>
+            <view class="s-inf">{{item.userName}}</view>
+            <text class="right">{{item.spitPaperTime}}</text>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

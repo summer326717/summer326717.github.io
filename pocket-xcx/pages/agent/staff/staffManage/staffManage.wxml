@@ -1,0 +1,28 @@
+<view class="wrap st-manege">
+  <view class="top_menu">
+    <view class="s-menu">
+      <picker class="select bottombg" bindchange="pickerState" value="{{stateIndex}}" range="{{stateList}}">
+        <view class="picker">{{stateList[stateIndex]}}</view>
+      </picker>
+    </view>
+    <view class="input">
+      <text class="search-icon" bindtap="operatorQryList"></text>
+      <input type="text" placeholder="可输入姓名或者手机号查询" value="{{nameOrMobile}}" bindinput='bindName' />
+    </view>
+    <view class="add">
+      <image class="addpicbg" bindtap="toAddStaff" src="http://tactivity.boonmo.com/imgs/add.png" />
+    </view>
+  </view>
+  <view class="content" wx:if="{{!isNoData}}">
+    <view class="list-item admanage">
+      <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
+        <text class="icon iconfont icon-fenpei" wx:if="{{item.ownPosState==0}}"></text>
+        <text class="">{{item.operatorName}}</text>
+        <text class="mobile">{{item.mobile}}</text>
+        <text class="icon iconfont icon-edit right" bindtap='editAd' data-id='{{item.operatorCode}}' data-name='{{item.operatorName}}' data-mobile='{{item.mobile}}'></text>
+        <text class="icon iconfont icon-fenxiang right" bindtap='fenpeiAd' data-id='{{item.operatorCode}}'></text>
+      </view>
+    </view>
+  </view>
+  <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

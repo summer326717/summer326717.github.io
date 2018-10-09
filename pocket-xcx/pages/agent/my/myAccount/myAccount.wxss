@@ -1,0 +1,46 @@
+.myAccount {
+  background: #FBFBFB;
+}
+
+.myAccount .top {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #dedede
+}
+
+.myAccount .top text {
+  text-align: center;
+  flex: 1;
+}
+
+.myAccount .top text:first-child {
+  border-right: 1px solid #dedede;
+}
+
+.myAccount .top text.active {
+  color: #F3A000;
+}
+
+.myAccount .bottom .item {
+  line-height: 45rpx;
+  padding: 15rpx 30rpx;
+  font-size: 30rpx;
+  color: #4B4848;
+  background: #ffffff;
+  margin-top: 20rpx;
+  position: relative;
+  border-bottom: 1px solid #dedede
+}
+
+.myAccount .bottom .item .time {
+  color: #7B7979;
+  font-size: 26rpx;
+}
+
+.myAccount .bottom .item .right {
+  position: absolute;
+  right: 30rpx;
+  top: 25rpx;
+}

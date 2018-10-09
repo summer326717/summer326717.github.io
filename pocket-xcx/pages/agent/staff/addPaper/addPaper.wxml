@@ -1,0 +1,22 @@
+<view class="wrap">
+    <view class="top">
+        <picker class="bottombg" mode="date" value="{{selectMonth}}" start="2010-01" end="{{currentMonth}}" bindchange="pickerMonth" fields='month'>
+            <view class="picker">{{selectMonth}}</view>
+        </picker>
+    </view>
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="top-total">
+            <view>
+                <text>本月累计</text>
+                <text>{{monthTotal}}</text>
+            </view>
+        </view>
+        <view class="m-list">
+            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                <text>{{item.monthDay}}</text>
+                <text class="countTotal">{{item.countTotal}}包</text>
+            </view>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

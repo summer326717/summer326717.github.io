@@ -1,0 +1,26 @@
+<view class="myAccount">
+    <view class="top">
+        <text wx:if='{{isShouru}}' class="active" bindtap='shouruClick'>收入</text>
+        <text wx:if='{{!isShouru}}' bindtap='shouruClick'>收入</text>
+        <text wx:if='{{!isShouru}}' class="active" bindtap='zhichuClick'>支出</text>
+        <text wx:if='{{isShouru}}' class="" bindtap='zhichuClick'>支出</text>
+    </view>
+    <view class="bottom" wx:if="{{!isNoData}}">
+        <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
+            <view class="">销售纸巾</view>
+            <view class="time">2018-06-01 11:11:11</view>
+            <text class="right">+10元</text>
+        </view>
+        <view class="item">
+            <view class="">销售纸巾</view>
+            <view class="time">2018-06-01 11:11:11</view>
+            <text class="right green">+10元</text>
+        </view>
+        <view class="item">
+            <view class="">销售纸巾</view>
+            <view class="time">2018-06-01 11:11:11</view>
+            <text class="right red">+10元</text>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

@@ -1,0 +1,11 @@
+<view class="wrap">
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="m-list">
+            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                <text>{{item.monthDay}}</text>
+                <text class="right">></text>
+            </view>
+        </view>
+    </view>
+    <view class="no-date" wx:if="{{isNoData}}">暂无数据...</view>
+</view>

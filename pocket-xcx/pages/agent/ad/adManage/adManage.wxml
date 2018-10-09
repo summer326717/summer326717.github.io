@@ -1,0 +1,33 @@
+<view class="wrap">
+  <view class="top_menu">
+    <view class="s-menu">
+      <picker class="select bottombg" bindchange="pickerState" value="{{stateIndex}}" range="{{stateList}}">
+        <view class="picker">{{stateList[stateIndex]}}</view>
+      </picker>
+    </view>
+    <view class="s-menu">
+      <picker class="select bottombg" bindchange="pickerType" value="{{typeIndex}}" range="{{typeList}}">
+        <view class="picker">{{typeList[typeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="add">
+      <picker class="select addpicbg" bindchange="pickerSelect" value="{{selectIndex}}" range="{{selectList}}">
+        <image src="http://tactivity.boonmo.com/imgs/add.png" />
+        <view class="picker">{{selectList[selectIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="content" wx:if="{{!isNoData}}">
+    <view class="list-item admanage">
+      <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
+        <text class="icon iconfont icon-time" wx:if="{{item.advertState==0}}"></text>
+        <text class="">{{item.advertName}}</text>
+        <text wx:if="{{item.advertStyle==0}}" class="icon iconfont icon-tupian"></text>
+        <text wx:if="{{item.advertStyle==1}}" class="icon iconfont icon-fuhao-shipin"></text>
+        <text class="icon iconfont icon-edit mright" wx:if="{{item.advertState==0}}" bindtap='editAd' data-type='{{item.advertStyle}}' data-id='{{item.advertId}}'></text>
+        <text class="icon iconfont icon-fenxiang mright" wx:if="{{item.advertState==1}}" bindtap='fenpeiAd' data-id='{{item.advertId}}'></text>
+      </view>
+    </view>
+  </view>
+  <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

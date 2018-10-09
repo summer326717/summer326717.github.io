@@ -1,0 +1,49 @@
+<view class="wrap my">
+    <view class="top">
+        <view class="head-icon">
+            <view class="image">
+                <image src="{{headImg}}" />
+            </view>
+        </view>
+        <view class="head-content">
+            <view class="">{{agentName}}</view>
+            <view class="">{{mobileNo}}</view>
+        </view>
+        <view wx:if="{{unReadMessage!=0}}" class="left-menu message" bindtap='toMessagePage'>
+            <text class="i">{{unReadMessage}}</text>
+        </view>
+    </view>
+    <view class="index-menu">
+        <view class="" bindtap='zhye'>
+            账户余额
+            <text class="right more"></text>
+            <text class='right'>{{balance}}</text>
+        </view>
+        <view class="">
+            我要提现
+            <text class="right more"></text>
+        </view>
+        <view class="" bindtap='sbzc'>
+            设备注册
+            <text class="right more"></text>
+        </view>
+        <view class="">
+            常见问题
+            <text class="right more"></text>
+        </view>
+        <view class="">
+            文档中心
+            <text class="right more"></text>
+        </view>
+    </view>
+    <view class="footer">
+        <navigator open-type="redirect" class="item" url='/pages/agent/homePage/homePage'>
+            <view class="icon iconfont icon-shouyexuanzhong"></view>
+            <view class="item-txt">首页</view>
+        </navigator>
+        <view class="item">
+            <view class="icon iconfont icon-wodexuanzhong active"></view>
+            <view class="item-txt">我的</view>
+        </view>
+    </view>
+</view>

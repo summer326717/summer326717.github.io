@@ -1,0 +1,28 @@
+<view class="wrap">
+    <view class="top">
+        <picker class="bottombg" mode="date" value="{{selectMonth}}" start="2010-01" end="{{currentMonth}}" bindchange="pickerMonth" fields='month'>
+            <view class="picker">{{selectMonth}}</view>
+        </picker>
+        <picker class="select bottombg" bindchange="pickerEquipment" value="{{eindex}}" range="{{EquipmentList}}" range-key="posName">
+            <view class="picker">{{EquipmentList[eindex].posName}}</view>
+        </picker>
+    </view>
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="top-total">
+            <view>
+                <text>本月累计</text>
+                <text>{{monthTotal}}</text>
+            </view>
+        </view>
+        <view class="m-list">
+            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                <navigator url='/pages/agent/paper/paperDetail/paperDetail?id={{item.monthDay}}'>
+                    <text>{{item.monthDay}}</text>
+                    <text class="right more"></text>
+                    <text class="countTotal">{{item.countTotal}}包</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>

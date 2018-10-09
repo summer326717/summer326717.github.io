@@ -1,0 +1,71 @@
+<view class="wrap operator">
+    <view class="top">
+        <view class="head-icon">
+            <view class="image">
+                <image src="{{headImg}}" />
+            </view>
+        </view>
+        <view class="head-content">
+            <view class="">{{agentName}}</view>
+            <view class="welcome">welcome</view>
+        </view>
+        <view wx:if="{{isShowMenu}}" class="left-menu" bindtap='toOperator'>后台管理 ></view>
+    </view>
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="con-top">
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{totalProfit}}</text>
+                </view>
+                <view class="txt">总收益</view>
+            </view>
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{sameMonthProfit}}</text>
+                </view>
+                <view class="txt">本月收益</view>
+            </view>
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{sameDayProfit}}</text>
+                </view>
+                <view class="txt">今日收益</view>
+            </view>
+        </view>
+        <view class="operator-middle">
+            <view class="redbg">
+                <navigator class="" url="/pages/agent/equipment/lackPaper/lackPaper">
+                    <image src="http://tactivity.boonmo.com/imgs/index_09.png" />
+                    <text class="">缺纸设备</text>
+                    <text class="tishi">{{lackPosNum}}</text>
+                </navigator>
+            </view>
+            <view class="whitebg"></view>
+            <view class="greenbg">
+                <navigator class="" url="/pages/agent/equipment/faultyEquipment/faultyEquipment">
+                    <image src="http://tactivity.boonmo.com/imgs/index_10.png" />
+                    <text class="">故障设备</text>
+                    <text class="tishi">{{faultPosNum}}</text>
+                </navigator>
+            </view>
+        </view>
+        <view class="l-list">
+            <view class="operator-tit">
+                <text class="icon iconfont icon-jilu"></text>
+                <text class="">最近补纸记录</text>
+            </view>
+            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                <view>{{item.posName?item.posName:item.posCode}}</view>
+                <view class="s-inf">{{item.fillTime?item.fillTime:''}}<text decode="{{true}}">&nbsp;</text></view>
+                <text class="right">{{item.fillPaperNum}}包</text>
+            </view>
+        </view>
+        <view class="opsaoyisao">
+            <image bindtap='saoyisao' src="http://tactivity.boonmo.com/imgs/saoyisao.png" />
+        </view>
+    </view>
+    <view class="content" wx:if="{{isNoData}}">暂无数据...</view>
+</view>

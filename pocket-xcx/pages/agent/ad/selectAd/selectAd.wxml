@@ -1,0 +1,29 @@
+<view class="wrap selecead">
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="content">
+            <view class="l-list">
+                <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                    <view>{{item.posName?item.posName:item.posCode}}</view>
+                    <view class="s-inf">{{item.detailAddress?item.detailAddress:''}}<text decode="{{true}}">&nbsp;</text></view>
+                    <text class="icon iconfont icon-xuanzhong noactive right" wx:if="{{item.distriState==0}}" bindtap='toFenpei' data-index='{{index}}'></text>
+                    <text class="icon iconfont icon-xuanzhong active right" wx:if="{{item.distriState==1}}" bindtap='toNotFenpei' data-index='{{index}}'></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+    <view class="bottom-btn">
+        <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox">
+                <checkbox checked="{{checkboxChange}}" />
+                全选
+            </label>
+        </checkbox-group>
+        <view class="info">
+            已选中
+            <text class='red'>{{totalNum}}</text>
+            台设备
+        </view>
+        <text class="save-btn" bindtap='selectAd'>保存</text>
+    </view>
+</view>

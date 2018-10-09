@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/agent/homePage/homePage",
+    "pages/agent/paper/paperStatistics/paperStatistics",
+    "pages/agent/paper/paperDetail/paperDetail",
+    "pages/agent/equipment/equipmentManage/equipmentManage",
+    "pages/agent/equipment/equipmentDetail/equipmentDetail",
+    "pages/agent/equipment/paperRecord/paperRecord",
+    "pages/agent/equipment/addPaper/addPaper",
+    "pages/agent/equipment/updateEquipment/updateEquipment",
+    "pages/agent/equipment/transferEquipment/transferEquipment",
+    "pages/agent/equipment/lackPaper/lackPaper",
+    "pages/agent/equipment/handleTrouble/handleTrouble",
+    "pages/agent/ad/adManage/adManage",
+    "pages/agent/ad/videoAd/videoAd",
+    "pages/agent/ad/pictureAd/pictureAd",
+    "pages/agent/ad/selectAd/selectAd",
+    "pages/agent/staff/staffManage/staffManage",
+    "pages/agent/staff/editStaff/editStaff",
+    "pages/agent/staff/selectStaff/selectStaff",
+    "pages/agent/staff/addPaper/addPaper",
+    "pages/agent/my/myMessage/myMessage",
+    "pages/agent/my/messageDetail/messageDetail",
+    "pages/agent/my/myAccount/myAccount",
+    "pages/agent/my/toCash/toCash",
+    "pages/operator/operator/operator",
+    "pages/agent/my/my/my",
+    "pages/agent/equipment/faultyEquipment/faultyEquipment"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F3A000",
+    "navigationBarTitleText": "口袋管家",
+    "navigationBarTextStyle": "white"
+  }
+}

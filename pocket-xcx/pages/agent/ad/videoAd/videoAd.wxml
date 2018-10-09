@@ -1,0 +1,67 @@
+<view class="uploadimg">
+    <view class="up-item">
+        <text class="">广告类型：</text>
+        <input class="up-right" type="text" value="视频" disabled="{{true}}" />
+    </view>
+    <view class="up-item">
+        <text class="">广告名称：</text>
+        <input class="up-right" type="text" placeholder="请输入广告名称" bindinput="bindAdvertName" value="{{advertName}}" />
+    </view>
+    <!-- <view class="">
+        <text class="">广告费用：</text>
+        <input type="text" placeholder="请输入广告名称" bindinput="bindadvertCost" value="{{advertCost}}" />
+    </view> -->
+    <view class="up-item">
+        <text class="">广告大小：</text>
+        <radio-group class="radio-group" bindchange="bindAdvertSize">
+            <label class="radio">
+                <radio value="0" checked="{{isTotalPing}}" />
+                全屏
+                <radio value="1" checked="{{isNotTotalPing}}" />
+                分屏
+            </label>
+        </radio-group>
+    </view>
+    <!-- <view class="up-item">
+        <text class="">停留时间：</text>
+        <input class="up-right" type="text" placeholder="请输入广告停留时间（单位：秒）" bindinput="bindAdvertHold" value="{{advertHold}}" />
+    </view> -->
+    <view class="up-item">
+        <text class="">视频上传：</text>
+        <view class="up-right">
+            <text class="upload icon iconfont icon-upload" bindtap='uploadVideo'></text>
+            <text class="gray" wx:if="{{advertSize==0}}">视频推荐尺寸1080*1760</text>
+            <text class="gray" wx:if="{{advertSize==1}}">视频推荐尺寸1080*607</text>
+        </view>
+    </view>
+    <view class="up-item video-height" wx:if="{{imgSrc&&advertSize==0}}">
+        <text class=""></text>
+        <view class="previewImg up-right">
+            <video id="prew_video" autoplay="{{false}}" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" direction="0" src="{{imgSrc}}"></video>
+        </view>
+    </view>
+    <view class="up-item video-height" wx:if="{{imgSrcTop&&advertSize==1}}">
+        <text class=""></text>
+        <view class="previewImg up-right">
+            <video id="prew_video" autoplay="{{false}}" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" direction="0" src="{{imgSrcTop}}"></video>
+        </view>
+    </view>
+    <view wx:if="{{advertSize==1}}">
+        <view class="up-item">
+            <text class="">图片上传：</text>
+            <view class="up-right">
+                <text class="upload icon iconfont icon-upload" bindtap='uploadImg'></text>
+                <text class="gray">图片推荐尺寸1080*1152</text>
+            </view>
+        </view>
+        <view class="up-item" wx:if="{{isHasImg}}">
+            <text class=""></text>
+            <view class="previewImg up-right" bindtap="previewImage">
+                <image src="{{additionalUrl}}" />
+            </view>
+        </view>
+    </view>
+    <view class="marginTop">
+        <button class="normal-btn" bindtap='submit' class="normal-btn">提交</button>
+    </view>
+</view>

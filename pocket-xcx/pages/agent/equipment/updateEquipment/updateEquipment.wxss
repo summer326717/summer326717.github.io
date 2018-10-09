@@ -1,0 +1,47 @@
+.eq-update {
+  line-height: 70rpx;
+}
+
+.eq-update .content {
+  border-top: none;
+}
+
+.eq-update input {
+  /*border-bottom: 1px solid #eddeed*/
+}
+
+.eq-update .up-item {
+  display: flex;
+  /*height: 80rpx;*/
+  align-items: center;
+  border-bottom: 1px solid #E1E1E1;
+}
+
+.eq-update picker {
+  flex: 1;
+  background: url('http://tactivity.boonmo.com/imgs/more.png') 100% 50% no-repeat;
+  background-size: 30rpx 30rpx;
+}
+
+.eq-update .up-item:first-child {
+  border-bottom: 20rpx solid #FBFBFB
+}
+
+.eq-update .up-item:first-child input {
+  border-bottom: none;
+}
+
+.eq-update .up-item text {
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 200rpx;
+}
+
+.eq-update .up-item input,
+.eq-update .up-item slider {
+  flex: 1;
+}
+
+.eq-update .content {
+  margin-bottom: 80rpx;
+}

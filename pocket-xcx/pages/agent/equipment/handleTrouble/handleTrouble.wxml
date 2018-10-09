@@ -1,0 +1,13 @@
+<view class="">
+    <view class="">
+        设备名称：
+        <text class=""></text>
+    </view>
+    <view class="">
+        设备名称：
+        <text class=""></text>
+    </view>
+    <view class="">处理结果:</view>
+    <textarea class="" />
+    <button class="normal-btn" bindtap='zrzhMethod'>提交</button>
+</view>

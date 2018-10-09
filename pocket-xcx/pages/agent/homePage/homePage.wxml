@@ -1,0 +1,67 @@
+<view class="wrap">
+    <view class="top">
+        <view class="head-icon">
+            <view class="image">
+                <image src="{{headImg}}" />
+            </view>
+        </view>
+        <view class="head-content">
+            <view class="">{{agentName}}</view>
+            <view class="welcome">welcome</view>
+        </view>
+        <view class="left-menu" bindtap='toOperator'>运营管理 ></view>
+    </view>
+    <view class="content">
+        <view class="con-top">
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{totalProfit}}</text>
+                </view>
+                <view class="txt">总收益</view>
+            </view>
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{sameMonthProfit}}</text>
+                </view>
+                <view class="txt">本月收益</view>
+            </view>
+            <view class="item">
+                <view class="money">
+                    ￥
+                    <text class="num">{{sameDayProfit}}</text>
+                </view>
+                <view class="txt">今日收益</view>
+            </view>
+        </view>
+        <view class="con-bottom">
+            <view class="item" wx:for="{{menuList}}" wx:key='{{index}}'>
+                <block wx:if="{{item.menuUrl}}">
+                    <navigator url='{{item.menuUrl}}'>
+                        <view class="icon">
+                            <image mode='widthFix' src="{{item.menuImg}}" />
+                        </view>
+                        <view class="name">{{item.menuName}}</view>
+                    </navigator>
+                </block>
+                <block wx:else>
+                    <view class="icon" bindtap='isToCreate'>
+                        <image mode='widthFix' src="{{item.menuImg}}" />
+                    </view>
+                    <view class="name">{{item.menuName}}</view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view class="item">
+            <view class="icon iconfont icon-shouyexuanzhong active"></view>
+            <view class="item-txt">首页</view>
+        </view>
+        <navigator open-type="redirect" class="item" url='/pages/agent/my/my/my'>
+            <view class="icon iconfont icon-wodemoren"></view>
+            <view class="item-txt">我的</view>
+        </navigator>
+    </view>
+</view>

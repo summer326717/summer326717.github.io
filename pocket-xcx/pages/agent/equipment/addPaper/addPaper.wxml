@@ -1,0 +1,12 @@
+<view class="">
+  <view class="item_tit">
+    <text>补纸数量</text>
+    <view class="buy_num">
+      <button class="jian" bindtap="jian">-</button>
+      <input class="num" type="text" bindinput="bindNum" value="{{spec_num}}" />
+      <button class="add" bindtap="jia">+</button>
+    </view>
+    <text>可补{{canBuzhi}}包</text>
+  </view>
+  <button class="normal-btn" bindtap='buzhi'>保存</button>
+</view>

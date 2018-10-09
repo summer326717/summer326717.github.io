@@ -1,0 +1,17 @@
+<!-- index.wxml -->
+<view class="container">
+    <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
+        <view class="info">
+            此小程序需要使用您的
+            <text class="orange">公开信息</text>
+            （名称、头像等）进入小程序，请您确认。
+        </view>
+        <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            请求授权
+        </button>
+    </view>
+    <view class="usermotto" wx:if="{{hasUserInfo}}">
+        <view class="info">此小程序需要使用您的微信绑定<text class="orange">手机号</text>进入小程序，请您确认。</view>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">请求授权</button>
+    </view>
+</view>

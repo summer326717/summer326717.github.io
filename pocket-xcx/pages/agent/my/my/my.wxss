@@ -1,0 +1,151 @@
+.wrap .top {
+  background: #F3A000;
+  height: 155rpx;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.wrap .top .head-icon,
+.wrap .top .left-menu {
+  flex: 1;
+}
+
+.wrap .top .head-content {
+  flex: 2;
+  font-size: 30rpx;
+}
+
+.wrap .top .head-content .welcome {
+  width: 143rpx;
+  height: 46rpx;
+  background: rgba(129, 193, 109, 1);
+  border-radius: 23rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.wrap .top .left-menu {
+  font-size: 32rpx;
+}
+
+.wrap .top .head-icon .image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-left: 24rpx;
+  overflow: hidden;
+}
+
+.wrap .content {
+  padding: 20rpx 20rpx 96rpx 20rpx;
+}
+
+.wrap .content .con-top {
+  border: 1px solid #F0F0F0;
+  border-radius: 10rpx;
+  box-shadow: 0 0 5px #F0F0F0;
+  padding: 20rpx;
+  display: flex;
+}
+
+.wrap .content .con-top .item {
+  flex: 1;
+  text-align: center;
+}
+
+.wrap .content .con-top .item .money {
+  font-size: 26rpx;
+}
+
+.wrap .content .con-top .item .num {
+  font-size: 48rpx;
+}
+
+.wrap .content .con-top .item .txt {
+  font-size: 28rpx;
+  color: #585858;
+}
+
+.wrap .content .con-top .item:not(:last-child) {
+  border-right: 1px solid #E5E5E5;
+}
+
+.wrap .content .con-bottom {
+  display: flex;
+  flex-flow: wrap;
+  border: 2px solid #E1E1E1;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 42rpx;
+}
+
+.wrap .content .con-bottom .item {
+  flex: 0 0 33%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #585858;
+  padding: 34rpx 0 29rpx 0;
+}
+
+.wrap .content .con-bottom .item .icon image {
+  width: 130rpx;
+  height: auto;
+  margin-bottom: 22rpx;
+}
+
+.wrap .index-menu view {
+  padding-left: 30rpx;
+  color: #585858;
+  height: 120rpx;
+  line-height: 120rpx;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.wrap .index-menu view text {
+  float: right;
+  margin-right: 30rpx;
+}
+
+.wrap .footer {
+  width: 100%;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  background: #EEEEEE;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.wrap .footer .item {
+  flex: 1;
+  text-align: center;
+}
+
+.wrap .footer .active {
+  color: #F3A000;
+}
+
+.message {
+  text-align: center;
+  height: 62rpx;
+  background: url('http://tactivity.boonmo.com/imgs/message.png') no-repeat 0 0;
+  background-size: contain;
+  position: relative;
+}
+
+.message .i {
+  min-width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 40rpx;
+  top: -20rpx;
+  border-radius: 40rpx;
+  background: #585858;
+  color: #ffffff
+}
+
+.my .more {
+  margin-top: 40rpx;
+}

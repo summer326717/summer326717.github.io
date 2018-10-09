@@ -1,0 +1,11 @@
+.radio-group {
+  flex: 1;
+}
+
+.video-height {
+  height: auto !important;
+}
+
+.video-height video {
+  width: 100%;
+}

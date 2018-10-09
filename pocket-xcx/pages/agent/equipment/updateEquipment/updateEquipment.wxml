@@ -1,0 +1,39 @@
+<view class="eq-index eq-update">
+    <view class="content">
+        <view class="up-item">
+            <text class="left">设备ID</text>
+            <input type="text" value="{{posCode}}" disabled="{{true}}" />
+        </view>
+        <view class="up-item">
+            <text class="left">设备名称</text>
+            <input type="text" bindinput="bindSbmc" value="{{posName}}" />
+        </view>
+        <view class="up-item">
+            <text class="left">所属区域</text>
+            <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+                <view class="picker">{{region[0]}}{{region[1]}}{{region[2]}}</view>
+            </picker>
+        </view>
+        <view class="up-item">
+            <text class="left">详细地址</text>
+            <input type="text" bindinput="bindXxdz" value="{{detailAddress}}" />
+        </view>
+        <view class="up-item">
+            <text class="left">最大纸量</text>
+            <input type="text" value="{{capacity}}" bindinput="bindZdzl" />
+        </view>
+        <view class="up-item">
+            <text class="left">运营人员</text>
+            <picker class="select" bindchange="pickerList" value="{{eindex}}" range="{{operatorQryList}}" range-key="operatorName">
+                <view class="picker">{{operatorQryList[eindex].operatorName}}</view>
+            </picker>
+        </view>
+        <view class="up-item">
+            <text class="left">设备音量</text>
+            <slider bindchange="bindSbyl" min="0" max="100" value="{{volume}}" show-value />
+        </view>
+    </view>
+    <view class="">
+        <button class="normal-btn mb50" bindtap="equipmentInfoEdit">保存</button>
+    </view>
+</view>

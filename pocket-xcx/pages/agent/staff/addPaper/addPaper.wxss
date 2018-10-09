@@ -1,0 +1,17 @@
+.wrap .content .m-list .m-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 40rpx;
+  border-top: 20rpx solid #FBFBFB;
+  border-bottom: 1px solid #E9E9E9;
+}
+
+.wrap .content .m-list .m-item .right {
+  float: right;
+  color: #666666;
+}
+
+.wrap .content .m-list .m-item .countTotal {
+  float: right;
+  margin-right: 50rpx;
+}

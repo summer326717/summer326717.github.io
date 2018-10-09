@@ -1,0 +1,77 @@
+<view class="eq-index">
+    <view class="eq-index-menu">
+        <navigator class="item" url='/pages/agent/equipment/paperRecord/paperRecord?posCode={{equipmentDetail.posCode}}'>
+            <view class="icon iconfont icon-jilu"></view>
+            <view>记录</view>
+        </navigator>
+        <view class='item' bindtap='buzhi'>
+            <view class="icon iconfont icon-buzhi"></view>
+            <view class="">补纸</view>
+        </view>
+        <view class='item' bindtap='ceshi'>
+            <view class="icon iconfont icon-ceshi"></view>
+            <view class="">测试</view>
+        </view>
+        <view class='item' bindtap='weihu'>
+            <view class="icon iconfont icon-weihu"></view>
+            <view class="">维护</view>
+        </view>
+    </view>
+    <view class="content">
+        <view class="">
+            <text class="left">设备ID：</text>
+            {{equipmentDetail.posCode}}
+        </view>
+        <view class="">
+            <text class="left">设备名称：</text>
+            {{equipmentDetail.posName?equipmentDetail.posName:''}}
+        </view>
+        <view class="">
+            <text class="left">所属区域：</text>
+            {{equipmentDetail.provinceName?equipmentDetail.provinceName:''}}{{equipmentDetail.cityName?equipmentDetail.cityName:''}}{{equipmentDetail.areaName?equipmentDetail.areaName:''}}
+        </view>
+        <view class="">
+            <text class="left">详细地址：</text>
+            {{equipmentDetail.detailAddress?equipmentDetail.detailAddress:''}}
+        </view>
+        <view class="">
+            <text class="left">出纸状态：</text>
+            <text class="green" wx:if="{{equipmentDetail.noPaperState==0}}">正常</text>
+            <text class="red" wx:else>异常</text>
+        </view>
+        <view class="">
+            <text class="left">屏幕状态：</text>
+            <text class="green" wx:if="{{equipmentDetail.screenState==0}}">正常</text>
+            <text class="red" wx:else>异常</text>
+        </view>
+        <view class="">
+            <text class="left">当前纸量：</text>
+            {{equipmentDetail.restNum}}/{{equipmentDetail.capacity?equipmentDetail.capacity:0}}
+        </view>
+        <view class="">
+            <text class="left">补纸次数：</text>
+            {{equipmentDetail.transterTimes}}
+        </view>
+        <view class="">
+            <text class="left">APP版本：</text>
+            {{equipmentDetail.appVersion}}
+        </view>
+        <view class="">
+            <text class="left">设备音量：</text>
+            {{equipmentDetail.volume}}
+        </view>
+        <view class="">
+            <text class="left">信号强度：</text>
+            {{equipmentDetail.signalValue}}
+        </view>
+        <view class="">
+            <text class="left">最近上线：</text>
+            {{equipmentDetail.lastOnlineTime}}
+        </view>
+        <view class="">
+            <text class="left">设备状态：</text>
+            <text class="green" wx:if="{{equipmentDetail.onlineState==0}}">在线</text>
+            <text class="red" wx:else>离线</text>
+        </view>
+    </view>
+</view>

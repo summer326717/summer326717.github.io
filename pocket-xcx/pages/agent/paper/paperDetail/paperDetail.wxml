@@ -1,0 +1,20 @@
+<view class="wrap">
+    <view class="top">
+        <picker disabled="{{true}}" mode="date" value="{{selectMonth}}" start="2010-01" end="{{currentMonth}}" bindchange="pickerMonth" fields='month'>
+            <view class="picker">{{selectMonth}}</view>
+        </picker>
+        <picker class="select bottombg" bindchange="pickerEquipment" value="{{eindex}}" range="{{EquipmentList}}" range-key="posName">
+            <view class="picker">{{EquipmentList[eindex].posName}}</view>
+        </picker>
+    </view>
+    <view class="content" wx:if="{{!isNoData}}">
+        <view class="l-list">
+            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                <view>{{item.posName}}</view>
+                <view class="right">{{item.countTotal}}包</view>
+                <text class="s-inf">{{item.detailAddress}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="no-data" wx:if="{{isNoData}}"></view>
+</view>
