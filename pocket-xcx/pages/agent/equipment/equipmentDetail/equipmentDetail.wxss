@@ -2,3 +2,41 @@
   width: 30rpx;
   height: 35rpx;
 }
+
+.e-detail-qrcode image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+  vertical-align: middle;
+}
+
+.dialogbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5)
+}
+
+.dialog {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  padding: 30rpx 30rpx 0 30rpx;
+  margin-top: 0;
+  background: #ffffff;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.dialog canvas {
+  width: 200px;
+  height: 200px;
+}
+
+.dialog .tishi {
+  color: #999999;
+}

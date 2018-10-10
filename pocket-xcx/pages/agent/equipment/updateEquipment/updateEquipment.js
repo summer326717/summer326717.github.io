@@ -36,8 +36,6 @@ Page({
   onLoad: function (options) {
     if (options.posCode) {
       this.operatorQryList(options.posCode)
-    } else {
-      this.operatorQryList('tianjia')
     }
   },
   /*bindRegionChange: function (e) {
@@ -142,18 +140,12 @@ Page({
   operatorQryList: function (type) {
     base.http_post('', '/operatorNameAndCodeQryList', (res) => {
       if (res.code == 0) {
-        if (type != 'tianjia') {
-          res.data.unshift({ operatorName: '请选择' })
-        } else {
-          res.data
-        }
+        res.data.unshift({ operatorName: '请选择' })
         this.setData({
           operatorQryList: res.data
         })
-        if (type != 'tianjia') {
-          this.getData(type)
-        }
       }
+      this.getData(type)
     })
   },
   pickerList: function (e) {

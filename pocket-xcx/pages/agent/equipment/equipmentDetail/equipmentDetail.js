@@ -1,5 +1,7 @@
 const util = require('../../../../utils/util.js')
 var base = require('../../../../utils/common/base')
+var QRCode = require('../../../../utils/common/qrcode.js')
+var qrcode = ''
 Page({
 
   /**
@@ -7,6 +9,8 @@ Page({
    */
   data: {
     equipmentDetail: {},
+    isShowQRCode: false,
+    posCode: '',
     itemList: ['编辑', '解绑', '转让']
   },
 
@@ -17,6 +21,39 @@ Page({
     let posCode = options.posCode
     this.setData({
       posCode: posCode
+    })
+  },
+  checkShowQRCode() {
+    this.setData({
+      isShowQRCode: !this.data.isShowQRCode
+    })
+    console.log(this.data.isShowQRCode)
+    if (this.data.isShowQRCode) {
+      qrcode = new QRCode('canvas', {
+        usingIn: this,
+        text: "http://weixin.qq.com/r/ailyalvE_gaFrR8J93x4?posCode=" + this.data.equipmentDetail.posCode,
+        image: '',
+        width: 200,
+        height: 200,
+        colorDark: "#1CA4FC",
+        colorLight: "white",
+        correctLevel: QRCode.CorrectLevel.H,
+      });
+    }
+  },
+  saveImg() {
+    wx.showActionSheet({
+      itemList: ['保存图片'],
+      success: function (res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 0) {
+          qrcode.exportImage(function (path) {
+            wx.saveImageToPhotosAlbum({
+              filePath: path,
+            })
+          })
+        }
+      }
     })
   },
   getData: function (posCode) {

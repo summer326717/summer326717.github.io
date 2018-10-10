@@ -18,9 +18,10 @@
         </view>
     </view>
     <view class="content">
-        <view class="">
+        <view class="e-detail-qrcode">
             <text class="left">设备ID：</text>
             {{equipmentDetail.posCode}}
+            <image src="http://tactivity.boonmo.com/imgs/code.png" bindtap="checkShowQRCode" />
         </view>
         <view class="">
             <text class="left">设备名称：</text>
@@ -37,7 +38,7 @@
         </view>
         <view class="">
             <text class="left">出纸状态：</text>
-            <text class="green" wx:if="{{equipmentDetail.noPaperState==0}}">正常</text>
+            <text class="green" wx:if="{{equipmentDetail.spitPaperState==0}}">正常</text>
             <text class="red" wx:else>异常</text>
         </view>
         <view class="">
@@ -47,7 +48,8 @@
         </view>
         <view class="">
             <text class="left">当前纸量：</text>
-            <text class="red">{{equipmentDetail.restNum}}</text>/{{equipmentDetail.capacity?equipmentDetail.capacity:0}}
+            <text class="red">{{equipmentDetail.restNum}}</text>
+            /{{equipmentDetail.capacity?equipmentDetail.capacity:0}}
         </view>
         <view class="">
             <text class="left">运营人员：</text>
@@ -77,6 +79,11 @@
             <text class="left">设备状态：</text>
             <text class="green" wx:if="{{equipmentDetail.onlineState==0}}">在线</text>
             <text class="red" wx:else>离线</text>
+        </view>
+        <view class="dialogbg" wx:if="{{isShowQRCode}}"></view>
+        <view class="dialog" wx:if="{{isShowQRCode}}">
+            <canvas class='canvas' canvas-id='canvas' bindlongtap='saveImg'></canvas>
+            <view class="tishi">长按保存二维码</view>
         </view>
     </view>
 </view>

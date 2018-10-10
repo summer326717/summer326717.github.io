@@ -39,7 +39,7 @@ Page({
     base.http_post(json, '/equipmentHandleFault', (res) => {
       if (res.code == 0) {
         base.toast('succ', res.message);
-        wx.na
+        wx.navigateBack()
       } else {
         base.toast('warn', res.message);
       }

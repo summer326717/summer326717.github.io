@@ -1,6 +1,6 @@
 var MD5 = require('../common/md5.js');
 
-export function http_post(json, url, completion) {
+export function http_post(json, url, completion) {console.log(json)
   wx.showLoading({
     title: '加载中...',
     mask: true
