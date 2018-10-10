@@ -1,0 +1,4 @@
+.openLocation image {
+  width: 30rpx;
+  height: 35rpx;
+}

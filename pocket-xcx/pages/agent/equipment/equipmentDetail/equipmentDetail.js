@@ -132,6 +132,31 @@ Page({
       }
     })
   },
+  openLocation: function () {
+    wx.openLocation({
+      latitude: this.data.equipmentDetail.latitude,
+      longitude: this.data.equipmentDetail.longitude,
+      name: this.data.equipmentDetail.posName,
+      address: this.data.equipmentDetail.provinceName + this.data.equipmentDetail.cityName + this.data.equipmentDetail.areaName + this.data.equipmentDetail.detailAddress,
+      success: (res) => {
+        if (res.errMsg.indexOf('ok') > 1) {
+        } else {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: res.errMsg
+          })
+        }
+      },
+      fail: (res) => {
+        wx.showModal({
+          showCancel: false,
+          title: '提示',
+          content: res.errMsg
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

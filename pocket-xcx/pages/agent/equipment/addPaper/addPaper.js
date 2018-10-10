@@ -20,8 +20,20 @@ Page({
     })
   },
   buzhi() {
-    if (this.spec_num) {
+    if (!this.data.spec_num) {
       base.toast('', '请输入补纸数量');
+      return
+    }
+    if (isNaN(this.data.spec_num)) {
+      base.toast('', '请输入正确补纸数量');
+      return
+    }
+    if (0 >= parseInt(this.data.spec_num)) {
+      base.toast('', '补纸数量大于0');
+      return
+    }
+    if (parseInt(this.data.canBuzhi) < parseInt(this.data.spec_num)) {
+      base.toast('', '补纸数量必须小于' + this.data.canBuzhi);
       return
     }
     let json = {

@@ -67,39 +67,39 @@ export function uploadImg(url, type, completion) {
       wx.getImageInfo({
         src: tempFilePaths[0],
         success(res) {
-          /*if (type == 1) {//全屏
-            if (res.width != '1080' || res.height != '1760') {
+          if (type == 1) {//全屏
+            if (res.width != '1080' || res.height != '1920') {
               wx.hideLoading()
               wx.showModal({
                 showCancel: false,
                 title: '提示',
-                content: '请使用1080*1760尺寸照片上传'
+                content: '请使用1080*1920尺寸照片上传'
               })
               return
             }
           }
           if (type == 2) {//上半屏
-            if (res.width != '1080' || res.height != '607') {
+            if (res.width != '1080' || res.height != '610') {
               wx.hideLoading()
               wx.showModal({
                 showCancel: false,
                 title: '提示',
-                content: '请使用1080*607尺寸照片上传'
+                content: '请使用1080*610尺寸照片上传'
               })
               return
             }
           }
           if (type == 3) {//视频图片
-            if (res.width != '1080' || res.height != '1153') {
+            if (res.width != '1080' || res.height != '1310') {
               wx.hideLoading()
               wx.showModal({
                 showCancel: false,
                 title: '提示',
-                content: '请使用1080*1153尺寸照片上传'
+                content: '请使用1080*1310尺寸照片上传'
               })
               return
             }
-          }*/
+          }
           wx.uploadFile({
             url: 'https://test.boonmo.com/scavengingpaper/api/baomo/' + url,
             filePath: tempFilePaths[0],

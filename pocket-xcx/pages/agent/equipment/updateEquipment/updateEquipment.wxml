@@ -10,13 +10,15 @@
         </view>
         <view class="up-item">
             <text class="left">所属区域</text>
-            <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
                 <view class="picker">{{region[0]}}{{region[1]}}{{region[2]}}</view>
-            </picker>
+            </picker> -->
+            <input class="picker-more" type="text" value="{{provinceName}}{{cityName}}{{areaName}}" disabled="{{true}}" bindtap="openLocation" />
         </view>
         <view class="up-item">
             <text class="left">详细地址</text>
             <input type="text" bindinput="bindXxdz" value="{{detailAddress}}" />
+            <!-- <text bindtap="openLocation">定位</text> -->
         </view>
         <view class="up-item">
             <text class="left">最大纸量</text>
@@ -24,7 +26,7 @@
         </view>
         <view class="up-item">
             <text class="left">运营人员</text>
-            <picker class="select" bindchange="pickerList" value="{{eindex}}" range="{{operatorQryList}}" range-key="operatorName">
+            <picker class="select picker-more" bindchange="pickerList" value="{{eindex}}" range="{{operatorQryList}}" range-key="operatorName">
                 <view class="picker">{{operatorQryList[eindex].operatorName}}</view>
             </picker>
         </view>

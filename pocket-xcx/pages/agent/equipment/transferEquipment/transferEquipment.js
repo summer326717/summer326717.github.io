@@ -38,8 +38,8 @@ Page({
     }
     base.http_post(json, '/equipmentTransfer', (res) => {
       if (res.code == 0) {
-        this.setData({
-          equipmentDetail: res.data
+        wx.navigateBack({
+          delta: 2
         })
       } else {
         base.toast('warn', res.message);

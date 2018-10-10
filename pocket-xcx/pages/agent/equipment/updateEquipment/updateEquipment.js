@@ -15,7 +15,7 @@ Page({
     pageNo: 1,
     distributeState: 'O',
     nameOrMobile: '',
-    region: ['请选择'],
+    //region: ['请选择'],
     customItem: '请选择',
     cityCode: '',
     areaCode: '',
@@ -25,7 +25,9 @@ Page({
     operateManId: '',//运营人员id
     operateManName: '',
     posCode: '',
-    posName: ''
+    posName: '',
+    latitude: 0,
+    longitude: 0
   },
 
   /**
@@ -38,7 +40,7 @@ Page({
       this.operatorQryList('tianjia')
     }
   },
-  bindRegionChange: function (e) {
+  /*bindRegionChange: function (e) {
     if (e.detail.code.length != 3) {
       return
     }
@@ -51,7 +53,7 @@ Page({
       provinceCode: e.detail.code[0],
       provinceName: e.detail.value[0]
     })
-  },
+  },*/
   getData: function (posCode) {
     let json = {
       posCode: posCode
@@ -80,11 +82,11 @@ Page({
           detailAddress: res.data.detailAddress,
           capacity: res.data.capacity
         })
-        if (!!this.data.provinceName && !!this.data.cityName && !!this.data.areaName) {
+        /*if (!!this.data.provinceName && !!this.data.cityName && !!this.data.areaName) {
           this.setData({
             region: [this.data.provinceName, this.data.cityName, this.data.areaName]
           })
-        }
+        }*/
       } else {
         base.toast('warn', res.message);
       }
@@ -95,7 +97,7 @@ Page({
       base.toast('warn', '请输入设备名称');
       return
     }
-    if (!this.data.areaName || !this.data.areaCode || !this.data.cityCode || !this.data.cityName || !this.data.provinceCode || !this.data.provinceName) {
+    if (!this.data.areaName || !this.data.cityName || !this.data.provinceName) {
       base.toast('warn', '请选择省市区');
       return
     }
@@ -118,8 +120,8 @@ Page({
       "cityCode": this.data.cityCode,
       "cityName": this.data.cityName,
       "detailAddress": this.data.detailAddress,
-      "latitude": 0,
-      "longitude": 0,
+      "latitude": this.data.latitude,
+      "longitude": this.data.longitude,
       "operateManId": this.data.operatorCode,//运营人员id
       "operateManName": this.data.operatorName,
       "posCode": this.data.posCode,
@@ -188,6 +190,86 @@ Page({
     this.setData({
       volume: e.detail.value
     })
+  },
+  openLocation: function () {
+    if (this.data.posCode) {
+      wx.getLocation({
+        success: (res) => {
+          console.log(res)
+          if (res.errMsg.indexOf('ok') > 1) {
+            wx.chooseLocation({
+              success: (cres) => {
+                console.log(cres)
+                if (res.errMsg.indexOf('ok') > 1) {
+                  if (cres.address) {
+                    let txt = cres.address.split('省')
+                    let provinceName = txt[0]
+                    txt = txt[1].split('市')
+                    let cityName = txt[0]
+                    txt = txt[1].split('区')
+                    let areaName = txt[0]
+                    let detailAddress = txt[1]
+                    this.setData({
+                      latitude: cres.latitude,
+                      longitude: cres.longitude,
+                      detailAddress: detailAddress,
+                      provinceName: provinceName + '省',
+                      cityName: cityName + '市',
+                      areaName: areaName + '区',
+                      provinceCode: '',
+                      cityCode: '',
+                      areaCode: '',
+                      //region: [provinceName + '省', cityName + '市', areaName + '区']
+                    })
+                  } else {
+                    base.toast('warn', '您没有选择地址');
+                  }
+                }
+              }
+            })
+          } else {
+            wx.showModal({
+              showCancel: false,
+              title: '提示',
+              content: res.errMsg
+            })
+          }
+        },
+        fail: (res) => {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '您未授权获取地址'
+          })
+        }
+      })
+    } else {
+      wx.openLocation({
+        latitude: res.latitude,
+        longitude: res.longitude,
+        success: (res) => {
+          if (res.errMsg.indexOf('ok') > 1) {
+            wx.chooseLocation({
+              success: (cres) => {
+                if (res.errMsg.indexOf('ok') > 1) {
+                  debugger
+                }
+              },
+              fail: () => {
+                debugger
+              }
+            })
+          }
+        },
+        fail: (res) => {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: res.errMsg
+          })
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

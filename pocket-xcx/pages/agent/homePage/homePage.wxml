@@ -2,7 +2,7 @@
     <view class="top">
         <view class="head-icon">
             <view class="image">
-                <image src="{{headImg}}" />
+                <image mode="aspectFit" src="{{headImg}}" />
             </view>
         </view>
         <view class="head-content">
