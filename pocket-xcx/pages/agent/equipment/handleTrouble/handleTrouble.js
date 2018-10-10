@@ -16,9 +16,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      posCode: options.posCode
+    })
+  },
+  bindHandleResult(e) {
+    this.setData({
+      handleResult: e.detail.value
+    })
   },
   equipmentHandleFault: function () {
+    if (!this.data.handleResult) {
+      base.toast('warn', '请输入处理结果');
+      return
+    }
     let json = {
       faultReaSon: this.data.faultReaSon,
       handleResult: this.data.handleResult,
@@ -27,9 +38,8 @@ Page({
     }
     base.http_post(json, '/equipmentHandleFault', (res) => {
       if (res.code == 0) {
-        if (res.data) {
-          //
-        }
+        base.toast('succ', res.message);
+        wx.na
       } else {
         base.toast('warn', res.message);
       }

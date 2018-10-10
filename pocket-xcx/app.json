@@ -13,7 +13,6 @@
     "pages/agent/equipment/transferEquipment/transferEquipment",
     "pages/agent/equipment/lackPaper/lackPaper",
     "pages/agent/equipment/handleTrouble/handleTrouble",
-    "pages/agent/ad/adManage/adManage",
     "pages/agent/ad/videoAd/videoAd",
     "pages/agent/ad/pictureAd/pictureAd",
     "pages/agent/ad/selectAd/selectAd",
@@ -27,7 +26,10 @@
     "pages/agent/my/toCash/toCash",
     "pages/operator/operator/operator",
     "pages/agent/my/my/my",
-    "pages/agent/equipment/faultyEquipment/faultyEquipment"
+    "pages/agent/equipment/faultyEquipment/faultyEquipment",
+    "pages/agent/ad/adManage/adManage",
+    "pages/agent/ad/adHalf/adHalf",
+    "pages/agent/ad/adTotal/adTotal"
   ],
   "window": {
     "backgroundTextStyle": "light",

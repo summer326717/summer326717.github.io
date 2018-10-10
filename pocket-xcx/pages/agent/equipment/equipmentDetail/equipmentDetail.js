@@ -26,7 +26,7 @@ Page({
     base.http_post(json, '/equipmentDetail', (res) => {
       if (res.code == 0) {
         res.data.appVersion = res.data.appVersion ? res.data.appVersion : ''
-        res.data.lastOnlineTime = res.data.lastOnlineTime ? res.data.lastOnlineTime : ''
+        res.data.lastOnlineTime = res.data.lastOnlineTime ? base.transTime(res.data.lastOnlineTime) : ''
         this.setData({
           equipmentDetail: res.data
         })
@@ -48,22 +48,32 @@ Page({
    * 测试
    */
   ceshi: function () {
-    wx.showToast({
-      title: '开发中...',
-      icon: 'none'
-    })
-    return;
     wx.showModal({
       title: '提示',
-      content: '是否测试出纸功能',
+      content: '是否确认测试出纸功能？',
       success: res => {
         if (res.confirm) {
           let json = {
             posCode: this.data.posCode
           }
-          base.http_post(json, '/pollingPosOnlineCheck', (res) => {
+          //发出检测，10秒后查询检测结果
+          base.http_post(json, '/spitPaperCheck', (res) => {
             if (res.code == 0) {
-              base.toast('succ', res.message);
+              wx.showLoading({
+                title: '加载中...',
+                mask: true
+              })
+              setTimeout(() => {
+                base.http_post(json, '/spitPaperCheckQryResult', (res) => {
+                  if (res.code == 0) {
+                    wx.hideLoading()
+                    base.toast('succ', res.message);
+                  } else {
+                    wx.hideLoading()
+                    base.toast('warn', res.message);
+                  }
+                })
+              }, 10000);
             } else {
               base.toast('warn', res.message);
             }

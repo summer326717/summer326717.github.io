@@ -243,7 +243,7 @@ Page({
   },
   previewImage: function () {
     wx.previewImage({
-      urls: [this.data.BottomimgSrc],
+      urls: [this.data.additionalUrl],
       current: '',
       success: () => {
       }

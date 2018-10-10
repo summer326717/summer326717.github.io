@@ -17,7 +17,8 @@ Page({
     pageNo: 1,
     pageSize: 10,
     isToBottom: false,
-    dataList: [{ advertName: '3232', advertState: '1', advertStyle: 0, advertId: 14 }]
+    isShowAddMenu: false,
+    dataList: []
   },
 
   /**
@@ -62,7 +63,7 @@ Page({
     })
     this.advertisementQryList()
   },
-  pickerSelect: function (e) {
+  /*pickerSelect: function (e) {
     if (e.detail.value == 0) {
       wx.navigateTo({
         url: '/pages/agent/ad/pictureAd/pictureAd'
@@ -73,16 +74,16 @@ Page({
         url: '/pages/agent/ad/videoAd/videoAd'
       })
     }
-  },
+  },*/
   editAd(e) {
     if (e.target.dataset.type == 0) {
       wx.navigateTo({
-        url: '/pages/agent/ad/pictureAd/pictureAd?advertId=' + e.target.dataset.id
+        url: '/pages/agent/ad/adTotal/adTotal?advertId=' + e.target.dataset.id
       })
     }
     if (e.target.dataset.type == 1) {
       wx.navigateTo({
-        url: '/pages/agent/ad/videoAd/videoAd?advertId=' + e.target.dataset.id
+        url: '/pages/agent/ad/adHalf/adHalf?advertId=' + e.target.dataset.id
       })
     }
   },
@@ -121,6 +122,21 @@ Page({
       } else {
         base.toast('warn', res.message);
       }
+    })
+  },
+  checkShowAddMenu() {
+    this.setData({
+      isShowAddMenu: !this.data.isShowAddMenu
+    })
+  },
+  totalPing() {
+    wx.navigateTo({
+      url: '/pages/agent/ad/adTotal/adTotal'
+    })
+  },
+  halfPing() {
+    wx.navigateTo({
+      url: '/pages/agent/ad/adHalf/adHalf'
     })
   },
   /**

@@ -112,7 +112,7 @@ Page({
     this.setData({
       eindex: index,
       posCode: this.data.EquipmentList[index].posCode,
-      posName: this.data.EquipmentList[index].posName
+      posName: this.data.EquipmentList[index].posName!='全部设备'?this.data.EquipmentList[index].posName:''
     })
     this.getEquimentList()
   },

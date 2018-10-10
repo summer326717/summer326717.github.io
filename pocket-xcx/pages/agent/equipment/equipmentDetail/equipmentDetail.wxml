@@ -47,11 +47,15 @@
         </view>
         <view class="">
             <text class="left">当前纸量：</text>
-            {{equipmentDetail.restNum}}/{{equipmentDetail.capacity?equipmentDetail.capacity:0}}
+            <text class="red">{{equipmentDetail.restNum}}</text>/{{equipmentDetail.capacity?equipmentDetail.capacity:0}}
+        </view>
+        <view class="">
+            <text class="left">运营人员：</text>
+            {{equipmentDetail.operateManName?equipmentDetail.operateManName:''}}
         </view>
         <view class="">
             <text class="left">补纸次数：</text>
-            {{equipmentDetail.fillTimes}}
+            {{equipmentDetail.fillTimes}}次
         </view>
         <view class="">
             <text class="left">APP版本：</text>
@@ -63,7 +67,7 @@
         </view>
         <view class="">
             <text class="left">信号强度：</text>
-            {{equipmentDetail.signalValue}}
+            {{equipmentDetail.signalValue}}%
         </view>
         <view class="">
             <text class="left">最近上线：</text>

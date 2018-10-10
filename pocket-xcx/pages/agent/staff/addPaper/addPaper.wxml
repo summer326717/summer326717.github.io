@@ -1,4 +1,4 @@
-<view class="wrap">
+<view class="wrap add-paper">
     <view class="top">
         <picker class="bottombg" mode="date" value="{{selectMonth}}" start="2010-01" end="{{currentMonth}}" bindchange="pickerMonth" fields='month'>
             <view class="picker">{{selectMonth}}</view>

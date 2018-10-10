@@ -15,3 +15,8 @@
   float: right;
   margin-right: 50rpx;
 }
+
+.add-paper picker {
+  width: 50%;
+  flex: none;
+}

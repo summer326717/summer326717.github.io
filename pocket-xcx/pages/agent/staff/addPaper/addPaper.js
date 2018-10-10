@@ -24,27 +24,33 @@ Page({
     let currentMonth = util.formatMonth(new Date())
     this.setData({
       currentMonth: currentMonth,
-      selectMonth: currentMonth
+      selectMonth: currentMonth,
+      operatorCode: options.id
     })
     this.getData()
-    this.getEquimentList()
   },
   getData: function () {
     let json = {
-      "pageNo": this.data.pageNo,
-      "pageSize": this.data.pageSize,
-      "yearMonth": this.data.selectMonth
+      pageNo: this.data.pageNo,
+      pageSize: this.data.pageSize,
+      yearMonth: this.data.selectMonth,
+      //operatorCode: this.data.operatorCode
     }
     base.http_post(json, '/operatorFillPaperCount', (res) => {
       if (res.code == 0) {
-        if (this.data.pageNo == 1) {
+        let result = []
+        if (this.data.pageNo > 1) {
+          result = this.data.dataList
+        }
+        let finalResult = util.concattArr(result, res.data.resultList)
+        this.setData({
+          dataList: finalResult,
+          isNoData: false
+        })
+        if (res.data.resultList.length < this.data.pageSize) {
           this.setData({
-            isNoData: false,
-            dataList: res.data.resultList,
-            isNoData: false
+            isToBottom: true
           })
-        } else {
-          let result = base.concattArr(this.data.dataList, res.data.resultList);
         }
       } else if (res.code == 8) {
         this.setData({
@@ -87,14 +93,26 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      pageNo: 1,
+      isToBottom: false
+    })
+    this.getData();
+    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (!this.data.isToBottom) {
+      wx.showNavigationBarLoading();
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.getData();
+      wx.hideNavigationBarLoading();
+    }
   },
 
   /**
@@ -103,20 +121,6 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  /**
-   * 选择设备
-   */
-  pickerEquipment: function (e) {
-    console.log(e)
-    let index = parseInt(e.detail.value)
-    this.setData({
-      eindex: index,
-      posCode: this.data.EquipmentList[index].posCode
-    })
-    this.getData()
-  },
-
   /**
    * 选择年月
    */

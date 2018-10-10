@@ -42,6 +42,11 @@ Page({
         if (this.data.pageNo > 1) {
           result = this.data.dataList
         }
+        res.data.data.fillPaperRecordVOS.map((v, i) => {
+          if (v.fillTime) {
+            v.fillTime = base.transTime(v.fillTime)
+          }
+        })
         let finalResult = util.concattArr(result, res.data.data.fillPaperRecordVOS)
         this.setData({
           headImg: res.data.data.headImg, // 头像

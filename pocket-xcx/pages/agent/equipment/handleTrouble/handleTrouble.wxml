@@ -1,13 +1,20 @@
-<view class="">
-    <view class="">
-        设备名称：
-        <text class=""></text>
+<view class="uploadimg">
+    <view class="up-item">
+        <text class="">设备名称：</text>
+        <input class="up-right" type="text" disabled='{{true}}' value="{{posName}}" />
     </view>
-    <view class="">
-        设备名称：
-        <text class=""></text>
+    <view class="up-item">
+        <text class="">故障问题：</text>
+        <input class="up-right" type="text" disabled='{{true}}' value="{{posName}}" />
     </view>
-    <view class="">处理结果:</view>
-    <textarea class="" />
-    <button class="normal-btn" bindtap='zrzhMethod'>提交</button>
+    <view class="up-item">
+        <text class="">处理结果：</text>
+        <view class="up-right"></view>
+    </view>
+    <view class="preview video-height">
+        <textarea bindinput="bindHandleResult" placeholder="请输入处理结果" value="{{handleResult}}"></textarea>
+    </view>
+    <view class="marginTop">
+        <button class="normal-btn mb50" bindtap='equipmentHandleFault'>提交</button>
+    </view>
 </view>

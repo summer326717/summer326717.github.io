@@ -54,14 +54,14 @@
                 <text class="gray">图片推荐尺寸1080*1152</text>
             </view>
         </view>
-        <view class="up-item" wx:if="{{isHasImg}}">
+        <view class="up-item video-height" wx:if="{{isHasImg}}">
             <text class=""></text>
             <view class="previewImg up-right" bindtap="previewImage">
-                <image src="{{additionalUrl}}" />
+                <image mode="aspectFit" src="{{additionalUrl}}" />
             </view>
         </view>
     </view>
     <view class="marginTop">
-        <button class="normal-btn" bindtap='submit' class="normal-btn">提交</button>
+        <button class="normal-btn mb50" bindtap='submit'>提交</button>
     </view>
 </view>

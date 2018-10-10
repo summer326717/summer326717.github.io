@@ -2,10 +2,11 @@
     <view class="content" wx:if="{{!isNoData}}">
         <view class="l-list">
             <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
-                <navigator url='/pages/agent/equipment/equipmentDetail/equipmentDetail?posCode={{item.posCode}}'>
+                <navigator url='/pages/agent/equipment/handleTrouble/handleTrouble?posCode={{item.posCode}}'>
                     <view>{{item.posName}}</view>
                     <view class="s-inf">{{item.detailAddress}}</view>
-                    <text class="right">{{item.restNum}}/{{item.capacity}}</text>
+                    <text class="right"><text class="red">{{item.restNum}}</text>/{{item.capacity}}</text>
+                    <text class="more" style="margin-top:40rpx"></text>
                 </navigator>
             </view>
         </view>

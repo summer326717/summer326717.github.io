@@ -1,0 +1,39 @@
+<view class="uploadimg">
+    <view class="up-item">
+        <text class="">广告名称：</text>
+        <input class="up-right" type="text" placeholder="请输入广告名称" bindinput="bindAdvertName" value="{{advertName}}" />
+    </view>
+    <view class="up-item">
+        <text class="">广告类型：</text>
+        <picker class="select" bindchange="pickerType" value="{{advertStyle}}" range="{{typeList}}">
+            <view class="picker">{{typeList[advertStyle]}}</view>
+        </picker>
+    </view>
+    <view class="up-item">
+        <text class="">全屏广告：</text>
+        <view class="up-right">
+            <text class="gray">*广告推荐尺寸为1080*1920</text>
+        </view>
+    </view>
+    <view class="up-item" wx:if="{{advertStyle==0}}">
+        <text class="">停留时间：</text>
+        <input class="up-right" type="text" placeholder="请输入广告停留时间（单位：秒）" bindinput="bindAdvertHold" value="{{advertHold}}" />
+    </view>
+    <view class="preview video-height">
+        <block wx:if="{{imgSrc.length>0}}">
+            <view class="previewImg" wx:for="{{imgSrc}}" wx:key="{{index}}">
+                <block wx:if="{{advertStyle==0}}">
+                    <image mode="widthFix" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
+                    <text class="delete" bindtap="deleteImg" data-index="{{index}}">×</text>
+                </block>
+                <block wx:else>
+                    <video id="prew_video" autoplay="{{false}}" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" bindplay="bindplay" bindended="bindended" direction="0" src="{{item}}"></video>
+                </block>
+            </view>
+        </block>
+        <text wx:if="{{imgSrc.length<=9}}" class="upload icon iconfont icon-upload" bindtap='uploadImg'></text>
+    </view>
+    <view class="marginTop">
+        <button class="normal-btn mb50" bindtap='submit'>提交</button>
+    </view>
+</view>

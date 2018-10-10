@@ -34,10 +34,10 @@
                 <text class="gray">图片推荐尺寸1080*1760</text>
             </view>
         </view>
-        <view class="up-item" wx:if="{{isHasImg}}">
+        <view class="up-item video-height" wx:if="{{isHasImg}}">
             <text class=""></text>
             <view class="previewImg up-right" bindtap="previewImage">
-                <image src="{{imgSrc}}" />
+                <image mode="aspectFit" src="{{imgSrc}}" />
             </view>
         </view>
     </view>
@@ -49,10 +49,10 @@
                 <text class="gray">图片推荐尺寸1080*607</text>
             </view>
         </view>
-        <view class="up-item" wx:if="{{isHasImgTop}}">
+        <view class="up-item video-height" wx:if="{{isHasImgTop}}">
             <text class=""></text>
             <view class="previewImg up-right" bindtap="previewTopImage">
-                <image src="{{TopimgSrc}}" />
+                <image mode="aspectFit" src="{{TopimgSrc}}" />
             </view>
         </view>
         <view class="up-item">
@@ -62,14 +62,14 @@
                 <text class="gray">图片推荐尺寸1080*1152</text>
             </view>
         </view>
-        <view class="up-item" wx:if="{{isHasImgBottom}}">
+        <view class="up-item video-height" wx:if="{{isHasImgBottom}}">
             <text class=""></text>
             <view class="previewImg up-right" bindtap="previewBottomImage">
-                <image src="{{BottomimgSrc}}" />
+                <image mode="aspectFit" src="{{BottomimgSrc}}" />
             </view>
         </view>
     </view>
     <view class="marginTop">
-        <button class="normal-btn" bindtap='submit' class="normal-btn">提交</button>
+        <button class="normal-btn mb50" bindtap='submit'>提交</button>
     </view>
 </view>

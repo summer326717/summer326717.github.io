@@ -48,7 +48,7 @@ export function http_post(json, url, completion) {
   })
 }
 
-export function uploadImg(url, type, completion) {
+export function uploadImg(url, completion) {
   wx.showLoading({
     title: '加载中...',
     mask: true
@@ -67,7 +67,7 @@ export function uploadImg(url, type, completion) {
       wx.getImageInfo({
         src: tempFilePaths[0],
         success(res) {
-          if (type == 1) {//全屏
+          /*if (type == 1) {//全屏
             if (res.width != '1080' || res.height != '1920') {
               wx.hideLoading()
               wx.showModal({
@@ -99,7 +99,7 @@ export function uploadImg(url, type, completion) {
               })
               return
             }
-          }
+          }*/
           wx.uploadFile({
             url: 'https://test.boonmo.com/scavengingpaper/api/baomo/' + url,
             filePath: tempFilePaths[0],
@@ -185,7 +185,7 @@ export function toast(type, message) {
     })
   } else if (message == undefined) {
     wx.showToast({
-      title: message,
+      title: type,
       icon: 'none',
     })
   } else {

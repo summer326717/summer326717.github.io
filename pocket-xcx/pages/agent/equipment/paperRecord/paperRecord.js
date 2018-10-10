@@ -29,6 +29,11 @@ Page({
         if (this.data.pageNo > 1) {
           result = this.data.dataList
         }
+        res.data.resultList.map((v, i) => {
+          if (v.spitPaperTime) {
+            v.spitPaperTime = base.transTime(v.spitPaperTime)
+          }
+        })
         let finalResult = util.concattArr(result, res.data.resultList)
         this.setData({
           dataList: finalResult,
