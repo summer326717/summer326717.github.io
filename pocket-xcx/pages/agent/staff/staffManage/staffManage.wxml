@@ -14,13 +14,19 @@
     </view>
   </view>
   <view class="content" wx:if="{{!isNoData}}">
-    <view class="list-item admanage">
-      <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
-        <text class="icon iconfont icon-fenpei" wx:if="{{item.ownPosState==0}}"></text>
-        <text class="" bindtap="toAddPage" data-id='{{item.operatorCode}}'>{{item.operatorName}}</text>
-        <text class="mobile" bindtap="toAddPage" data-id='{{item.operatorCode}}'>{{item.mobile}}</text>
-        <text class="icon iconfont icon-edit right" bindtap='editAd' data-id='{{item.operatorCode}}' data-name='{{item.operatorName}}' data-mobile='{{item.mobile}}'></text>
-        <text class="icon iconfont icon-fenxiang right" bindtap='fenpeiAd' data-id='{{item.operatorCode}}'></text>
+    <view class="content">
+      <view class="list-item admanage">
+        <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
+          <text class="icon iconfont icon-fenpei" wx:if="{{item.ownPosState==0}}"></text>
+          <text class="" bindtap="toAddPage" data-id='{{item.operatorCode}}'>
+            {{item.operatorName}}
+          </text>
+          <text class="mobile" bindtap="toAddPage" data-id='{{item.operatorCode}}'>
+            {{item.mobile}}
+          </text>
+          <text class="icon iconfont icon-edit right" bindtap='editAd' data-id='{{item.operatorCode}}' data-name='{{item.operatorName}}' data-mobile='{{item.mobile}}'></text>
+          <text class="icon iconfont icon-fenxiang right" bindtap='fenpeiAd' data-id='{{item.operatorCode}}'></text>
+        </view>
       </view>
     </view>
   </view>

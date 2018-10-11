@@ -1,1 +1,8 @@
-/* pages/agent/equipment/faultyEquipment/faultyEquipment.wxss */
+.s-inf {
+  width: 80%;
+  color: #817F7F;
+  font-size: 26rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

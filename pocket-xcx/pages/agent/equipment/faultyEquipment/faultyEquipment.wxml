@@ -1,13 +1,14 @@
 <view class="wrap">
     <view class="content" wx:if="{{!isNoData}}">
-        <view class="l-list">
-            <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
-                <navigator url='/pages/agent/equipment/handleTrouble/handleTrouble?posCode={{item.posCode}}'>
-                    <view>{{item.posName}}</view>
-                    <view class="s-inf">{{item.detailAddress}}</view>
-                    <text class="right"><text class="red">{{item.restNum}}</text>/{{item.capacity}}</text>
-                    <text class="more" style="margin-top:40rpx"></text>
-                </navigator>
+        <view class="content">
+            <view class="l-list">
+                <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
+                    <navigator url='/pages/agent/equipment/handleTrouble/handleTrouble?posCode={{item.posCode}}'>
+                        <view>{{item.posName?item.posName:item.posCode}}</view>
+                        <view class="s-inf">{{item.detailAddress?item.detailAddress:'暂无地址'}}</view>
+                        <text class="more"></text>
+                    </navigator>
+                </view>
             </view>
         </view>
     </view>

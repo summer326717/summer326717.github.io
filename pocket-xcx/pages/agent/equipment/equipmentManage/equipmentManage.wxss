@@ -2,4 +2,27 @@
   width: 80%;
   color: #817F7F;
   font-size: 26rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.search-icon {
+  width: 50rpx;
+  height: 50rpx;
+  background: url('http://tactivity.boonmo.com/imgs/search.png') no-repeat;
+  background-size: contain;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.wrap .input {
+  flex: 2;
+  position: relative;
+}
+
+.wrap .input input {
+  padding-left: 60rpx;
 }

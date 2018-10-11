@@ -3,18 +3,29 @@
         <picker class="select bottombg" bindchange="pickerEquipment" value="{{sindex}}" range="{{stateList}}">
             <view class="picker">{{stateList[sindex]}}</view>
         </picker>
-        <picker class="select bottombg" bindchange="pickerEquipmentList" value="{{eindex}}" range="{{EquipmentList}}" range-key="posName">
+        <!-- <picker class="select bottombg" bindchange="pickerEquipmentList" value="{{eindex}}" range="{{EquipmentList}}" range-key="posName">
             <view class="picker">{{EquipmentList[eindex].posName}}</view>
-        </picker>
+        </picker> -->
+        <view class="input">
+            <text class="search-icon" bindtap="searchnameOrMobile"></text>
+            <input type="text" placeholder="可输入姓名或者手机号查询" value="{{posName}}" bindinput='bindName' />
+        </view>
     </view>
     <view class="content" wx:if="{{!isNoData}}">
         <view class="content">
             <view class="l-list">
                 <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
                     <navigator url='/pages/agent/equipment/equipmentDetail/equipmentDetail?posCode={{item.posCode}}'>
-                        <view><image wx:if='{{item.onlineState==1}}' class="lixian" src="http://tactivity.boonmo.com/imgs/link.png" />{{item.posName?item.posName:item.posCode}}<text decode="{{true}}">&nbsp;</text></view>
-                        <view class="s-inf">{{item.provinceName?item.provinceName:''}}{{item.cityName?item.cityName:''}}{{item.areaName?item.areaName:''}}{{item.detailAddress?item.detailAddress:''}}<text decode="{{true}}">&nbsp;</text></view>
-                        <text class="right">{{item.restNum}}/{{item.capacity?item.capacity:0}}</text>
+                        <view>
+                            <image wx:if='{{item.onlineState==1}}' class="lixian" src="http://tactivity.boonmo.com/imgs/link.png" />
+                            {{item.posName?item.posName:item.posCode}}
+                        </view>
+                        <view class="s-inf">
+                            {{item.provinceName?item.provinceName:''}}{{item.cityName?item.cityName:''}}{{item.areaName?item.areaName:''}}{{item.detailAddress?item.detailAddress:'暂无地址'}}
+                        </view>
+                        <text class="right" style="margin-top:0">
+                            {{item.restNum}}/{{item.capacity?item.capacity:0}}
+                        </text>
                         <text class="more"></text>
                     </navigator>
                 </view>

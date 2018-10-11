@@ -68,6 +68,18 @@ Page({
       }
     })
   },
+  searchnameOrMobile() {
+    this.setData({
+      pageNo: 1,
+      pageSize: 10
+    })
+    this.getEquimentList()
+  },
+  bindName: function (e) {
+    this.setData({
+      posName: e.detail.value
+    })
+  },
   /**
    * 选择设备
    */
@@ -112,7 +124,7 @@ Page({
     this.setData({
       eindex: index,
       posCode: this.data.EquipmentList[index].posCode,
-      posName: this.data.EquipmentList[index].posName!='全部设备'?this.data.EquipmentList[index].posName:''
+      posName: this.data.EquipmentList[index].posName != '全部设备' ? this.data.EquipmentList[index].posName : ''
     })
     this.getEquimentList()
   },

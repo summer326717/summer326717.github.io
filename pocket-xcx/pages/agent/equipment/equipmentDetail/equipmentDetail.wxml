@@ -80,8 +80,8 @@
             <text class="green" wx:if="{{equipmentDetail.onlineState==0}}">在线</text>
             <text class="red" wx:else>离线</text>
         </view>
-        <view class="dialogbg" wx:if="{{isShowQRCode}}"></view>
-        <view class="dialog" wx:if="{{isShowQRCode}}">
+        <view class="dialogbg {{isShowQRCode?'':'hide'}}" bindtap="checkShowQRCode"></view>
+        <view class="dialog {{isShowQRCode?'':'hide'}}">
             <canvas class='canvas' canvas-id='canvas' bindlongtap='saveImg'></canvas>
             <view class="tishi">长按保存二维码</view>
         </view>

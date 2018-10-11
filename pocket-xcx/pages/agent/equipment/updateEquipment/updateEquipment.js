@@ -107,10 +107,6 @@ Page({
       base.toast('warn', '请输入最大纸量');
       return
     }
-    if (!this.data.operatorName || !this.data.operatorCode) {
-      base.toast('warn', '请选择运营人员');
-      return
-    }
     let json = {
       "areaCode": this.data.areaCode,
       "areaName": this.data.areaName,

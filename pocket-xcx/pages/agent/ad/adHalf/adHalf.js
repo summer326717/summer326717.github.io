@@ -93,7 +93,7 @@ Page({
       advertSize: 1,//分屏
       advertStyle: 1, // 0是图片，1是视频 
       advertType: 1,//代理人
-      advertUrl: this.data.advertUrl,
+      advertUrl: this.data.advertUrl[0],
       additionalUrl: this.data.additionalUrl
     }
     base.http_post(json, '/saveAdvertInfo', (res) => {
@@ -113,7 +113,7 @@ Page({
       if (res.code == 0) {
         this.setData({
           advertHold: res.data.advertHold,
-          advertUrl: res.data.advertUrl,
+          advertUrl: [res.data.advertUrl],
           advertName: res.data.advertName,
           additionalUrl: res.data.additionalUrl
         })
@@ -151,7 +151,7 @@ Page({
       advertHold: advertHold,
       advertId: this.data.advertId,
       advertName: this.data.advertName,
-      advertUrl: this.data.advertUrl,
+      advertUrl: this.data.advertUrl[0],
       additionalUrl: this.data.additionalUrl
     }
     base.http_post(json, '/updateAdvertInfo', (res) => {

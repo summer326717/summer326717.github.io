@@ -155,7 +155,7 @@
 }
 
 .navigator-hover {
-  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .green {
@@ -392,5 +392,9 @@
   background: rgba(0, 0, 0, 0.5);
   display: inline-block;
   border-radius: 5rpx;
-  font-size:20px;
+  font-size: 20px;
+}
+
+.hide {
+  display: none;
 }
