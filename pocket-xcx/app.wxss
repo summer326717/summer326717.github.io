@@ -321,6 +321,10 @@
   margin-bottom: 50rpx;
 }
 
+.mt50 {
+  margin-top: 50rpx;
+}
+
 .video-height {
   height: auto !important;
 }

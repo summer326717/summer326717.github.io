@@ -123,7 +123,7 @@ Page({
       pageNo: 1,
       isToBottom: false
     })
-    this.getData();
+    this.accountInComeFlowingWater();
     wx.stopPullDownRefresh()
   },
 
@@ -136,7 +136,7 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getData();
+      this.accountInComeFlowingWater();
       wx.hideNavigationBarLoading();
     }
   },

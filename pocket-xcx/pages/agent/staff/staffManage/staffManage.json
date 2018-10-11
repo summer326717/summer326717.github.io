@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "运营人员"
+  "navigationBarTitleText": "运营人员",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
 }

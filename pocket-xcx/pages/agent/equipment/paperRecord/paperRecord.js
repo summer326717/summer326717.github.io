@@ -8,6 +8,7 @@ Page({
   data: {
     dataList: [],
     isNoData: false,
+    posCode: '',
     isToBottom: false,
   },
 
@@ -15,6 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      posCode: options.posCode
+    })
     this.getData(options.posCode)
   },
   getData: function (posCode) {
@@ -89,7 +93,7 @@ Page({
       pageNo: 1,
       isToBottom: false
     })
-    this.getData();
+    this.getData(this.data.posCode)
     wx.stopPullDownRefresh()
   },
 
@@ -102,7 +106,7 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getData();
+      this.getData(this.data.posCode)
       wx.hideNavigationBarLoading();
     }
   },

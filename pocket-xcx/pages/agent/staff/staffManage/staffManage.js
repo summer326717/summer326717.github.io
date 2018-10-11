@@ -122,14 +122,26 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      pageNo: 1,
+      isToBottom: false
+    })
+    this.operatorQryList();
+    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (!this.data.isToBottom) {
+      wx.showNavigationBarLoading();
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.operatorQryList();
+      wx.hideNavigationBarLoading();
+    }
   },
 
   /**

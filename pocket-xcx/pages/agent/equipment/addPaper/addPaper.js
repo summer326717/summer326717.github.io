@@ -49,6 +49,20 @@ Page({
       }
     })
   },
+  yijianbuman(){
+    let json = {
+      paperNum: this.data.canBuzhi,
+      posCode: this.data.posCode
+    }
+    base.http_post(json, '/fillPaperRecord', (res) => {
+      if (res.code == 0) {
+        base.toast('succ', res.message);
+        wx.navigateBack()
+      } else {
+        base.toast('', res.message);
+      }
+    })
+  },
   bindNum: function (e) {
     this.setData({
       spec_num: e.detail.value

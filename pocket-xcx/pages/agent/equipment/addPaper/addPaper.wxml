@@ -9,4 +9,5 @@
     <text>可补{{canBuzhi}}包</text>
   </view>
   <button class="normal-btn" bindtap='buzhi'>保存</button>
+  <button class="normal-btn mb50 mt50" bindtap='yijianbuman'>一键补满</button>
 </view>

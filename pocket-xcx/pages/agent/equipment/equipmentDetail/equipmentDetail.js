@@ -101,6 +101,7 @@ Page({
                 base.http_post(json, '/spitPaperCheckQryResult', (res) => {
                   if (res.code == 0) {
                     wx.hideLoading()
+                    this.getData(this.data.posCode)
                     base.toast('succ', res.message);
                   } else {
                     wx.hideLoading()
