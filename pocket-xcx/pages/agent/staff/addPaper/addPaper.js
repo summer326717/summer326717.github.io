@@ -42,12 +42,12 @@ Page({
         if (this.data.pageNo > 1) {
           result = this.data.dataList
         }
-        let finalResult = util.concattArr(result, res.data.resultList)
+        let finalResult = util.concattArr(result, res.data)
         this.setData({
           dataList: finalResult,
           isNoData: false
         })
-        if (res.data.resultList.length < this.data.pageSize) {
+        if (res.data.length < this.data.pageSize) {
           this.setData({
             isToBottom: true
           })
