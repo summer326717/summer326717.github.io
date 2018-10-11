@@ -1,2 +1,6 @@
-<!--pages/agent/my/messageDetail/messageDetail.wxml-->
-<text>pages/agent/my/messageDetail/messageDetail.wxml</text>
+<view class="message">
+  <view class="">{{messageDetail.smsItem}}</view>
+  <view class="">{{messageDetail.createYmd}}</view>
+  <view class="">{{messageDetail.smsText}}</view>
+  <view class="">--{{messageDetail.publishManName}}</view>
+</view>

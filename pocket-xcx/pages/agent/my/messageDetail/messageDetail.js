@@ -5,21 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    smsConsumeId: ''
+    messageDetail: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.messageDetailAndRead(options.id)
   },
-  messageDetailAndRead() {
+  messageDetailAndRead(smsConsumeId) {
     let json = {
-      smsConsumeId: this.data.smsConsumeId
+      smsConsumeId: parseInt(smsConsumeId)
     }
-    base.http_post('', '/messageDetailAndRead', (res) => {
+    base.http_post(json, '/messageDetailAndRead', (res) => {
       if (res.code == 0) {
+        this.setData({
+          messageDetail: res.data
+        })
+      } else {
+        base.toast(res.message);
       }
     })
   },
