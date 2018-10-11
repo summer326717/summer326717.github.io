@@ -15,3 +15,8 @@
   float: right;
   margin-right: 50rpx;
 }
+
+.top-total .total-num {
+  float: right;
+  margin-right: 120rpx;
+}

@@ -47,6 +47,7 @@ Page({
         let finalResult = util.concattArr(result, res.data.resultList)
         this.setData({
           dataList: finalResult,
+          monthTotal: res.data.fillPaperNum,
           isNoData: false
         })
         if (res.data.resultList.length < this.data.pageSize) {
@@ -70,7 +71,7 @@ Page({
           let EquipmentList = res.data
           EquipmentList.unshift({ posCode: '', posName: '全部设备' })
           this.setData({
-            EquipmentList: EquipmentList
+            EquipmentList: EquipmentList,
           })
         }
       } else {

@@ -8,7 +8,7 @@
         </picker> -->
         <view class="input">
             <text class="search-icon" bindtap="searchnameOrMobile"></text>
-            <input type="text" placeholder="可输入姓名或者手机号查询" value="{{posName}}" bindinput='bindName' />
+            <input type="text" placeholder="按设备名称搜索" value="{{posName}}" bindinput='bindName' />
         </view>
     </view>
     <view class="content" wx:if="{{!isNoData}}">

@@ -11,7 +11,7 @@
         <view class="top-total">
             <view>
                 <text>本月累计</text>
-                <text>{{monthTotal}}</text>
+                <text class="total-num">{{monthTotal}}包</text>
             </view>
         </view>
         <view class="m-list">

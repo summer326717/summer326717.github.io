@@ -15,21 +15,18 @@
         <view class="con-top">
             <view class="item">
                 <view class="money">
-                    ￥
                     <text class="num">{{totalProfit}}</text>
                 </view>
                 <view class="txt">总补纸</view>
             </view>
             <view class="item">
                 <view class="money">
-                    ￥
                     <text class="num">{{sameMonthProfit}}</text>
                 </view>
                 <view class="txt">本月补纸</view>
             </view>
             <view class="item">
                 <view class="money">
-                    ￥
                     <text class="num">{{sameDayProfit}}</text>
                 </view>
                 <view class="txt">今日补纸</view>
