@@ -34,7 +34,7 @@ Page({
       pageNo: this.data.pageNo,
       pageSize: this.data.pageSize,
       yearMonth: this.data.selectMonth,
-      //operatorCode: this.data.operatorCode
+      operatorCode: this.data.operatorCode
     }
     base.http_post(json, '/operatorFillPaperCount', (res) => {
       if (res.code == 0) {

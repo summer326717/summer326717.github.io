@@ -23,7 +23,7 @@
         <block wx:if="{{imgSrc.length>0}}">
             <view class="previewImg" wx:for="{{imgSrc}}" wx:key="{{index}}">
                 <block wx:if="{{advertStyle==0}}">
-                    <image mode="widthFix" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
+                    <image mode="aspectFit" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
                     <text class="delete" bindtap="deleteImg" data-index="{{index}}">×</text>
                 </block>
                 <block wx:else>

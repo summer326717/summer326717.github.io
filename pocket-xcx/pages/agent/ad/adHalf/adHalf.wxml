@@ -31,7 +31,7 @@
         <block wx:if="{{additionalUrls.length>0}}">
             <view class="previewImg" wx:for="{{additionalUrls}}" wx:key="{{index}}">
                 <block>
-                    <image mode="widthFix" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
+                    <image mode="aspectFit" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
                     <text class="delete" bindtap="deleteImg" data-index="{{index}}">×</text>
                 </block>
             </view>
