@@ -18,5 +18,5 @@
 
 .add-paper picker {
   width: 50%;
-  flex: none;
+  flex: none!important;
 }

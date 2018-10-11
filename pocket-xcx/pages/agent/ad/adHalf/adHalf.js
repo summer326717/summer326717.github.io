@@ -10,7 +10,8 @@ Page({
     advertHold: '',
     playVideo: false,
     videoContext: '',
-    additionalUrl: []
+    advertUrls: [],
+    additionalUrls: []
   },
   bindAdvertName: function (e) {
     this.setData({
@@ -28,10 +29,10 @@ Page({
         if (res.errMsg.indexOf('ok') > 1) {
           let data = JSON.parse(res.data)
           if (data.code == 0) {
-            let additionalUrl = this.data.additionalUrl
-            additionalUrl.push(data.data)
+            let additionalUrls = this.data.additionalUrls
+            additionalUrls.push(data.data)
             this.setData({
-              additionalUrl: additionalUrl
+              additionalUrls: additionalUrls
             })
           } else {
             base.toast('warn', data.message);
@@ -47,7 +48,7 @@ Page({
           let data = JSON.parse(res.data)
           if (data.code == 0) {
             this.setData({
-              advertUrl: [data.data]
+              advertUrls: [data.data]
             })
           } else {
             base.toast('warn', data.message);
@@ -69,32 +70,31 @@ Page({
    * 添加广告
    */
   saveAdvertInfo: function () {
-    let advertHold = 0
     if (!this.data.advertName) {
       base.toast('warn', '请输入广告名称');
+      return
+    }
+    if (this.data.advertUrls.length == 0) {
+      base.toast('warn', '请上传视频');
       return
     }
     if (!this.data.advertHold) {
       base.toast('warn', '请输入停留时间');
       return
     }
-    if (this.data.advertUrl.length == 0) {
-      base.toast('warn', '请上传视频');
-      return
-    }
-    if (this.data.additionalUrl.length == 0) {
+    if (this.data.additionalUrls.length == 0) {
       base.toast('warn', '请上传图片');
       return
     }
     let json = {
       advertCost: 0,
-      advertHold: advertHold,
+      advertHold: this.data.advertHold,
       advertName: this.data.advertName,
       advertSize: 1,//分屏
       advertStyle: 1, // 0是图片，1是视频 
       advertType: 1,//代理人
-      advertUrl: this.data.advertUrl[0],
-      additionalUrl: this.data.additionalUrl
+      advertUrls: this.data.advertUrls,
+      additionalUrls: this.data.additionalUrls
     }
     base.http_post(json, '/saveAdvertInfo', (res) => {
       if (res.code == 0) {
@@ -113,10 +113,11 @@ Page({
       if (res.code == 0) {
         this.setData({
           advertHold: res.data.advertHold,
-          advertUrl: [res.data.advertUrl],
+          advertUrls: res.data.advertUrls,
           advertName: res.data.advertName,
-          additionalUrl: res.data.additionalUrl
+          additionalUrls: res.data.additionalUrls?res.data.additionalUrls:[]
         })
+        console.log(this)
       } else {
         base.toast('warn', res.message);
       }
@@ -126,7 +127,6 @@ Page({
    * 编辑广告
    */
   updateAdvertInfo: function () {
-    let advertHold = ''
     if (!this.data.advertName) {
       base.toast('warn', '请填写广告名称');
       return
@@ -135,11 +135,11 @@ Page({
       base.toast('warn', '请输入停留时间');
       return
     }
-    if (this.data.advertUrl.length == 0) {
+    if (this.data.advertUrls.length == 0) {
       base.toast('warn', '请上传视频');
       return
     }
-    if (this.data.additionalUrl.length == 0) {
+    if (this.data.additionalUrls.length == 0) {
       base.toast('warn', '请上传图片');
       return
     }
@@ -148,11 +148,11 @@ Page({
       advertSize: 1,//分屏
       advertType: 1,//代理人
       advertStyle: 1,//0图片1视频
-      advertHold: advertHold,
+      advertHold: this.data.advertHold,
       advertId: this.data.advertId,
       advertName: this.data.advertName,
-      advertUrl: this.data.advertUrl[0],
-      additionalUrl: this.data.additionalUrl
+      advertUrls: this.data.advertUrls,
+      additionalUrls: this.data.additionalUrls
     }
     base.http_post(json, '/updateAdvertInfo', (res) => {
       if (res.code == 0) {
@@ -165,8 +165,8 @@ Page({
   },
   previewImage(e) {
     wx.previewImage({
-      urls: this.data.additionalUrl,
-      current: this.data.additionalUrl[e.currentTarget.dataset.index],
+      urls: this.data.additionalUrls,
+      current: this.data.additionalUrls[e.currentTarget.dataset.index],
       success: () => {
       }
     })
@@ -192,10 +192,10 @@ Page({
     this.videoContext.exitFullScreen()
   },
   deleteImg(e) {
-    let additionalUrl = this.data.additionalUrl
-    additionalUrl.splice(e.currentTarget.dataset.index, 1)
+    let additionalUrls = this.data.additionalUrls
+    additionalUrls.splice(e.currentTarget.dataset.index, 1)
     this.setData({
-      additionalUrl: additionalUrl
+      additionalUrls: additionalUrls
     })
   },
   /**

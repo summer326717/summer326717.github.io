@@ -11,8 +11,8 @@
       </picker>
     </view>
     <view class="add">
-      <view class="select addpicbg">
-        <image bindtap="checkShowAddMenu" src="http://tactivity.boonmo.com/imgs/add.png" />
+      <view class="select addpicbg" bindtap="checkShowAddMenu">
+        <image src="http://tactivity.boonmo.com/imgs/add.png" />
       </view>
       <!-- <picker class="select addpicbg" bindchange="pickerSelect" value="{{selectIndex}}" range="{{selectList}}">
         <image src="http://tactivity.boonmo.com/imgs/add.png" />

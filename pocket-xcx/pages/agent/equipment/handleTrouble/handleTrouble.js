@@ -9,6 +9,7 @@ Page({
     faultReaSon: '',
     handleResult: '',
     posCode: '',
+    posName: '',
     posFaultId: ''
   },
 
@@ -17,7 +18,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      posCode: options.posCode
+      posCode: options.posCode,
+      posName: options.posName,
+      posFaultId: options.posFaultId,
+      faultReaSon: options.faultReaSon
     })
   },
   bindHandleResult(e) {

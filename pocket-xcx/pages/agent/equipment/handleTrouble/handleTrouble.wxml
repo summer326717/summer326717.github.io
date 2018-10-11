@@ -5,7 +5,7 @@
     </view>
     <view class="up-item">
         <text class="">故障问题：</text>
-        <input class="up-right" type="text" disabled='{{true}}' value="{{posName}}" />
+        <input class="up-right" type="text" disabled='{{true}}' value="{{faultReaSon}}" />
     </view>
     <view class="up-item">
         <text class="">处理结果：</text>

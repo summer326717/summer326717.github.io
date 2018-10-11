@@ -10,8 +10,8 @@
         </view>
     </view>
     <view class="preview video-height">
-        <block wx:if="{{advertUrl.length>0}}">
-            <view class="previewImg" wx:for="{{advertUrl}}" wx:key="{{index}}">
+        <block wx:if="{{advertUrls.length>0}}">
+            <view class="previewImg" wx:for="{{advertUrls}}" wx:key="{{index}}">
                 <video id="prew_video" autoplay="{{false}}" muted="{{!playVideo}}" bindfullscreenchange="bindVideoScreenChange" bindplay="bindplay" bindended="bindended" direction="0" src="{{item}}"></video>
             </view>
         </block>
@@ -28,15 +28,15 @@
         <input class="up-right" type="text" placeholder="请输入广告停留时间（单位：秒）" bindinput="bindAdvertHold" value="{{advertHold}}" />
     </view>
     <view class="preview video-height">
-        <block wx:if="{{additionalUrl.length>0}}">
-            <view class="previewImg" wx:for="{{additionalUrl}}" wx:key="{{index}}">
+        <block wx:if="{{additionalUrls.length>0}}">
+            <view class="previewImg" wx:for="{{additionalUrls}}" wx:key="{{index}}">
                 <block>
                     <image mode="widthFix" src="{{item}}" bindtap="previewImage" data-index="{{index}}" />
                     <text class="delete" bindtap="deleteImg" data-index="{{index}}">×</text>
                 </block>
             </view>
         </block>
-        <text wx:if="{{additionalUrl.length<=9}}" class="upload icon iconfont icon-upload" bindtap='uploadImg' data-type='1'></text>
+        <text wx:if="{{additionalUrls.length<=9}}" class="upload icon iconfont icon-upload" bindtap='uploadImg' data-type='1'></text>
     </view>
     <view class="marginTop">
         <button class="normal-btn mb50" bindtap='submit'>提交</button>

@@ -11,7 +11,8 @@ Page({
     advertHold: '',
     playVideo: false,
     videoContext: '',
-    imgSrc: []
+    imgSrc: [],
+    additionalUrls: []
   },
   bindAdvertName: function (e) {
     this.setData({
@@ -104,8 +105,8 @@ Page({
       advertSize: 0,//全屏
       advertStyle: this.data.advertStyle, // 0是图片，1是视频 
       advertType: 1,//代理人
-      advertUrl: this.data.imgSrc,
-      additionalUrl: ''
+      advertUrls: this.data.imgSrc,
+      additionalUrls: []
     }
     base.http_post(json, '/saveAdvertInfo', (res) => {
       if (res.code == 0) {
@@ -125,10 +126,11 @@ Page({
         this.setData({
           advertInfoDetail: res.data,
           advertHold: res.data.advertHold,
-          imgSrc: res.data.advertUrl,
+          imgSrc: res.data.advertUrls,
           advertName: res.data.advertName,
-          additionalUrl: res.data.additionalUrl,
-          advertSize: res.data.advertSize
+          additionalUrls: res.data.additionalUrls,
+          advertSize: res.data.advertSize,
+          advertStyle: res.data.advertStyle
         })
       } else {
         base.toast('warn', res.message);
@@ -168,8 +170,8 @@ Page({
       advertHold: advertHold,
       advertId: this.data.advertId,
       advertName: this.data.advertName,
-      advertUrl: this.data.imgSrc,
-      additionalUrl: ''
+      advertUrls: this.data.imgSrc,
+      additionalUrls: []
     }
     base.http_post(json, '/updateAdvertInfo', (res) => {
       if (res.code == 0) {

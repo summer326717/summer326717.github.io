@@ -1,6 +1,34 @@
 //app.js
 App({
   onLaunch: function () {
+    const updateManager = wx.getUpdateManager()
+    //监听向微信后台请求检查更新结果事件。微信在小程序冷启动时自动检查更新，不需由开发者主动触发。
+    updateManager.onCheckForUpdate(function (res) {
+      if (res.hasUpdate) {
+        console.log(res.hasUpdate)
+      }
+    })
+    //监听小程序有版本更新事件。客户端主动触发下载（无需开发者触发），下载成功后回调
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            //重启小程序
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
+    updateManager.onUpdateFailed(function () {
+      // 新版本下载失败
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本下载失败',
+        showCancel: false
+      })
+    })
     // 登录
     wx.login({
       success: res => {
