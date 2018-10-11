@@ -5,7 +5,7 @@
         <view class="picker">{{stateList[stateIndex]}}</view>
       </picker>
     </view>
-    <view class="input">
+    <view class="input long-input">
       <text class="search-icon" bindtap="operatorQryList"></text>
       <input type="text" placeholder="可输入姓名或者手机号查询" value="{{nameOrMobile}}" bindinput='bindName' />
     </view>

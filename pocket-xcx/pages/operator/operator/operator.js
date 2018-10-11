@@ -43,8 +43,8 @@ Page({
           result = this.data.dataList
         }
         res.data.data.fillPaperRecordVOS.map((v, i) => {
-          if (v.fillTime) {
-            v.fillTime = base.transTime(v.fillTime)
+          if (v.createTime) {
+            v.createTime = base.transTime(v.createTime)
           }
         })
         let finalResult = util.concattArr(result, res.data.data.fillPaperRecordVOS)

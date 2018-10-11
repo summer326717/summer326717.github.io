@@ -13,10 +13,15 @@
 
 .wrap .content .m-list .m-item .countTotal {
   float: right;
-  margin-right: 50rpx;
+  margin-right: 80rpx;
 }
 
 .add-paper picker {
   width: 50%;
-  flex: none!important;
+  flex: none !important;
+}
+
+.top-total .total-num {
+  float: right;
+  margin-right: 120rpx;
 }

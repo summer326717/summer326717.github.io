@@ -57,10 +57,10 @@
             <view class="m-item" wx:for='{{dataList}}' wx:key='{{index}}'>
                 <view>{{item.posName?item.posName:item.posCode}}</view>
                 <view class="s-inf">
-                    {{item.fillTime}}
+                    {{item.createTime}}
                     <text decode="{{true}}">&nbsp;</text>
                 </view>
-                <text class="right">{{item.fillPaperNum}}包</text>
+                <text class="right">{{item.fillNum}}包</text>
             </view>
         </view>
         <view class="opsaoyisao">
