@@ -82,10 +82,6 @@ Page({
       base.toast('warn', '请输入停留时间');
       return
     }
-    if (this.data.additionalUrls.length == 0) {
-      base.toast('warn', '请上传图片');
-      return
-    }
     let json = {
       advertCost: 0,
       advertHold: this.data.advertHold,
@@ -137,10 +133,6 @@ Page({
     }
     if (this.data.advertUrls.length == 0) {
       base.toast('warn', '请上传视频');
-      return
-    }
-    if (this.data.additionalUrls.length == 0) {
-      base.toast('warn', '请上传图片');
       return
     }
     let json = {
