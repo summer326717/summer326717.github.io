@@ -6,7 +6,7 @@
     <view class="up-item">
         <text class="">上屏广告：</text>
         <view class="up-right">
-            <text class="gray">*广告推荐尺寸为1080*800</text>
+            <text class="gray">*广告推荐比例为16:9</text>
         </view>
     </view>
     <view class="preview video-height">
@@ -20,7 +20,7 @@
     <view class="up-item">
         <text class="">下屏广告：</text>
         <view class="up-right">
-            <text class="gray">*广告推荐尺寸为1080*11200</text>
+            <text class="gray">*广告推荐尺寸为1080*1313</text>
         </view>
     </view>
     <view class="up-item">

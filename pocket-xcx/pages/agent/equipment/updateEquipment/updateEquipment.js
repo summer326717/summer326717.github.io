@@ -22,7 +22,7 @@ Page({
     areaName: '',
     cityName: '',
     detailAddress: '',
-    operateManId: '',//运营人员id
+    operatorCode: '',//运营人员id
     operateManName: '',
     posCode: '',
     posName: '',
@@ -107,6 +107,10 @@ Page({
       base.toast('warn', '请输入最大纸量');
       return
     }
+    let operatorName = ''
+    if (this.data.operatorCode) {
+      operatorName = this.data.operatorName
+    }
     let json = {
       "areaCode": this.data.areaCode,
       "areaName": this.data.areaName,
@@ -117,7 +121,7 @@ Page({
       "latitude": this.data.latitude,
       "longitude": this.data.longitude,
       "operateManId": this.data.operatorCode,//运营人员id
-      "operateManName": this.data.operatorName,
+      "operateManName": operatorName,
       "posCode": this.data.posCode,
       "posName": this.data.posName,
       "provinceCode": this.data.provinceCode,
@@ -127,7 +131,18 @@ Page({
     base.http_post(json, '/equipmentInfoEdit', (res) => {
       if (res.code == 0) {
         base.toast('succ', res.message);
-        wx.navigateBack()
+        let json2 = {
+          posCode: this.data.posCode,
+          voiceValue: this.data.volume
+        }
+        base.http_post(json2, '/agentSetUpVoice', (res) => {
+          if (res.code == 0) {
+            base.toast('succ', res.message);
+            wx.navigateBack()
+          } else {
+            base.toast('warn', res.message);
+          }
+        })
       } else {
         base.toast('warn', res.message);
       }
@@ -136,7 +151,7 @@ Page({
   operatorQryList: function (type) {
     base.http_post('', '/operatorNameAndCodeQryList', (res) => {
       if (res.code == 0) {
-        res.data.unshift({ operatorName: '请选择' })
+        res.data.unshift({operatorName: '请选择', operatorCode: '' })
         this.setData({
           operatorQryList: res.data
         })

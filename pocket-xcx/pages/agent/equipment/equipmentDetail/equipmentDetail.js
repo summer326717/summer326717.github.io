@@ -28,7 +28,7 @@ Page({
       image: '',
       width: 200,
       height: 200,
-      colorDark: "#1CA4FC",
+      colorDark: "#F3A000",
       colorLight: "white",
       correctLevel: QRCode.CorrectLevel.H,
     });
