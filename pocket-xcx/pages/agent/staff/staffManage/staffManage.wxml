@@ -16,7 +16,7 @@
   <view class="content" wx:if="{{!isNoData}}">
     <view class="content">
       <view class="list-item admanage">
-        <view class="item" wx:for="{{dataList}}" wx:key="{{index}}">
+        <view class="item" wx:for="{{dataList}}" wx:key="{{index}}" data-index='{{index}}' bindtouchstart="deleteTouchStart" bindtouchmove="deleteTouchmove">
           <text class="icon iconfont icon-fenpei" wx:if="{{item.ownPosState==0}}"></text>
           <text class="" bindtap="toAddPage" data-id='{{item.operatorCode}}'>
             {{item.operatorName}}
@@ -26,6 +26,7 @@
           </text>
           <text class="icon iconfont icon-edit right" bindtap='editAd' data-id='{{item.operatorCode}}' data-name='{{item.operatorName}}' data-mobile='{{item.mobile}}'></text>
           <text class="icon iconfont icon-fenxiang right" bindtap='fenpeiAd' data-id='{{item.operatorCode}}'></text>
+          <button class="remove-btn" bindtap="removeAd" data-id="{{item.operatorCode}}" style="right:{{item.right}}px">删除</button>
         </view>
       </view>
     </view>

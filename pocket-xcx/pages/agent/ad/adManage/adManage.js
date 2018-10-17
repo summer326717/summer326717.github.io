@@ -18,6 +18,9 @@ Page({
     pageSize: 10,
     isToBottom: false,
     isShowAddMenu: false,
+    clientX: '',
+    clientY: '',
+    delBtnWidth: 60, // 删除按钮宽度
     dataList: []
   },
 
@@ -130,13 +133,52 @@ Page({
     })
   },
   totalPing() {
+    //视频
     wx.navigateTo({
-      url: '/pages/agent/ad/adTotal/adTotal'
+      url: '/pages/agent/ad/adTotal/adTotal?advertStyle=1'
     })
   },
   halfPing() {
     wx.navigateTo({
+      url: '/pages/agent/ad/adTotal/adTotal?advertStyle=0'
+    })
+    /*wx.navigateTo({
       url: '/pages/agent/ad/adHalf/adHalf'
+    })*/
+  },
+  deleteTouchStart(e) {
+    this.setData({
+      clientX: e.changedTouches[0].clientX
+    })
+  },
+  deleteTouchmove(e) {
+    let disWidth = this.data.clientX - e.changedTouches[0].clientX
+    let delBtnWidth = this.data.delBtnWidth
+    if (disWidth > 0) {
+      var right = disWidth > delBtnWidth ? 0 : -(60 - disWidth)
+    } else {
+      var right = -disWidth > delBtnWidth ? -60 : disWidth
+    }
+    var index = e.currentTarget.dataset.index
+    var list = this.data.dataList
+    list[index].right = right
+    this.setData({
+      dataList: list
+    })
+  },
+  deleteTouchEnd(e) {
+  },
+  removeAd(e) {
+    let json = {
+      advertId: e.target.dataset.id
+    }
+    base.http_post(json, '/delAdvertInfo', (res) => {
+      if (res.code == 0) {
+        base.toast('succ', res.message)
+        this.advertisementQryList()
+      } else {
+        base.toast('warn', res.message)
+      }
     })
   },
   /**

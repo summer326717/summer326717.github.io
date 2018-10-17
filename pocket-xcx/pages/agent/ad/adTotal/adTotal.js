@@ -32,7 +32,7 @@ Page({
   },
   uploadImg: function (e) {
     if (this.data.advertStyle == 0) {//图片
-      if (this.data.imgSrc.length <= 9) {
+      if (this.data.imgSrc.length >= 9) {
         base.toast('warn', '最多只能上传9张');
         return
       }

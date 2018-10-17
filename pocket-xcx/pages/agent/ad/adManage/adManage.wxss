@@ -42,8 +42,23 @@
   margin-top: 20rpx;
   background: rgba(255, 255, 255, 1);
   border-bottom: 1px solid #E9E9E9;
+  position: relative;
 }
 
 .blankflex5 {
   flex: 5;
+}
+
+.remove-btn {
+  color: #fff;
+  background: #fb4810;
+  text-align: center;
+  width: 60px;
+  height: 138rpx;
+  line-height: 138rpx;
+  font-size: 28rpx;
+  position: absolute;
+  border-radius: 2px;
+  right: -60px;
+  top: 0;
 }

@@ -57,7 +57,7 @@ export function uploadImg(url, completion) {
   var hash = MD5.hex_md5(time + "BAOMO");
   var token = wx.getStorageSync('token')
   wx.chooseImage({
-    count: 1,
+    count: 9,
     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
@@ -196,7 +196,7 @@ export function toast(type, message) {
   }
 }
 export function transTime(t, type) {
-  var d = new Date(t);
+  var d = new Date(t.replace(/T/g,' ').split('.')[0]);
   var y = d.getFullYear();
   var m = d.getMonth() + 1;
   var dd = d.getDate();

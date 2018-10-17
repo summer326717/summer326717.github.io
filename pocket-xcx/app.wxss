@@ -348,6 +348,7 @@
   color: #ffffff;
   text-align: center;
   line-height: 90rpx;
+  z-index: 1000;
 }
 
 .top-right-add-menu::before {

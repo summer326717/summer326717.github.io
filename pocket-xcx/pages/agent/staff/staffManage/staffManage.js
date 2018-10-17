@@ -13,6 +13,8 @@ Page({
     pageNo: 1,
     pageSize: 10,
     nameOrMobile: '',
+    clientX: '',
+    delBtnWidth: 60,
     distributeState: 'O',
     dataList: []
   },
@@ -88,6 +90,41 @@ Page({
   toAddPage(e) {
     wx.navigateTo({
       url: '/pages/agent/staff/addPaper/addPaper?id=' + e.target.dataset.id
+    })
+  },
+  deleteTouchStart(e) {
+    this.setData({
+      clientX: e.changedTouches[0].clientX
+    })
+  },
+  deleteTouchmove(e) {
+    let disWidth = this.data.clientX - e.changedTouches[0].clientX
+    let delBtnWidth = this.data.delBtnWidth
+    if (disWidth > 0) {
+      var right = disWidth > delBtnWidth ? 0 : -(60 - disWidth)
+    } else {
+      var right = -disWidth > delBtnWidth ? -60 : disWidth
+    }
+    var index = e.currentTarget.dataset.index
+    var list = this.data.dataList
+    list[index].right = right
+    this.setData({
+      dataList: list
+    })
+  },
+  deleteTouchEnd(e) {
+  },
+  removeAd(e) {
+    let json = {
+      operatorCode: e.target.dataset.id
+    }
+    base.http_post(json, '/operatorInfoDel', (res) => {
+      if (res.code == 0) {
+        base.toast('succ', res.message)
+        this.operatorQryList()
+      } else {
+        base.toast('warn', res.message)
+      }
     })
   },
   /**
