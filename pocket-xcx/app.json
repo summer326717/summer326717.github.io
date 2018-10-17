@@ -13,8 +13,6 @@
     "pages/agent/equipment/transferEquipment/transferEquipment",
     "pages/agent/equipment/lackPaper/lackPaper",
     "pages/agent/equipment/handleTrouble/handleTrouble",
-    "pages/agent/ad/videoAd/videoAd",
-    "pages/agent/ad/pictureAd/pictureAd",
     "pages/agent/ad/selectAd/selectAd",
     "pages/agent/staff/staffManage/staffManage",
     "pages/agent/staff/editStaff/editStaff",

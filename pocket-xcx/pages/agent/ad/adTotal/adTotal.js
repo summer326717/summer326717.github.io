@@ -32,6 +32,10 @@ Page({
   },
   uploadImg: function (e) {
     if (this.data.advertStyle == 0) {//图片
+      if (this.data.imgSrc.length <= 9) {
+        base.toast('warn', '最多只能上传9张');
+        return
+      }
       base.uploadImg('advertImgUploadSave', res => {
         if (res.errMsg.indexOf('ok') > 1) {
           let data = JSON.parse(res.data)
@@ -221,10 +225,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      advertId: options.advertId ? options.advertId : '',
+      advertStyle: options.advertStyle ? options.advertStyle : '1'
+    })
     if (options.advertId) {
-      this.setData({
-        advertId: options.advertId
-      })
       this.queryAdvertInfoDetail(options.advertId)
     }
   },

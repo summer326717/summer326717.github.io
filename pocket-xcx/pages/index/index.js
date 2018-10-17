@@ -102,6 +102,7 @@ Page({
             })
           }
         } else {
+          app.onLaunch()
           base.toast('', res.message);
         }
       })
