@@ -92,12 +92,7 @@ Page({
     })
   },
   toNotFenpei(e) {
-    let dataList = this.data.dataList
-    dataList[e.target.dataset.index].distriState = 0
-    this.setData({
-      dataList: dataList,
-      totalNum: this.data.totalNum - 1
-    })
+    this.advertisementCancel(e.target.dataset.code, e.target.dataset.index)
   },
   advertisementDistribute(str) {
     let json = {
@@ -123,6 +118,25 @@ Page({
     })
     //let str = newArr.join(',')
     this.advertisementDistribute(newArr)
+  },
+  advertisementCancel(posCode, index) {
+    let json = {
+      posCode: posCode,
+      advertId: this.data.advertId
+    }
+    base.http_post(json, '/advertisementCancel', (res) => {
+      if (res.code == 0) {
+        /*let dataList = this.data.dataList
+        dataList[index].distriState = 0
+        this.setData({
+          dataList: dataList,
+          totalNum: this.data.totalNum - 1
+        })*/
+        this.qryAdvertDistributePosList()
+      } else {
+        base.toast('warn', res.message);
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

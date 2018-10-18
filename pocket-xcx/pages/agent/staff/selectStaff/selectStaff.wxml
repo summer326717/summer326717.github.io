@@ -6,7 +6,7 @@
                     <view>{{item.posName?item.posName:item.posCode}}</view>
                     <view class="s-inf">{{item.detailAddress?item.detailAddress:'暂无地址'}}<text decode="{{true}}">&nbsp;</text></view>
                     <text class="icon iconfont icon-xuanzhong noactive right" wx:if="{{item.distributeState==0}}" bindtap='toFenpei' data-index='{{index}}'></text>
-                    <text class="icon iconfont icon-xuanzhong active right" wx:if="{{item.distributeState==1}}" bindtap='toNotFenpei' data-index='{{index}}'></text>
+                    <text class="icon iconfont icon-xuanzhong active right" wx:if="{{item.distributeState==1}}" bindtap='toNotFenpei' data-index='{{index}}' data-id='{{item.posCode}}'></text>
                 </view>
             </view>
         </view>
