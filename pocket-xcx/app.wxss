@@ -249,6 +249,7 @@
 
 .admanage {
   padding-bottom: 76rpx;
+  overflow: hidden;
 }
 
 .admanage .mobile {

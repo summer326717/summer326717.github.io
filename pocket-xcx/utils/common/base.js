@@ -196,7 +196,8 @@ export function toast(type, message) {
   }
 }
 export function transTime(t, type) {
-  var d = new Date(t.replace(/T/g,' ').split('.')[0]);
+  var d = t.replace(/T/g,' ').split('.')[0]
+  d = new Date(Date.parse(d.replace(/-/g, "/")))
   var y = d.getFullYear();
   var m = d.getMonth() + 1;
   var dd = d.getDate();
