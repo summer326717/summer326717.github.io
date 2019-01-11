@@ -10,7 +10,7 @@
       <input type="text" placeholder="可输入姓名或者手机号查询" value="{{nameOrMobile}}" bindinput='bindName' />
     </view>
     <view class="add">
-      <image class="addpicbg" bindtap="toAddStaff" src="http://tactivity.boonmo.com/imgs/add.png" />
+      <image class="addpicbg" bindtap="toAddStaff" src="http://activity.boonmo.com/imgs/add.png" />
     </view>
   </view>
   <view class="content" wx:if="{{!isNoData}}">

@@ -1,7 +1,7 @@
 <!-- index.wxml -->
 <view class="container">
     <view class="logo">
-        <image src="http://tactivity.boonmo.com/imgs/logo.png" />
+        <image src="http://activity.boonmo.com/imgs/logo.png" />
     </view>
     <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
         <view class="info">

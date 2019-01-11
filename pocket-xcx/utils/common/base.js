@@ -10,6 +10,7 @@ export function http_post(json, url, completion) {console.log(json)
   var token = wx.getStorageSync('token')
   wx.request({
     method: "POST",
+    //url: 'https://wxapi.boonmo.com/scavengingpaper/api/baomo' + url,
     url: 'https://test.boonmo.com/scavengingpaper/api/baomo' + url,
     data: json,
     header: {
@@ -101,6 +102,7 @@ export function uploadImg(url, completion) {
             }
           }*/
           wx.uploadFile({
+            //url: 'https://wxapi.boonmo.com/scavengingpaper/api/baomo/' + url,
             url: 'https://test.boonmo.com/scavengingpaper/api/baomo/' + url,
             filePath: tempFilePaths[0],
             name: 'file',
@@ -146,7 +148,7 @@ export function uploadVideo(url, completion) {
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
       var tempFilePath = res.tempFilePath;
       wx.uploadFile({
-        url: 'https://test.boonmo.com/scavengingpaper/api/baomo/' + url,
+        url: 'https://wxapi.boonmo.com/scavengingpaper/api/baomo/' + url,
         filePath: tempFilePath,
         name: 'file',
         header: {

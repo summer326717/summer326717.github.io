@@ -54,7 +54,7 @@
 .search-icon {
   width: 50rpx;
   height: 50rpx;
-  background: url('http://tactivity.boonmo.com/imgs/search.png') no-repeat;
+  background: url('http://activity.boonmo.com/imgs/search.png') no-repeat;
   background-size: contain;
   display: inline-block;
   position: absolute;

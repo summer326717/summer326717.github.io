@@ -19,7 +19,7 @@
 
 .eq-update .picker-more {
   flex: 1;
-  background: url('http://tactivity.boonmo.com/imgs/more.png') 100% 50% no-repeat;
+  background: url('http://activity.boonmo.com/imgs/more.png') 100% 50% no-repeat;
   background-size: 30rpx 30rpx;
 }
 

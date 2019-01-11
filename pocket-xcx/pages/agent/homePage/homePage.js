@@ -8,42 +8,42 @@ Page({
     menuList: [
       {
         menuName: '出纸统计',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_01.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_01.png',
         menuUrl: '/pages/agent/paper/paperStatistics/paperStatistics'
       },
       {
         menuName: '设备管理',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_02.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_02.png',
         menuUrl: '/pages/agent/equipment/equipmentManage/equipmentManage'
       },
       {
         menuName: '缺纸设备',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_03.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_03.png',
         menuUrl: '/pages/agent/equipment/lackPaper/lackPaper'
       },
       {
         menuName: '故障设备',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_04.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_04.png',
         menuUrl: '/pages/agent/equipment/faultyEquipment/faultyEquipment'
       },
       {
         menuName: '广告平台',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_05.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_05.png',
         menuUrl: ''
       },
       {
         menuName: '广告管理',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_06.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_06.png',
         menuUrl: '/pages/agent/ad/adManage/adManage'
       },
       {
         menuName: '运营人员',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_07.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_07.png',
         menuUrl: '/pages/agent/staff/staffManage/staffManage'
       },
       {
         menuName: '吸粉管理',
-        menuImg: 'http://tactivity.boonmo.com/imgs/index_08.png',
+        menuImg: 'http://activity.boonmo.com/imgs/index_08.png',
         menuUrl: ''
       }
     ],

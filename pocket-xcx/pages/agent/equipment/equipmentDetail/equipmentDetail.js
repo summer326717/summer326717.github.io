@@ -11,7 +11,8 @@ Page({
     equipmentDetail: {},
     isShowQRCode: false,
     posCode: '',
-    itemList: ['编辑', '解绑', '转让']
+    //itemList: ['编辑', '解绑', '转让']
+    itemList: ['编辑']
   },
 
   /**

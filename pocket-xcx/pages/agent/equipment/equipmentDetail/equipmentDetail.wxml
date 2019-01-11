@@ -21,7 +21,7 @@
         <view class="e-detail-qrcode">
             <text class="left">设备ID：</text>
             {{equipmentDetail.posCode}}
-            <image src="http://tactivity.boonmo.com/imgs/code.png" bindtap="checkShowQRCode" />
+            <image src="http://activity.boonmo.com/imgs/code.png" bindtap="checkShowQRCode" />
         </view>
         <view class="">
             <text class="left">设备名称：</text>
@@ -34,7 +34,7 @@
         <view class="openLocation">
             <text class="left">详细地址：</text>
             {{equipmentDetail.detailAddress?equipmentDetail.detailAddress:''}}
-            <image wx:if="{{equipmentDetail.detailAddress}}" bindtap='openLocation' src="http://tactivity.boonmo.com/imgs/position.png" />
+            <image wx:if="{{equipmentDetail.detailAddress}}" bindtap='openLocation' src="http://activity.boonmo.com/imgs/position.png" />
         </view>
         <view class="">
             <text class="left">出纸状态：</text>

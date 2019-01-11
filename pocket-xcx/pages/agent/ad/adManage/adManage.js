@@ -169,15 +169,23 @@ Page({
   deleteTouchEnd(e) {
   },
   removeAd(e) {
-    let json = {
-      advertId: e.target.dataset.id
-    }
-    base.http_post(json, '/delAdvertInfo', (res) => {
-      if (res.code == 0) {
-        base.toast('succ', res.message)
-        this.advertisementQryList()
-      } else {
-        base.toast('warn', res.message)
+    wx.showModal({
+      title: '提示',
+      content: '确认删除该广告？',
+      success: res => {
+        if (res.confirm) {
+          let json = {
+            advertId: e.target.dataset.id
+          }
+          base.http_post(json, '/delAdvertInfo', (res) => {
+            if (res.code == 0) {
+              base.toast('succ', res.message)
+              this.advertisementQryList()
+            } else {
+              base.toast('warn', res.message)
+            }
+          })
+        }
       }
     })
   },

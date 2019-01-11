@@ -139,12 +139,12 @@
   height: 300rpx;
   margin: 0 auto;
   padding-top: 100rpx;
-  background: url('http://tactivity.boonmo.com/imgs/nodata.png') no-repeat 0 100%;
+  background: url('http://activity.boonmo.com/imgs/nodata.png') no-repeat 0 100%;
   background-size: 300rpx 300rpx;
 }
 
 .bottombg {
-  background: url('http://tactivity.boonmo.com/imgs/bottom.png') no-repeat 75% 0;
+  background: url('http://activity.boonmo.com/imgs/bottom.png') no-repeat 75% 0;
   background-size: 32rpx 32rpx;
 }
 
@@ -317,7 +317,7 @@
   width: 35rpx;
   height: 35rpx;
   margin: 0 auto;
-  background: url('http://tactivity.boonmo.com/imgs/more.png') no-repeat 0 100%;
+  background: url('http://activity.boonmo.com/imgs/more.png') no-repeat 0 100%;
   background-size: 35rpx 35rpx;
   margin-top: 20rpx;
 }

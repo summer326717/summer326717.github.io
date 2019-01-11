@@ -35,7 +35,7 @@
         <view class="operator-middle">
             <view class="redbg">
                 <navigator class="" url="/pages/agent/equipment/lackPaper/lackPaper">
-                    <image src="http://tactivity.boonmo.com/imgs/index_09.png" />
+                    <image src="http://activity.boonmo.com/imgs/index_09.png" />
                     <text class="">缺纸设备</text>
                     <text class="tishi">{{lackPosNum}}</text>
                 </navigator>
@@ -43,7 +43,7 @@
             <view class="whitebg"></view>
             <view class="greenbg">
                 <navigator class="" url="/pages/agent/equipment/faultyEquipment/faultyEquipment">
-                    <image src="http://tactivity.boonmo.com/imgs/index_10.png" />
+                    <image src="http://activity.boonmo.com/imgs/index_10.png" />
                     <text class="">故障设备</text>
                     <text class="tishi">{{faultPosNum}}</text>
                 </navigator>
@@ -64,7 +64,7 @@
             </view>
         </view>
         <view class="opsaoyisao">
-            <image bindtap='saoyisao' src="http://tactivity.boonmo.com/imgs/saoyisao.png" />
+            <image bindtap='saoyisao' src="http://activity.boonmo.com/imgs/saoyisao.png" />
         </view>
     </view>
     <view class="content" wx:if="{{isNoData}}">暂无数据...</view>
