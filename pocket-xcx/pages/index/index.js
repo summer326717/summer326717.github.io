@@ -91,6 +91,7 @@ Page({
           //var userType = wx.getStorageSync('userType')
           wx.setStorageSync('token', res.data.token)
           wx.setStorageSync('userType', res.data.userType)
+          wx.setStorageSync('userCode', res.data.userInfo.userCode)
           wx.setStorageSync('mobileNo', res.data.userInfo.mobileNo)
           if (res.data.userType) {
             wx.reLaunch({

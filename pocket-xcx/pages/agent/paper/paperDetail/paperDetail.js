@@ -1,5 +1,6 @@
 var base = require('../../../../utils/common/base')
 const util = require('../../../../utils/util.js')
+var wxcharts = require('../../../../utils/common/wxcharts-min.js')
 Page({
 
   /**
@@ -21,7 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let currentMonth = '2018-' + options.id
+    let currentMonth = options.y.split('-')[0] + '-' + options.id
     this.setData({
       currentMonth: currentMonth,
       selectMonth: currentMonth

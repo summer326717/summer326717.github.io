@@ -38,12 +38,12 @@
         </view>
         <view class="">
             <text class="left">出纸状态：</text>
-            <text class="green" wx:if="{{equipmentDetail.spitPaperState==0}}">正常</text>
+            <text class="green" wx:if="{{equipmentDetail.spitPaperState==0&&onlineState==0}}">正常</text>
             <text class="red" wx:else>异常</text>
         </view>
         <view class="">
             <text class="left">屏幕状态：</text>
-            <text class="green" wx:if="{{equipmentDetail.screenState==0}}">正常</text>
+            <text class="green" wx:if="{{equipmentDetail.screenState==0&&onlineState==0}}">正常</text>
             <text class="red" wx:else>异常</text>
         </view>
         <view class="">

@@ -10,6 +10,7 @@ Page({
     isNoData: false,
     posCode: '',
     isToBottom: false,
+    createYMD: ''
   },
 
   /**
@@ -17,7 +18,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      posCode: options.posCode
+      posCode: options.posCode,
+      createYMD: options.time ? options.time : ''
     })
     this.getData(options.posCode)
   },
@@ -25,7 +27,8 @@ Page({
     let json = {
       pageNo: 1,
       pageSize: 10,
-      posCode: posCode
+      posCode: posCode,
+      createYMD: this.data.createYMD
     }
     base.http_post(json, '/outPaperDetailList', (res) => {
       if (res.code == 0) {

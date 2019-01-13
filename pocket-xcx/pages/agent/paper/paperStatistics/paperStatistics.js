@@ -1,5 +1,7 @@
 const util = require('../../../../utils/util.js')
 var base = require('../../../../utils/common/base')
+var wxCharts = require('../../../../utils/common/wxcharts-min.js')
+var lineChart = null
 Page({
 
   /**
@@ -17,6 +19,8 @@ Page({
     dataList: [],
     isNoData: false,
     isToBottom: false,
+    loadTime: 1,
+    chartData: {}
   },
 
   /**
@@ -28,10 +32,52 @@ Page({
       currentMonth: currentMonth,
       selectMonth: currentMonth
     })
-    this.getData()
+    this.getData(() => {
+      /**
+       * 折线图显示
+       */
+      var windowWidth = 320;
+      try {
+        var res = wx.getSystemInfoSync();
+        windowWidth = res.windowWidth;
+      } catch (e) {
+        console.error('getSystemInfoSync failed!');
+      }
+      lineChart = new wxCharts({
+        canvasId: 'lineCanvas',
+        type: 'line',
+        categories: this.data.chartData.categories, // 横坐标数据
+        animation: true,
+        // background: '#f5f5f5',
+        series: [{
+          name: '出纸数',
+          data: this.data.chartData.data, // 纵坐标数据
+          format: function (val, name) {
+            return val + '包';
+          }
+        }],
+        xAxis: {
+          disableGrid: true
+        },
+        yAxis: {
+          title: '出纸数 (包)',
+          format: function (val) {
+            return val.toFixed(2);
+          },
+          min: 0
+        },
+        width: windowWidth,
+        height: 180,
+        dataLabel: false,
+        dataPointShape: true,
+        extra: {
+          lineStyle: 'curve'
+        }
+      });
+    })
     this.getEquimentList()
   },
-  getData: function () {
+  getData: function (complete) {
     let json = {
       "pageNo": this.data.pageNo,
       "pageSize": this.data.pageSize,
@@ -45,14 +91,34 @@ Page({
           result = this.data.dataList
         }
         let finalResult = util.concattArr(result, res.data.resultList)
+        let data = []
+        let categories = []
+        finalResult.map((v, i) => {
+          data.push(v.countTotal)
+          categories.push(v.monthDay)
+        })
         this.setData({
           dataList: finalResult,
           monthTotal: res.data.fillPaperNum,
-          isNoData: false
+          isNoData: false,
+          chartData: {
+            data: data,
+            categories: categories
+          }
+        })
+        if (this.data.loadTime != 1) {
+          this.updateData()
+        }
+        this.setData({
+          loadTime: this.data.loadTime + 1
         })
         if (res.data.resultList.length < this.data.pageSize) {
           this.setData({
             isToBottom: true
+          })
+        } else {
+          this.setData({
+            isToBottom: false
           })
         }
       } else if (res.code == 8) {
@@ -62,6 +128,7 @@ Page({
       } else {
         base.toast(res.message);
       }
+      complete(true)
     })
   },
   getEquimentList: function () {
@@ -78,6 +145,28 @@ Page({
         base.toast(res.message);
       }
     })
+  },
+  touchHandler: function (e) {
+    console.log(lineChart.getCurrentDataIndex(e));
+    lineChart.showToolTip(e, {
+      // background: '#7cb5ec',
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+  updateData: function () {
+    var series = [{
+      name: '出纸数（包）',
+      data: this.data.chartData.data,
+      format: function (val, name) {
+        return val + '包';
+      }
+    }];
+    lineChart.updateData({
+      categories: this.data.chartData.categories,
+      series: series
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -115,7 +204,7 @@ Page({
       pageNo: 1,
       isToBottom: false
     })
-    this.getData();
+    this.getData(() => { });
     wx.stopPullDownRefresh()
   },
 
@@ -128,7 +217,7 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getData();
+      this.getData(() => { });
       wx.hideNavigationBarLoading();
     }
   },
@@ -150,7 +239,7 @@ Page({
       eindex: index,
       posCode: this.data.EquipmentList[index].posCode
     })
-    this.getData()
+    this.getData(() => { })
   },
 
   /**
@@ -161,6 +250,6 @@ Page({
     this.setData({
       selectMonth: e.detail.value
     })
-    this.getData()
+    this.getData(() => { })
   }
 })

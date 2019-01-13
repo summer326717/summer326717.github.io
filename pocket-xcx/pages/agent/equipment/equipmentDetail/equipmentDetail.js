@@ -23,16 +23,6 @@ Page({
     this.setData({
       posCode: posCode
     })
-    qrcode = new QRCode('canvas', {
-      usingIn: this,
-      text: "http://weixin.qq.com/r/ailyalvE_gaFrR8J93x4?posCode=" + this.data.equipmentDetail.posCode,
-      image: '',
-      width: 200,
-      height: 200,
-      colorDark: "#F3A000",
-      colorLight: "white",
-      correctLevel: QRCode.CorrectLevel.H,
-    });
   },
   checkShowQRCode() {
     this.setData({
@@ -65,6 +55,17 @@ Page({
         this.setData({
           equipmentDetail: res.data
         })
+        qrcode = new QRCode('canvas', {
+          usingIn: this,
+          //text: "http://weixin.qq.com/r/ailyalvE_gaFrR8J93x4?posCode=" + this.data.equipmentDetail.posCode,
+          text: res.data.qrCode,
+          image: '',
+          width: 200,
+          height: 200,
+          colorDark: "#F3A000",
+          colorLight: "white",
+          correctLevel: QRCode.CorrectLevel.H,
+        });
       } else {
         base.toast('warn', res.message);
       }

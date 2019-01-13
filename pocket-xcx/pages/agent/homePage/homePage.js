@@ -44,7 +44,7 @@ Page({
       {
         menuName: '吸粉管理',
         menuImg: 'http://activity.boonmo.com/imgs/index_08.png',
-        menuUrl: ''
+        menuUrl: '' // /pages/agent/fan/fanManage/fanManage
       }
     ],
     headImg: '', // 头像
