@@ -36,46 +36,51 @@ Page({
       /**
        * 折线图显示
        */
-      var windowWidth = 320;
-      try {
-        var res = wx.getSystemInfoSync();
-        windowWidth = res.windowWidth;
-      } catch (e) {
-        console.error('getSystemInfoSync failed!');
+      if (this.data.chartData.categories) {
+        this.createWxCharts()
       }
-      lineChart = new wxCharts({
-        canvasId: 'lineCanvas',
-        type: 'line',
-        categories: this.data.chartData.categories, // 横坐标数据
-        animation: true,
-        // background: '#f5f5f5',
-        series: [{
-          name: '出纸数',
-          data: this.data.chartData.data, // 纵坐标数据
-          format: function (val, name) {
-            return val + '包';
-          }
-        }],
-        xAxis: {
-          disableGrid: true
-        },
-        yAxis: {
-          title: '出纸数 (包)',
-          format: function (val) {
-            return val.toFixed(2);
-          },
-          min: 0
-        },
-        width: windowWidth,
-        height: 180,
-        dataLabel: false,
-        dataPointShape: true,
-        extra: {
-          lineStyle: 'curve'
-        }
-      });
     })
     this.getEquimentList()
+  },
+  createWxCharts () {
+    var windowWidth = 320;
+    try {
+      var res = wx.getSystemInfoSync();
+      windowWidth = res.windowWidth;
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
+    }
+    lineChart = new wxCharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      categories: this.data.chartData.categories, // 横坐标数据
+      animation: true,
+      // background: '#f5f5f5',
+      series: [{
+        name: '出纸数',
+        data: this.data.chartData.data, // 纵坐标数据
+        format: function (val, name) {
+          return val + '包';
+        }
+      }],
+      xAxis: {
+        disableGrid: true
+      },
+      yAxis: {
+        title: '出纸数 (包)',
+        format: function (val) {
+          return val.toFixed(2);
+        },
+        min: 0
+      },
+      width: windowWidth,
+      height: 180,
+      dataLabel: false,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    });
   },
   getData: function (complete) {
     let json = {
@@ -108,6 +113,8 @@ Page({
         })
         if (this.data.loadTime != 1) {
           this.updateData()
+        } else {
+          this.createWxCharts()
         }
         this.setData({
           loadTime: this.data.loadTime + 1

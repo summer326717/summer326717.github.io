@@ -148,7 +148,8 @@ export function uploadVideo(url, completion) {
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
       var tempFilePath = res.tempFilePath;
       wx.uploadFile({
-        url: 'https://wxapi.boonmo.com/scavengingpaper/api/baomo/' + url,
+        //url: 'https://wxapi.boonmo.com/scavengingpaper/api/baomo/' + url,
+        url: 'https://test.boonmo.com/scavengingpaper/api/baomo/' + url,
         filePath: tempFilePath,
         name: 'file',
         header: {

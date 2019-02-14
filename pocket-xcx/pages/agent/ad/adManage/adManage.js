@@ -117,6 +117,10 @@ Page({
           this.setData({
             isToBottom: true
           })
+        } else {
+          this.setData({
+            isToBottom: false
+          })
         }
       } else if (res.code == 8) {
         this.setData({
