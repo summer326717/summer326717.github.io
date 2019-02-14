@@ -26,15 +26,17 @@
   </view>
   <view class="content" wx:if="{{!isNoData}}">
     <view class="list-item admanage">
-      <view class="item" wx:for="{{dataList}}" wx:key="{{index}}" data-index='{{index}}' bindtouchstart="deleteTouchStart" bindtouchend="deleteTouchEnd" bindtouchmove="deleteTouchmove">
-        <text class="icon iconfont icon-time" wx:if="{{item.advertState==0}}"></text>
-        <text class="">{{item.advertName}}</text>
-        <text wx:if="{{item.advertStyle==0}}" class="icon iconfont icon-tupian"></text>
-        <text wx:if="{{item.advertStyle==1}}" class="icon iconfont icon-fuhao-shipin"></text>
-        <text class="blankflex5" decode="{{true}}">&nbsp;</text>
-        <text class="icon iconfont icon-edit mright" wx:if="{{item.advertState==0}}" bindtap='editAd' data-type='{{item.advertSize}}' data-id='{{item.advertId}}'></text>
-        <text class="icon iconfont icon-fenxiang mright" wx:if="{{item.advertState==1}}" bindtap='fenpeiAd' data-id='{{item.advertId}}'></text>
-        <button class="remove-btn" bindtap="removeAd" data-id="{{item.advertId}}" style="right:{{item.right}}px">删除</button>
+      <view class="item touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{dataList}}" wx:key="{{index}}" data-index='{{index}}' bindtouchstart="touchstart" bindtouchmove="touchmove">
+        <view class="content">
+          <text class="icon iconfont icon-time" wx:if="{{item.advertState==0}}"></text>
+          <text class="">{{item.advertName}}</text>
+          <text wx:if="{{item.advertStyle==0}}" class="icon iconfont icon-tupian"></text>
+          <text wx:if="{{item.advertStyle==1}}" class="icon iconfont icon-fuhao-shipin"></text>
+          <text class="blankflex5" decode="{{true}}">&nbsp;</text>
+          <text class="icon iconfont icon-edit mright" wx:if="{{item.advertState==0}}" bindtap='editAd' data-type='{{item.advertSize}}' data-id='{{item.advertId}}'></text>
+          <text class="icon iconfont icon-fenxiang mright" wx:if="{{item.advertState==1}}" bindtap='fenpeiAd' data-id='{{item.advertId}}'></text>
+        </view>
+        <button class="del" bindtap="removeAd" data-id="{{item.advertId}}" style="right:{{item.right}}px">删除</button>
       </view>
     </view>
   </view>

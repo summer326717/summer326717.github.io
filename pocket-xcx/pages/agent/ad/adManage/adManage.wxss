@@ -49,16 +49,46 @@
   flex: 5;
 }
 
-.remove-btn {
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #ccc;
+  width: 100%;
+  overflow: hidden
+  }
+  
+  .list-item .content {
+  width: 100%;
+  padding: 10px;
+  line-height: 22px;
+  margin-right:0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px
+  }
+  
+  .del {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
   background: #fb4810;
   text-align: center;
   width: 60px;
   height: 138rpx;
   line-height: 138rpx;
   font-size: 28rpx;
-  position: absolute;
-  border-radius: 2px;
-  right: -60px;
-  top: 0;
-}
+  }
+  .touch-move-active .content,
+  .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  }
